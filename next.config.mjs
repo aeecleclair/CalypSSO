@@ -2,6 +2,7 @@
 const nextConfig = {
   output: "export",
   basePath: "/calypsso",
+  distDir: "out",
 };
 
 export default nextConfig;
