@@ -1,5 +1,6 @@
 "use client";
 
+import { HiddenField } from "@/components/tools/hidden-field";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -32,11 +33,9 @@ const formSchema = z.object({
   }),
 });
 
-export function ResetPasswordForm() {
+function ResetPasswordForm() {
   let isRegisterLoading = false;
-
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,10 +45,17 @@ export function ResetPasswordForm() {
   });
   const { toast } = useToast();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+    const token = searchParams.get("token");
+
     isRegisterLoading = true;
 
-    fetch(HYPERION + "/users/reset-password", {
+    const variables = await fetch("/variables.json", {
+      method: "GET",
+    }).then((response) => response.json());
+
+    fetch(variables.hyperion + "/users/reset-password", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -59,16 +65,14 @@ export function ResetPasswordForm() {
         new_password: values.newPassword,
       }),
     })
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
-          console.log("toasting");
-          response.json().then((data) =>
-            toast({
-              title: "Échec de la modification",
-              description: data.detail,
-              variant: "destructive",
-            }),
-          );
+          const data = await response.json();
+          toast({
+            title: "Échec de la modification",
+            description: data.detail,
+            variant: "destructive",
+          });
         } else {
           toast({
             title: "Mot de passe modifié avec succès",
@@ -76,10 +80,10 @@ export function ResetPasswordForm() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Échec de la requête", error);
         toast({
           title: "Échec de la requête",
-          description: error,
+          description: error.message,
           variant: "destructive",
         });
       })
@@ -120,9 +124,5 @@ export function ResetPasswordForm() {
     </Card>
   );
 }
-
-const Reset = () => {
-  return <h1> Test </h1>;
-};
 
 export default ResetPasswordForm;
