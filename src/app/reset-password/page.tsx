@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -43,6 +44,7 @@ export function ResetPasswordForm() {
       newPassword: "",
     },
   });
+  const { toast } = useToast();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     isRegisterLoading = true;
@@ -57,12 +59,29 @@ export function ResetPasswordForm() {
         new_password: values.newPassword,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((response) => {
+        if (!response.ok) {
+          console.log("toasting");
+          response.json().then((data) =>
+            toast({
+              title: "Échec de la modification",
+              description: data.detail,
+              variant: "destructive",
+            }),
+          );
+        } else {
+          toast({
+            title: "Mot de passe modifié avec succès",
+          });
+        }
       })
       .catch((error) => {
         console.error(error);
+        toast({
+          title: "Échec de la requête",
+          description: error,
+          variant: "destructive",
+        });
       })
       .finally(() => (isRegisterLoading = true));
   }
