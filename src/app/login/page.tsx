@@ -68,7 +68,7 @@ const Login = () => {
                 connecter avec.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="grid gap-4">
               <CustomFormField
                 form={form}
                 name="email"
