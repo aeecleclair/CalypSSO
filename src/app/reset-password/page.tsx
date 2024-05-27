@@ -37,6 +37,7 @@ const formSchema = z.object({
 export const ResetPasswordForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onBlur",
   });
   const { toast } = useToast();
 
