@@ -90,7 +90,7 @@ export const ResetPasswordForm = () => {
   }
 
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm m-auto backdrop-blur bg-opacity-50 bg-white">
       <CardHeader>
         <CardTitle className="text-2xl">MyECL</CardTitle>
         <CardDescription>Réinitialisez votre mot de passe</CardDescription>
@@ -121,6 +121,7 @@ export const ResetPasswordForm = () => {
               type="submit"
               isLoading={isRegisterLoading}
               label="Réinitialiser"
+              className="w-full"
             />
           </form>
         </Form>

@@ -18,7 +18,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex flex-col items-center mt-4">{children}</main>
+        <main className="flex flex-col items-center h-screen bg-[#202c39]">
+          <div className="relative z-0 w-full h-screen flex items-center justify-center">
+            <div className="saturn">
+              <div className="clouds"></div>
+              <div className="planet"></div>
+              <div className="ring"></div>
+              <div className="up"></div>
+            </div>
+            <div className="absolute inset-0 flex justify-center items-center z-10">
+              {children}
+            </div>
+          </div>
+        </main>
         <Toaster />
       </body>
     </html>
