@@ -54,7 +54,7 @@ export const Register = ({ onCodeReceived }: RegisterProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex [&>div]:w-full h-screen">
+        <div className="flex [&>div]:w-full h-screen m-4">
           <Card className="rounded-xl border bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-80 bg-white">
             <CardHeader>
               <CardTitle className="text-2xl">{"Créer un compte"}</CardTitle>
@@ -78,7 +78,7 @@ export const Register = ({ onCodeReceived }: RegisterProps) => {
                 isLoading={false}
                 // isLoading={isRegisteringLoading}
               />
-              <div className="flex flex-row w-[700px]">
+              <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
                 <div className="w-full text-center text-sm">
                   Vous avez déjà un compte ?{" "}
                   <Button variant="link" className="pl-1" type="button">

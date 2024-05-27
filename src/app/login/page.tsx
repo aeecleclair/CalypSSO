@@ -59,7 +59,7 @@ const Login = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex [&>div]:w-full h-screen">
+        <div className="flex [&>div]:w-full h-screen m-4">
           <Card className="rounded-xl border border-white bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-75 bg-white">
             <CardHeader>
               <CardTitle>Se connecter</CardTitle>
@@ -90,15 +90,15 @@ const Login = () => {
                 isLoading={false}
                 // isLoading={isResetLoading}
               />
+              <div className="flex flex-row justify-between lg:w-[700px] w-full">
+                <Button variant="link">
+                  <Link href="/register">Créer un compte</Link>
+                </Button>
+                <Button variant="link">
+                  <Link href="/recover">Mot de passe oublié ?</Link>
+                </Button>
+              </div>
             </CardContent>
-            <CardFooter className="flex flex-row justify-between w-[700px]">
-              <Button variant="link">
-                <Link href="/register">Créer un compte</Link>
-              </Button>
-              <Button variant="link">
-                <Link href="/recover">Mot de passe oublié ?</Link>
-              </Button>
-            </CardFooter>
           </Card>
         </div>
       </form>

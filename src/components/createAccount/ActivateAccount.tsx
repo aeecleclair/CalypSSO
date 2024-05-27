@@ -86,7 +86,7 @@ export const ActivateAccount = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex [&>div]:w-full h-screen">
+        <div className="flex [&>div]:w-full h-screen m-4">
           <Card className="rounded-xl border bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-80 bg-white">
             <CardHeader>
               <CardTitle className="text-xl">Créer un compte</CardTitle>
@@ -105,7 +105,7 @@ export const ActivateAccount = ({
                   />
                 </div>
                 <TextSeparator text="Informations du compte" />
-                <div className="grid grid-cols-2 gap-4 mt-2">
+                <div className="grid md:grid-cols-2 gap-4 mt-2 grid-cols-1">
                   <CustomFormField
                     form={form}
                     name="firstname"
@@ -132,7 +132,7 @@ export const ActivateAccount = ({
                   isLoading={false}
                   // isLoading={isActivationLoading}
                 />
-                <div className="flex justify-between w-[700px]">
+                <div className="flex justify-between lg:w-[700px] w-full lg:flex-row flex-col">
                   <div className="w-full text-center text-sm">
                     Vous avez déjà un compte ?{" "}
                     <Button variant="link" className="pl-1" type="button">
