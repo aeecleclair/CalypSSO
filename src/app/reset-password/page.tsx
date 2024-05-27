@@ -35,7 +35,6 @@ const formSchema = z.object({
 
 function ResetPasswordForm() {
   let isRegisterLoading = false;
-  const searchParams = useSearchParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,16 +45,16 @@ function ResetPasswordForm() {
   const { toast } = useToast();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    const token = searchParams.get("token");
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
 
     isRegisterLoading = true;
 
-    const variables = await fetch("/variables.json", {
+    const variables = await fetch("/calypsso/variables.json", {
       method: "GET",
     }).then((response) => response.json());
 
-    fetch(variables.hyperion + "/users/reset-password", {
+    fetch(variables.hyperion + "users/reset-password", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
