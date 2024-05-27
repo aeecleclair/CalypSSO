@@ -1,6 +1,7 @@
 "use client";
 
-import { HiddenField } from "@/components/tools/hidden-field";
+import { HiddenField } from "@/components/custom/HiddenField";
+import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,7 +13,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -31,24 +31,21 @@ const formSchema = z.object({
   newPassword: z.string().min(6, {
     message: "Votre mot de passe doit avoir au moins 6 caractères",
   }),
+  code: z.string().optional(),
 });
 
-function ResetPasswordForm() {
-  let isRegisterLoading = false;
-
+export const ResetPasswordForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      newPassword: "",
-    },
   });
   const { toast } = useToast();
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
+  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
 
-    isRegisterLoading = true;
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("values", values);
+
+    setIsRegisterLoading(true);
 
     const variables = await fetch("/calypsso/variables.json", {
       method: "GET",
@@ -60,7 +57,7 @@ function ResetPasswordForm() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        reset_token: token,
+        reset_token: values.code,
         new_password: values.newPassword,
       }),
     })
@@ -86,7 +83,10 @@ function ResetPasswordForm() {
           variant: "destructive",
         });
       })
-      .finally(() => (isRegisterLoading = true));
+      .finally(() => {
+        setIsRegisterLoading(false);
+        form.reset();
+      });
   }
 
   return (
@@ -116,12 +116,17 @@ function ResetPasswordForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <HiddenField form={form} name="code" queryParam="token" />
+            <LoadingButton
+              type="submit"
+              isLoading={isRegisterLoading}
+              label="Réinitialiser"
+            />
           </form>
         </Form>
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ResetPasswordForm;
