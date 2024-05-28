@@ -17,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <main className="flex flex-col items-center h-screen bg-[#202c39]">
+      <body className={`${inter.className} bg-[#202c39]`}>
+        <main className="flex flex-col items-center">
           <div className="relative z-0 w-full h-screen flex items-center justify-center">
             <div className="saturn">
               <div className="clouds"></div>
