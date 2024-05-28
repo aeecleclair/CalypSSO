@@ -23,7 +23,7 @@ export const HiddenField = ({
     <FormField
       control={form.control}
       name={name}
-      render={({ field }) => <Input type="hidden" {...field} />}
+      render={({ field }) => <input type="hidden" {...field} />}
     />
   );
 };
