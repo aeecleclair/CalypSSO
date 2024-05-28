@@ -62,10 +62,9 @@ const Login = () => {
         <div className="flex [&>div]:w-full h-screen m-4">
           <Card className="rounded-xl border border-white bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-75 bg-white">
             <CardHeader>
-              <CardTitle>Se connecter</CardTitle>
+              <CardTitle>MyECL</CardTitle>
               <CardDescription>
-                Si vous possédez déjà un compte MyECL, vous pouvez vous
-                connecter avec.
+                Portail de connexion pour les services proposé par Eclair
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
