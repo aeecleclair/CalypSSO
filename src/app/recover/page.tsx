@@ -10,12 +10,14 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RecoverPage = () => {
   // const { recoverPassword, isRecoverLoading } = useRecoverPassword();
+  const router = useRouter();
   const formSchema = z.object({
     email: z
       .string({
@@ -31,6 +33,7 @@ const RecoverPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    router.push("/recover/success")
     // recoverPassword(values.email, () => {
     //   toast({
     //     title: "Email envoyé",

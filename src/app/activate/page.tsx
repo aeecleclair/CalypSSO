@@ -20,7 +20,7 @@ import { z } from "zod";
 
 const RegisterPage = () => {
   // const { activateAccount, isActivationLoading } = useAccountCreation();
-  // const router = useRouter();
+  const router = useRouter();
   const formSchema = z.object({
     activation_code: z
       .string({
@@ -57,6 +57,7 @@ const RegisterPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    router.push("/activate/success");
     // const body: CoreUserActivateRequest = {
     //   activation_token: values.activation_code,
     //   firstname: values.firstname,

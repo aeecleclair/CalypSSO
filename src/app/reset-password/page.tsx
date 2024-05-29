@@ -43,6 +43,7 @@ const ResetPasswordPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    router.push("/reset-password/success");
     // resetPassword(values.password, values.activation_code, () => {
     //   toast({
     //     title: "Mot de passe réinitialisé",
