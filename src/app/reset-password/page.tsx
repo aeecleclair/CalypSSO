@@ -5,7 +5,6 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
-import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
