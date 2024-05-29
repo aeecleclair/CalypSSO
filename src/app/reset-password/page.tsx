@@ -90,13 +90,8 @@ const ResetPasswordPage = () => {
               </div>
               <div className="w-full text-center text-sm">
                 {"Vous n'avez pas reçu le code par mail ? "}
-                <Button
-                  variant="link"
-                  className="pl-1"
-                  // onClick={onCodeNotReceived}
-                  type="button"
-                >
-                  Revenir
+                <Button variant="link" className="pl-1" type="button">
+                  <Link href="/recover">Revenir</Link>
                 </Button>
               </div>
             </div>

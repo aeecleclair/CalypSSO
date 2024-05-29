@@ -71,13 +71,8 @@ const RegisterPage = () => {
               </div>
               <div className="w-full text-center text-sm">
                 Vous avez reçu le code par mail ?{" "}
-                <Button
-                  variant="link"
-                  className="pl-1"
-                  // onClick={onCodeReceived}
-                  type="button"
-                >
-                  Continuer
+                <Button variant="link" className="pl-1" type="button">
+                  <Link href="/activate">Continuer</Link>
                 </Button>
               </div>
             </div>
