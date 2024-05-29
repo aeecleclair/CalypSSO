@@ -99,6 +99,8 @@ export type AssociationEdit = {
   mandate_year?: number | null;
 };
 
+export type AvailableMembership = "AEECL" | "USEECL";
+
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
  */
@@ -228,13 +230,6 @@ export type BodyTokenAuthTokenPost = {
   code_verifier?: string | null;
 };
 
-export type BodyUploadDocumentRaidDocumentPost = {
-  /**
-   * @format binary
-   */
-  file: Blob;
-};
-
 export type BookingBase = {
   reason: string;
   /**
@@ -362,6 +357,8 @@ export type CashComplete = {
 export type CashEdit = {
   balance: number;
 };
+
+export type CdrStatus = "pending" | "online" | "onsite" | "closed";
 
 export type ChangePasswordRequest = {
   email: string;
@@ -566,6 +563,18 @@ export type CoreUserUpdateAdmin = {
   external?: boolean | null;
 };
 
+export type CurriculumBase = {
+  name: string;
+};
+
+export type CurriculumComplete = {
+  name: string;
+  /**
+   * @format uuid
+   */
+  id: string;
+};
+
 export type Decision = "approved" | "declined" | "pending";
 
 /**
@@ -588,7 +597,7 @@ export type DeliveryReturn = {
    * @format date
    */
   delivery_date: string;
-  products?: ProductComplete[];
+  products?: AppModulesAmapSchemasAmapProductComplete[];
   id: string;
   status: DeliveryStatusType;
 };
@@ -604,47 +613,23 @@ export type DeliveryUpdate = {
   delivery_date?: string | null;
 };
 
-export type Difficulty = "discovery" | "sports" | "expert";
-
-export type Document = {
-  type: DocumentType;
+export type DocumentBase = {
   name: string;
+};
+
+export type DocumentComplete = {
+  name: string;
+  /**
+   * @format uuid
+   */
   id: string;
   /**
-   * @format date
+   * @format uuid
    */
-  uploaded_at: string;
-  validation: DocumentValidation;
+  seller_id: string;
 };
 
-export type DocumentBase = {
-  type: DocumentType;
-  name: string;
-  id: string;
-};
-
-export type DocumentCreation = {
-  id: string;
-};
-
-export type DocumentType =
-  | "idCard"
-  | "medicalCertificate"
-  | "studentCard"
-  | "raidRules"
-  | "parentAuthorization";
-
-export type DocumentValidation =
-  | "pending"
-  | "accepted"
-  | "refused"
-  | "temporary";
-
-export type EmergencyContact = {
-  firstname?: string | null;
-  name?: string | null;
-  phone?: string | null;
-};
+export type DocumentSignatureType = "material" | "numeric";
 
 export type EventApplicant = {
   name: string;
@@ -811,11 +796,6 @@ export type InformationEdit = {
   manager?: string | null;
   link?: string | null;
   description?: string | null;
-};
-
-export type InviteToken = {
-  team_id: string;
-  token: string;
 };
 
 export type Item = {
@@ -1043,8 +1023,6 @@ export type ManagerUpdate = {
   group_id?: string | null;
 };
 
-export type MeetingPlace = "centrale" | "bellecour" | "anyway";
-
 export type MemberComplete = {
   name: string;
   firstname: string;
@@ -1053,24 +1031,7 @@ export type MemberComplete = {
   email: string;
   phone?: string | null;
   promo?: number | null;
-  memberships: MembershipComplete[];
-};
-
-export type MembershipBase = {
-  user_id: string;
-  association_id: string;
-  mandate_year: number;
-  role_name: string;
-  role_tags?: string | null;
-};
-
-export type MembershipComplete = {
-  user_id: string;
-  association_id: string;
-  mandate_year: number;
-  role_name: string;
-  role_tags?: string | null;
-  id: string;
+  memberships: AppModulesPhonebookSchemasPhonebookMembershipComplete[];
 };
 
 export type MembershipEdit = {
@@ -1181,6 +1142,9 @@ export type PaperComplete = {
    * @format date
    */
   release_date: string;
+  /**
+   * @format uuid
+   */
   id: string;
 };
 
@@ -1189,88 +1153,22 @@ export type PaperUpdate = {
   release_date?: string | null;
 };
 
-export type Participant = {
-  name: string;
-  firstname: string;
+export type PaymentBase = {
+  total: number;
+  payment_type: PaymentType;
+};
+
+export type PaymentComplete = {
+  total: number;
+  payment_type: PaymentType;
   /**
-   * @format date
+   * @format uuid
    */
-  birthday: string;
-  phone: string;
-  email: string;
   id: string;
-  bike_size: Size | null;
-  t_shirt_size: Size | null;
-  situation: string | null;
-  validation_progress: number;
-  payment: boolean;
-  t_shirt_payment: boolean;
-  number_of_document: number;
-  number_of_validated_document: number;
-  address: string | null;
-  other_school?: string | null;
-  company?: string | null;
-  diet?: string | null;
-  id_card: Document | null;
-  medical_certificate: Document | null;
-  security_file: SecurityFile | null;
-  student_card?: Document | null;
-  raid_rules?: Document | null;
-  parent_authorization?: Document | null;
-  attestation_on_honour: boolean;
-  is_minor: boolean;
+  user_id: string;
 };
 
-export type ParticipantBase = {
-  name: string;
-  firstname: string;
-  /**
-   * @format date
-   */
-  birthday: string;
-  phone: string;
-  email: string;
-};
-
-export type ParticipantPreview = {
-  name: string;
-  firstname: string;
-  /**
-   * @format date
-   */
-  birthday: string;
-  phone: string;
-  email: string;
-  id: string;
-  bike_size: Size | null;
-  t_shirt_size: Size | null;
-  situation: string | null;
-  validation_progress: number;
-  payment: boolean;
-  t_shirt_payment: boolean;
-  number_of_document: number;
-  number_of_validated_document: number;
-};
-
-export type ParticipantUpdate = {
-  name?: string | null;
-  firstname?: string | null;
-  birthday?: string | null;
-  address?: string | null;
-  phone?: string | null;
-  email?: string | null;
-  bike_size?: Size | null;
-  t_shirt_size?: Size | null;
-  situation?: string | null;
-  other_school?: string | null;
-  company?: string | null;
-  diet?: string | null;
-  attestation_on_honour?: boolean | null;
-};
-
-export type PaymentUrl = {
-  url: string;
-};
+export type PaymentType = "cash" | "check" | "HelloAsso" | "card" | "archived";
 
 export type PrizeBase = {
   name: string;
@@ -1294,28 +1192,96 @@ export type PrizeSimple = {
   id: string;
 };
 
-export type ProductComplete = {
-  name: string;
-  price: number;
-  category: string;
-  id: string;
+export type ProductBase = {
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  available_online: boolean;
 };
 
-export type ProductEdit = {
-  category?: string | null;
-  name?: string | null;
-  price?: number | null;
+export type ProductCompleteNoConstraint = {
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  available_online: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format uuid
+   */
+  seller_id: string;
+  variants?: ProductVariantComplete[];
 };
 
 export type ProductQuantity = {
   quantity: number;
-  product: ProductComplete;
+  product: AppModulesAmapSchemasAmapProductComplete;
 };
 
 export type ProductSimple = {
   name: string;
   price: number;
   category: string;
+};
+
+export type ProductVariantBase = {
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  price: number;
+  enabled: boolean;
+  unique: boolean;
+};
+
+export type ProductVariantComplete = {
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  price: number;
+  enabled: boolean;
+  unique: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format uuid
+   */
+  product_id: string;
+};
+
+export type ProductVariantEdit = {
+  name_fr?: string | null;
+  name_en?: string | null;
+  description_fr?: string | null;
+  description_en?: string | null;
+  price?: number | null;
+  enabled?: boolean | null;
+  unique?: boolean | null;
+};
+
+export type PurchaseBase = {
+  quantity: number;
+};
+
+export type PurchaseComplete = {
+  quantity: number;
+  user_id: string;
+  /**
+   * @format uuid
+   */
+  product_variant_id: string;
+  validated: boolean;
+};
+
+export type PurchaseEdit = {
+  quantity?: number | null;
 };
 
 /**
@@ -1347,28 +1313,6 @@ export type RaffleStats = {
 };
 
 export type RaffleStatusType = "creation" | "open" | "lock";
-
-export type RaidDriveFoldersCreation = {
-  parent_folder_id: string;
-};
-
-export type RaidInformation = {
-  raid_start_date?: string | null;
-  raid_end_date?: string | null;
-  raid_registering_end_date?: string | null;
-  payment_link?: string | null;
-  contact?: string | null;
-  president?: EmergencyContact | null;
-  volunteer_responsible?: EmergencyContact | null;
-  security_responsible?: EmergencyContact | null;
-  rescue?: EmergencyContact | null;
-};
-
-export type RaidPrice = {
-  student_price?: number | null;
-  partner_price?: number | null;
-  t_shirt_price?: number | null;
-};
 
 export type Recommendation = {
   title: string;
@@ -1433,44 +1377,49 @@ export type SectionComplete = {
   id: string;
 };
 
-export type SecurityFile = {
-  allergy?: string | null;
-  asthma: boolean;
-  intensive_care_unit?: boolean | null;
-  intensive_care_unit_when?: string | null;
-  ongoing_treatment?: string | null;
-  sicknesses?: string | null;
-  hospitalization?: string | null;
-  surgical_operation?: string | null;
-  trauma?: string | null;
-  family?: string | null;
-  emergency_person_firstname?: string | null;
-  emergency_person_name?: string | null;
-  emergency_person_phone?: string | null;
+export type SellerBase = {
+  name: string;
+  group_id: string;
+  order: number;
+};
+
+export type SellerComplete = {
+  name: string;
+  group_id: string;
+  order: number;
+  /**
+   * @format uuid
+   */
   id: string;
-  file_id?: string | null;
-  validation: DocumentValidation;
 };
 
-export type SecurityFileBase = {
-  allergy?: string | null;
-  asthma: boolean;
-  intensive_care_unit?: boolean | null;
-  intensive_care_unit_when?: string | null;
-  ongoing_treatment?: string | null;
-  sicknesses?: string | null;
-  hospitalization?: string | null;
-  surgical_operation?: string | null;
-  trauma?: string | null;
-  family?: string | null;
-  emergency_person_firstname?: string | null;
-  emergency_person_name?: string | null;
-  emergency_person_phone?: string | null;
-  id?: string | null;
-  file_id?: string | null;
+export type SellerEdit = {
+  name?: string | null;
+  group_id?: string | null;
+  order?: number | null;
 };
 
-export type Size = "XS" | "S" | "M" | "L" | "XL";
+export type SignatureBase = {
+  signature_type: DocumentSignatureType;
+  numeric_signature_id?: string | null;
+};
+
+export type SignatureComplete = {
+  signature_type: DocumentSignatureType;
+  numeric_signature_id?: string | null;
+  user_id: string;
+  /**
+   * @format uuid
+   */
+  document_id: string;
+};
+
+export type Status = {
+  /**
+   * @default pending
+   */
+  status?: CdrStatus;
+};
 
 /**
  * Status of the voting
@@ -1481,40 +1430,6 @@ export type StatusType =
   | "closed"
   | "counting"
   | "published";
-
-export type Team = {
-  name: string;
-  id: string;
-  number: number | null;
-  captain: Participant;
-  second: Participant | null;
-  difficulty: Difficulty | null;
-  meeting_place: MeetingPlace | null;
-  validation_progress: number;
-  file_id: string | null;
-};
-
-export type TeamBase = {
-  name: string;
-};
-
-export type TeamPreview = {
-  name: string;
-  id: string;
-  number: number | null;
-  captain: ParticipantPreview;
-  second: ParticipantPreview | null;
-  difficulty: Difficulty | null;
-  meeting_place: MeetingPlace | null;
-  validation_progress: number;
-};
-
-export type TeamUpdate = {
-  name?: string | null;
-  number?: number | null;
-  difficulty?: Difficulty | null;
-  meeting_place?: MeetingPlace | null;
-};
 
 export type TicketComplete = {
   pack_id: string;
@@ -1601,7 +1516,95 @@ export type AppCoreStandardResponsesResult = {
   success?: boolean;
 };
 
+export type AppModulesAmapSchemasAmapProductComplete = {
+  name: string;
+  price: number;
+  category: string;
+  id: string;
+};
+
+export type AppModulesAmapSchemasAmapProductEdit = {
+  category?: string | null;
+  name?: string | null;
+  price?: number | null;
+};
+
 export type AppModulesCampaignSchemasCampaignResult = {
   list_id: string;
   count: number;
+};
+
+export type AppModulesCdrSchemasCdrMembershipBase = {
+  user_id: string;
+  membership: AvailableMembership;
+  /**
+   * @format date
+   */
+  start_date: string;
+  /**
+   * @format date
+   */
+  end_date: string;
+};
+
+export type AppModulesCdrSchemasCdrMembershipComplete = {
+  user_id: string;
+  membership: AvailableMembership;
+  /**
+   * @format date
+   */
+  start_date: string;
+  /**
+   * @format date
+   */
+  end_date: string;
+  /**
+   * @format uuid
+   */
+  id: string;
+};
+
+export type AppModulesCdrSchemasCdrProductComplete = {
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  available_online: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format uuid
+   */
+  seller_id: string;
+  variants?: ProductVariantComplete[];
+  product_constraints?: ProductCompleteNoConstraint[];
+  document_constraints?: DocumentComplete[];
+};
+
+export type AppModulesCdrSchemasCdrProductEdit = {
+  name_fr?: string | null;
+  name_en?: string | null;
+  description_fr?: string | null;
+  description_en?: string | null;
+  description?: string | null;
+  available_online?: boolean | null;
+};
+
+export type AppModulesPhonebookSchemasPhonebookMembershipBase = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+};
+
+export type AppModulesPhonebookSchemasPhonebookMembershipComplete = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+  id: string;
 };

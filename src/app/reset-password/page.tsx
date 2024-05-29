@@ -10,16 +10,16 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { useRecoverPassword } from "@/hooks/useRecoverPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-// import { useRecoverPassword } from "@/hooks/useRecoverPassword";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const ResetPasswordPage = () => {
-  // const { resetPassword, isResetLoading } = useRecoverPassword();
+  const { resetPassword, isResetLoading } = useRecoverPassword();
   const router = useRouter();
   const formSchema = z.object({
     activation_code: z
@@ -43,14 +43,9 @@ const ResetPasswordPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    router.push("/reset-password/success");
-    // resetPassword(values.password, values.activation_code, () => {
-    //   toast({
-    //     title: "Mot de passe réinitialisé",
-    //     description: "Votre mot de passe a été réinitialisé avec succès",
-    //   });
-    //   router.replace("/login");
-    // });
+    resetPassword(values.password, values.activation_code, () => {
+      router.push("/reset-password/success");
+    });
   }
 
   return (
@@ -78,8 +73,7 @@ const ResetPasswordPage = () => {
               type="submit"
               className="w-full mt-2"
               label="Réinitialiser le mot de passe"
-              isLoading={false}
-              // isLoading={isResetLoading}
+              isLoading={isResetLoading}
             />
             <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
               <div className="w-full text-center text-sm">

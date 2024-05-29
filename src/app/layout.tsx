@@ -1,8 +1,9 @@
+import { Background } from "./Background";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Background } from "./Background";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ export default function RootLayout({
           <div className="relative z-0 w-full h-screen flex items-center justify-center">
             <Background />
             <div className="absolute inset-0 flex justify-center items-center z-10">
-              {children}
+              <Providers>{children}</Providers>
             </div>
           </div>
         </main>

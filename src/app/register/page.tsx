@@ -6,8 +6,7 @@ import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-// import { useAccountCreation } from "@/hooks/useCreateAccount";
-import { toast } from "@/components/ui/use-toast";
+import { useAccountCreation } from "@/hooks/useCreateAccount";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RegisterPage = () => {
-  // const { registerAccount, isRegisteringLoading } = useAccountCreation();
+  const { registerAccount, isRegisteringLoading } = useAccountCreation();
   const router = useRouter();
   const formSchema = z.object({
     email: z
@@ -33,14 +32,9 @@ const RegisterPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    router.push("/register/success");
-    // registerAccount(values.email, () => {
-    //   toast({
-    //     title: "Email envoyé",
-    //     description: "Un email vous a été envoyé pour activer votre compte",
-    //   });
-    //   onCodeReceived();
-    // });
+    registerAccount(values.email, () => {
+      router.push("/register/success");
+    });
   }
   return (
     <CenteredCard
@@ -62,8 +56,7 @@ const RegisterPage = () => {
               className="w-full mt-2"
               type="submit"
               label="Commencer à créer le compte"
-              isLoading={false}
-              // isLoading={isRegisteringLoading}
+              isLoading={isRegisteringLoading}
             />
             <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
               <div className="w-full text-center text-sm">
