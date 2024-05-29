@@ -85,7 +85,7 @@ const Login = () => {
               <LoadingButton
                 type="submit"
                 className="w-full mt-2"
-                label="Réinitialiser le mot de passe"
+                label="Se connecter"
                 isLoading={false}
                 // isLoading={isResetLoading}
               />
