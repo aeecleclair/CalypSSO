@@ -1,25 +1,17 @@
 "use client";
 
-import * as React from "react";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Link from "next/link";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { PasswordInput } from "@/components/custom/PasswordInput";
+import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/custom/PasswordInput";
+import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import * as React from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const Login = () => {
   const formSchema = z.object({
@@ -57,51 +49,46 @@ const Login = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex [&>div]:w-full h-screen m-4">
-          <Card className="rounded-xl border border-white bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-75 bg-white">
-            <CardHeader>
-              <CardTitle>MyECL</CardTitle>
-              <CardDescription>
-                Portail de connexion pour les services proposé par Eclair
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              <CustomFormField
-                form={form}
-                name="email"
-                label="Email"
-                render={(field) => (
-                  <Input placeholder="inscription@raid.fr" {...field} />
-                )}
-              />
-              <CustomFormField
-                form={form}
-                name="password"
-                label="Mot de passe"
-                render={(field) => <PasswordInput {...field} />}
-              />
-              <LoadingButton
-                type="submit"
-                className="w-full mt-2"
-                label="Se connecter"
-                isLoading={false}
-                // isLoading={isResetLoading}
-              />
-              <div className="flex flex-row justify-between lg:w-[700px] w-full">
-                <Button variant="link">
-                  <Link href="/register">Créer un compte</Link>
-                </Button>
-                <Button variant="link">
-                  <Link href="/recover">Mot de passe oublié ?</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </form>
-    </Form>
+    <CenteredCard
+      title="MyECL"
+      description="Portail de connexion pour les services proposé par Eclair"
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="grid gap-4">
+            <CustomFormField
+              form={form}
+              name="email"
+              label="Email"
+              render={(field) => (
+                <Input placeholder="inscription@raid.fr" {...field} />
+              )}
+            />
+            <CustomFormField
+              form={form}
+              name="password"
+              label="Mot de passe"
+              render={(field) => <PasswordInput {...field} />}
+            />
+            <LoadingButton
+              type="submit"
+              className="w-full mt-2"
+              label="Se connecter"
+              isLoading={false}
+              // isLoading={isResetLoading}
+            />
+            <div className="flex flex-row justify-between lg:w-[700px] w-full">
+              <Button variant="link">
+                <Link href="/register">Créer un compte</Link>
+              </Button>
+              <Button variant="link">
+                <Link href="/recover">Mot de passe oublié ?</Link>
+              </Button>
+            </div>
+          </div>
+        </form>
+      </Form>
+    </CenteredCard>
   );
 };
 

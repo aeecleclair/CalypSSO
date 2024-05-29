@@ -1,17 +1,11 @@
 "use client";
 
+import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -58,67 +52,58 @@ const ResetPasswordPage = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex [&>div]:w-full h-screen m-4">
-          <Card className="rounded-xl border bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-80 bg-white">
-            <CardHeader>
-              <CardTitle className="text-xl">
-                Réinitialiser le mot de passe
-              </CardTitle>
-              <CardDescription>
-                {"Entrez le code d'activation et votre nouveau mot de passe"}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4">
-                <div className="grid gap-2 mb-2">
-                  <CustomFormField
-                    form={form}
-                    name="activation_code"
-                    label="Code d'activation"
-                    render={(field) => <Input {...field} />}
-                  />
-                </div>
-                <TextSeparator text="Nouveau mot de passe" />
-                <CustomFormField
-                  form={form}
-                  name="password"
-                  label="Mot de passe"
-                  render={(field) => <PasswordInput {...field} />}
-                />
-                <LoadingButton
-                  type="submit"
-                  className="w-full mt-2"
-                  label="Réinitialiser le mot de passe"
-                  isLoading={false}
-                  // isLoading={isResetLoading}
-                />
-                <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
-                  <div className="w-full text-center text-sm">
-                    Vous avez déjà un compte ?{" "}
-                    <Button variant="link" className="pl-1" type="button">
-                      <Link href="/login">Connectez-vous</Link>
-                    </Button>
-                  </div>
-                  <div className="w-full text-center text-sm">
-                    {"Vous n'avez pas reçu le code par mail ? "}
-                    <Button
-                      variant="link"
-                      className="pl-1"
-                      // onClick={onCodeNotReceived}
-                      type="button"
-                    >
-                      Revenir
-                    </Button>
-                  </div>
-                </div>
+    <CenteredCard
+      title="Réinitialiser le mot de passe"
+      description="Entrez le code d'activation et votre nouveau mot de passe"
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="grid gap-4">
+            <div className="grid gap-2 mb-2">
+              <CustomFormField
+                form={form}
+                name="activation_code"
+                label="Code d'activation"
+                render={(field) => <Input {...field} />}
+              />
+            </div>
+            <TextSeparator text="Nouveau mot de passe" />
+            <CustomFormField
+              form={form}
+              name="password"
+              label="Mot de passe"
+              render={(field) => <PasswordInput {...field} />}
+            />
+            <LoadingButton
+              type="submit"
+              className="w-full mt-2"
+              label="Réinitialiser le mot de passe"
+              isLoading={false}
+              // isLoading={isResetLoading}
+            />
+            <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
+              <div className="w-full text-center text-sm">
+                Vous avez déjà un compte ?{" "}
+                <Button variant="link" className="pl-1" type="button">
+                  <Link href="/login">Connectez-vous</Link>
+                </Button>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      </form>
-    </Form>
+              <div className="w-full text-center text-sm">
+                {"Vous n'avez pas reçu le code par mail ? "}
+                <Button
+                  variant="link"
+                  className="pl-1"
+                  // onClick={onCodeNotReceived}
+                  type="button"
+                >
+                  Revenir
+                </Button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </Form>
+    </CenteredCard>
   );
 };
 

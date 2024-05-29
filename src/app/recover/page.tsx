@@ -1,19 +1,13 @@
 "use client";
 
 // import { useRecoverPassword } from "@/hooks/useRecoverPassword";
-import { toast } from "@/components/ui/use-toast";
+import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
@@ -48,59 +42,52 @@ const RecoverPage = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex [&>div]:w-full h-screen m-4">
-          <Card className="rounded-xl border bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-80 bg-white">
-            <CardHeader>
-              <CardTitle className="text-2xl">
-                {"Réinitialiser le mot de passe"}
-              </CardTitle>
-              <CardDescription>
-                {"Entrez votre email pour commencer"}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              <CustomFormField
-                form={form}
-                name="email"
-                label="Email"
-                render={(field) => (
-                  <Input placeholder="inscription@raid.fr" {...field} />
-                )}
-              />
-              <LoadingButton
-                type="submit"
-                className="w-full mt-2"
-                label={"Recevoir le code de réinitialisation"}
-                isLoading={false}
-                // isLoading={isRecoverLoading}
-              />
+    <CenteredCard
+      title={"Réinitialiser le mot de passe"}
+      description={"Entrez votre email pour commencer"}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="grid gap-4">
+            <CustomFormField
+              form={form}
+              name="email"
+              label="Email"
+              render={(field) => (
+                <Input placeholder="inscription@raid.fr" {...field} />
+              )}
+            />
+            <LoadingButton
+              type="submit"
+              className="w-full mt-2"
+              label={"Recevoir le code de réinitialisation"}
+              isLoading={false}
+              // isLoading={isRecoverLoading}
+            />
 
-              <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
-                <div className="w-full text-center text-sm">
-                  Vous avez déjà un compte ?{" "}
-                  <Button variant="link" className="pl-1" type="button">
-                    <Link href="/login">Connectez-vous</Link>
-                  </Button>
-                </div>
-                <div className="w-full text-center text-sm">
-                  Vous avez reçu le code par mail ?{" "}
-                  <Button
-                    variant="link"
-                    className="pl-1"
-                    // onClick={onCodeReceived}
-                    type="button"
-                  >
-                    Continuer
-                  </Button>
-                </div>
+            <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
+              <div className="w-full text-center text-sm">
+                Vous avez déjà un compte ?{" "}
+                <Button variant="link" className="pl-1" type="button">
+                  <Link href="/login">Connectez-vous</Link>
+                </Button>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      </form>
-    </Form>
+              <div className="w-full text-center text-sm">
+                Vous avez reçu le code par mail ?{" "}
+                <Button
+                  variant="link"
+                  className="pl-1"
+                  // onClick={onCodeReceived}
+                  type="button"
+                >
+                  Continuer
+                </Button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </Form>
+    </CenteredCard>
   );
 };
 
