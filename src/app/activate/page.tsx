@@ -2,6 +2,7 @@
 
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
+import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { TextSeparator } from "@/components/custom/TextSeparator";
@@ -80,15 +81,7 @@ const RegisterPage = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <div className="grid gap-2 mb-2">
-              <CustomFormField
-                form={form}
-                name="activation_code"
-                label="Code d'activation"
-                render={(field) => <Input {...field} />}
-              />
-            </div>
-            <TextSeparator text="Informations du compte" />
+            <HiddenField form={form} name="activation_code" queryParam="code" />
             <div className="grid md:grid-cols-2 gap-4 mt-2 grid-cols-1">
               <CustomFormField
                 form={form}

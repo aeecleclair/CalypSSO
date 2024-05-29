@@ -2,6 +2,7 @@
 
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
+import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { TextSeparator } from "@/components/custom/TextSeparator";
@@ -54,20 +55,12 @@ const ResetPasswordPage = () => {
   return (
     <CenteredCard
       title="Réinitialiser le mot de passe"
-      description="Entrez le code d'activation et votre nouveau mot de passe"
+      description="Entrez votre nouveau mot de passe"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <div className="grid gap-2 mb-2">
-              <CustomFormField
-                form={form}
-                name="activation_code"
-                label="Code d'activation"
-                render={(field) => <Input {...field} />}
-              />
-            </div>
-            <TextSeparator text="Nouveau mot de passe" />
+            <HiddenField form={form} name="activation_code" queryParam="code" />
             <CustomFormField
               form={form}
               name="password"
