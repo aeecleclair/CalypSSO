@@ -2,6 +2,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Background } from "./Background";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,12 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-[#202c39]`}>
         <main className="flex flex-col items-center">
           <div className="relative z-0 w-full h-screen flex items-center justify-center">
-            <div className="saturn">
-              <div className="clouds"></div>
-              <div className="planet"></div>
-              <div className="ring"></div>
-              <div className="up"></div>
-            </div>
+            <Background />
             <div className="absolute inset-0 flex justify-center items-center z-10">
               {children}
             </div>
