@@ -1,5 +1,12 @@
-import Link from "next/link";
+"use client";
 
+import { CustomFormField } from "@/components/custom/CustomFormField";
+import { LoadingButton } from "@/components/custom/LoadingButton";
+import { PasswordInput } from "@/components/custom/PasswordInput";
+import { TextSeparator } from "@/components/custom/TextSeparator";
+import { Form } from "@/components/ui/form";
+// import { useAccountCreation } from "@/hooks/useCreateAccount";
+import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,25 +17,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Form } from "../ui/form";
-import { CustomFormField } from "../custom/CustomFormField";
-// import { useAccountCreation } from "@/hooks/useCreateAccount";
-import { toast } from "../ui/use-toast";
+import Link from "next/link";
 // import { CoreUserActivateRequest } from "@/api/hyperionSchemas";
 import { useRouter } from "next/navigation";
-import { LoadingButton } from "../custom/LoadingButton";
-import { TextSeparator } from "../custom/TextSeparator";
-import { PasswordInput } from "../custom/PasswordInput";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-interface ActivateAccountProps {
-  onCodeNotReceived: () => void;
-}
-
-export const ActivateAccount = ({
-  onCodeNotReceived,
-}: ActivateAccountProps) => {
+const RegisterPage = () => {
   // const { activateAccount, isActivationLoading } = useAccountCreation();
   // const router = useRouter();
   const formSchema = z.object({
@@ -144,7 +139,7 @@ export const ActivateAccount = ({
                     <Button
                       variant="link"
                       className="pl-1"
-                      onClick={onCodeNotReceived}
+                      // onClick={onCodeNotReceived}
                       type="button"
                     >
                       Revenir
@@ -159,3 +154,5 @@ export const ActivateAccount = ({
     </Form>
   );
 };
+
+export default RegisterPage;

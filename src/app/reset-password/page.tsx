@@ -1,7 +1,9 @@
 "use client";
 
-import { HiddenField } from "@/components/custom/HiddenField";
+import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { PasswordInput } from "@/components/custom/PasswordInput";
+import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,125 +12,114 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import Link from "next/link";
+// import { useRecoverPassword } from "@/hooks/useRecoverPassword";
+import { useRouter } from "next/navigation";
+import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const HYPERION = "http://localhost:8000";
+const ResetPasswordPage = () => {
+  // const { resetPassword, isResetLoading } = useRecoverPassword();
+  const router = useRouter();
+  const formSchema = z.object({
+    activation_code: z
+      .string({
+        required_error: "Veuillez renseigner le code d'activation",
+      })
+      .min(8, {
+        message: "Le code d'activation doit contenir 8 caractères",
+      }),
+    password: z
+      .string({
+        required_error: "Veuillez renseigner un mot de passe",
+      })
+      .min(6, {
+        message: "Le mot de passe doit contenir au moins 6 caractères",
+      }),
+  });
 
-const formSchema = z.object({
-  newPassword: z.string().min(6, {
-    message: "Votre mot de passe doit avoir au moins 6 caractères",
-  }),
-  code: z.string().optional(),
-});
-
-export const ResetPasswordForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    mode: "onBlur",
   });
-  const { toast } = useToast();
 
-  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("values", values);
-
-    setIsRegisterLoading(true);
-
-    const variables = await fetch("/calypsso/variables.json", {
-      method: "GET",
-    }).then((response) => response.json());
-
-    fetch(variables.hyperion + "users/reset-password", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        reset_token: values.code,
-        new_password: values.newPassword,
-      }),
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          const data = await response.json();
-          toast({
-            title: "Échec de la modification",
-            description: data.detail,
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Mot de passe modifié avec succès",
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Échec de la requête", error);
-        toast({
-          title: "Échec de la requête",
-          description: error.message,
-          variant: "destructive",
-        });
-      })
-      .finally(() => {
-        setIsRegisterLoading(false);
-        form.reset();
-      });
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // resetPassword(values.password, values.activation_code, () => {
+    //   toast({
+    //     title: "Mot de passe réinitialisé",
+    //     description: "Votre mot de passe a été réinitialisé avec succès",
+    //   });
+    //   router.replace("/login");
+    // });
   }
 
   return (
-    <Card className="w-full max-w-sm m-auto backdrop-blur bg-opacity-50 bg-white">
-      <CardHeader>
-        <CardTitle className="text-2xl">MyECL</CardTitle>
-        <CardDescription>Réinitialisez votre mot de passe</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="newPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nouveau mot de passe</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Mot de passe"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <HiddenField form={form} name="code" queryParam="token" />
-            <LoadingButton
-              type="submit"
-              isLoading={isRegisterLoading}
-              label="Réinitialiser"
-              className="w-full"
-            />
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="flex [&>div]:w-full h-screen m-4">
+          <Card className="rounded-xl border bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-80 bg-white">
+            <CardHeader>
+              <CardTitle className="text-xl">
+                Réinitialiser le mot de passe
+              </CardTitle>
+              <CardDescription>
+                {"Entrez le code d'activation et votre nouveau mot de passe"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                <div className="grid gap-2 mb-2">
+                  <CustomFormField
+                    form={form}
+                    name="activation_code"
+                    label="Code d'activation"
+                    render={(field) => <Input {...field} />}
+                  />
+                </div>
+                <TextSeparator text="Nouveau mot de passe" />
+                <CustomFormField
+                  form={form}
+                  name="password"
+                  label="Mot de passe"
+                  render={(field) => <PasswordInput {...field} />}
+                />
+                <LoadingButton
+                  type="submit"
+                  className="w-full mt-2"
+                  label="Réinitialiser le mot de passe"
+                  isLoading={false}
+                  // isLoading={isResetLoading}
+                />
+                <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
+                  <div className="w-full text-center text-sm">
+                    Vous avez déjà un compte ?{" "}
+                    <Button variant="link" className="pl-1" type="button">
+                      <Link href="/login">Connectez-vous</Link>
+                    </Button>
+                  </div>
+                  <div className="w-full text-center text-sm">
+                    {"Vous n'avez pas reçu le code par mail ? "}
+                    <Button
+                      variant="link"
+                      className="pl-1"
+                      // onClick={onCodeNotReceived}
+                      type="button"
+                    >
+                      Revenir
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </form>
+    </Form>
   );
 };
 
-export default ResetPasswordForm;
+export default ResetPasswordPage;
