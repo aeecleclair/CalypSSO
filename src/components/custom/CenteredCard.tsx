@@ -19,7 +19,7 @@ export const CenteredCard = ({
 }: CenteredCardProps) => {
   return (
     <div className="flex [&>div]:w-full h-screen m-4">
-      <Card className="rounded-xl border bg-card text-card-foreground shadow m-auto text-zinc-700 backdrop-blur bg-opacity-80 bg-white">
+      <Card className="rounded-xl border shadow m-auto backdrop-blur bg-opacity-80 bg-white">
         <CardHeader>
           <CardTitle className="text-xl">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
