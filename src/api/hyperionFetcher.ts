@@ -1,6 +1,8 @@
 import { HyperionContext } from "./hyperionContext";
 
-const baseUrl = window.location.origin; // Using the current origin as the base URL since it will be served by the backend
+// We using the current origin as the base URL since pages will be served by the backend
+const baseUrl =
+  process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL || window.location.origin;
 
 export type ErrorWrapper<TError> =
   | TError
