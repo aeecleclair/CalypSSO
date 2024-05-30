@@ -3,9 +3,9 @@
 import { BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost } from "@/api/hyperionSchemas";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
-import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
+import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -89,26 +89,30 @@ const Login = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <HiddenField form={form} name="client_id" queryParam="client_id" />
-            <HiddenField
+            <SuspenseHiddenField
+              form={form}
+              name="client_id"
+              queryParam="client_id"
+            />
+            <SuspenseHiddenField
               form={form}
               name="response_type"
               queryParam="response_type"
             />
-            <HiddenField
+            <SuspenseHiddenField
               form={form}
               name="redirect_uri"
               queryParam="redirect_uri"
             />
-            <HiddenField form={form} name="scope" queryParam="scope" />
-            <HiddenField form={form} name="state" queryParam="state" />
-            <HiddenField form={form} name="nonce" queryParam="nonce" />
-            <HiddenField
+            <SuspenseHiddenField form={form} name="scope" queryParam="scope" />
+            <SuspenseHiddenField form={form} name="state" queryParam="state" />
+            <SuspenseHiddenField form={form} name="nonce" queryParam="nonce" />
+            <SuspenseHiddenField
               form={form}
               name="code_challenge"
               queryParam="code_challenge"
             />
-            <HiddenField
+            <SuspenseHiddenField
               form={form}
               name="code_challenge_method"
               queryParam="code_challenge_method"

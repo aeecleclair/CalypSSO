@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { FormField } from "../ui/form";
 
-interface HiddenFieldProps {
+export interface HiddenFieldProps {
   form: any;
   queryParam: string;
   name: string;
