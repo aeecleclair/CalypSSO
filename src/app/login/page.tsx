@@ -1,5 +1,6 @@
 "use client";
 
+import { BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost } from "@/api/hyperionSchemas";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
@@ -7,13 +8,17 @@ import { PasswordInput } from "@/components/custom/PasswordInput";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuthenticate } from "@/hooks/useAuthenticate";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+
 const Login = () => {
+  const { authenticate, isLoading } = useAuthenticate();
+
   const formSchema = z.object({
     password: z.string({
       required_error: "Veuillez renseigner un mot de passe",
@@ -32,20 +37,16 @@ const Login = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // const body: CoreUserActivateRequest = {
-    //   activation_token: values.activation_code,
-    //   firstname: values.firstname,
-    //   name: values.name,
-    //   password: values.password,
-    //   floor: "Exte",
-    // };
-    // activateAccount(body, () => {
-    //   toast({
-    //     title: "Compte créé",
-    //     description: "Votre compte a été créé avec succès",
-    //   });
-    //   router.replace("/login");
-    // });
+    const body: BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost =
+      {
+        client_id: "",
+        response_type: "",
+        email: "",
+        password: ""
+      };
+    authenticate(body, () => {
+      // redirect to the redirect_uri
+    });
   }
 
   return (
@@ -74,8 +75,7 @@ const Login = () => {
               type="submit"
               className="w-full mt-2"
               label="Se connecter"
-              isLoading={false}
-              // isLoading={isResetLoading}
+              isLoading={isLoading}
             />
             <div className="flex flex-row justify-between lg:w-[700px] w-full">
               <Button variant="link">
