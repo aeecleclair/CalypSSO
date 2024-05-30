@@ -12,7 +12,7 @@ def get_calypsso_app() -> FastAPI:
 
     app.mount(
         "/",
-        StaticFiles(directory=MODULE_PATH / "public"),
+        StaticFiles(directory=MODULE_PATH / "public", html=True),
         name="calypsso",
     )
     return app
