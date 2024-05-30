@@ -12,12 +12,12 @@ import { useAuthenticate } from "@/hooks/useAuthenticate";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-
 const Login = () => {
-  const { authenticate, isLoading } = useAuthenticate();
+  const { authenticate, isLoading, isError } = useAuthenticate();
 
   const formSchema = z.object({
     password: z.string({
@@ -36,14 +36,37 @@ const Login = () => {
     resolver: zodResolver(formSchema),
   });
 
+  useEffect(() => {
+    form.setError("email", {
+      type: "manual",
+      message: isError ? "Identifiants incorrects" : "",
+    });
+    form.setError("password", {
+      type: "manual",
+      message: isError ? "Identifiants incorrects" : "",
+    });
+    form.reset({ email: form.getValues("email") });
+  }, [form, isError]);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     const body: BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost =
       {
         client_id: "",
         response_type: "",
-        email: "",
-        password: ""
+        email: values.email,
+        password: values.password,
+        redirect_uri: "",
+        scope: "",
+        state: "",
+        nonce: "",
       };
+    // Only for PKCE
+    // if (values.code_challenge) {
+    //   body.code_challenge = values.code_challenge;
+    // }
+    // if (values.code_challenge_method) {
+    //   body.code_challenge_method = values.code_challenge_method;
+    // }
     authenticate(body, () => {
       // redirect to the redirect_uri
     });

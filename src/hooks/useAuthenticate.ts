@@ -9,12 +9,14 @@ const backUrl: string =
 
 export const useAuthenticate = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   async function authenticate(
     params: BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost,
     callback: () => void,
   ): Promise<void> {
     setIsLoading(true);
+    setIsError(false);
     const body = stringify(params);
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -26,16 +28,19 @@ export const useAuthenticate = () => {
       });
       if (result.status != 200) {
         setIsLoading(false);
+        setIsError(true);
         return;
       }
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+      setIsError(true);
     }
   }
 
   return {
     authenticate,
     isLoading,
+    isError,
   };
 };
