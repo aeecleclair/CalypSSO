@@ -3,9 +3,7 @@ import axios from "axios";
 import { stringify } from "qs";
 import { useState } from "react";
 
-
-const backUrl: string =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
+const backUrl: string = window.location.origin; // Using the current origin as the base URL since it will be served by the backend
 
 export const useAuthenticate = () => {
   const [isLoading, setIsLoading] = useState(false);

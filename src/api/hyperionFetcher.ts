@@ -1,7 +1,6 @@
 import { HyperionContext } from "./hyperionContext";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr"; // TODO add your baseUrl
+const baseUrl = window.location.origin; // Using the current origin as the base URL since it will be served by the backend
 
 export type ErrorWrapper<TError> =
   | TError
