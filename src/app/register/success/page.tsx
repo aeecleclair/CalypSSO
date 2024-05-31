@@ -1,7 +1,6 @@
 import { SuccessCard } from "@/components/custom/SuccessCard";
 import { HiOutlineMail } from "react-icons/hi";
 
-
 const SuccessPage = () => {
   return (
     <SuccessCard

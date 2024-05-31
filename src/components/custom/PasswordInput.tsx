@@ -1,9 +1,9 @@
 "use client";
+
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import * as React from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { Input } from "@/components/ui/input";
-
-import { cn } from "@/lib/utils";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -29,7 +29,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 PasswordInput.displayName = "PasswordInput";
 

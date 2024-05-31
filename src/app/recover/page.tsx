@@ -42,41 +42,41 @@ const RecoverPage = () => {
       title={"Réinitialiser le mot de passe"}
       description={"Entrez votre email pour commencer"}
     >
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="grid gap-4">
-              <CustomFormField
-                form={form}
-                name="email"
-                label="Email"
-                render={(field) => (
-                  <Input placeholder="inscription@raid.fr" {...field} />
-                )}
-              />
-              <LoadingButton
-                type="submit"
-                className="w-full mt-2"
-                label={"Recevoir le code de réinitialisation"}
-                isLoading={isRecoverLoading}
-              />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="grid gap-4">
+            <CustomFormField
+              form={form}
+              name="email"
+              label="Email"
+              render={(field) => (
+                <Input placeholder="inscription@raid.fr" {...field} />
+              )}
+            />
+            <LoadingButton
+              type="submit"
+              className="w-full mt-2"
+              label={"Recevoir le code de réinitialisation"}
+              isLoading={isRecoverLoading}
+            />
 
-              <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
-                <div className="w-full text-center text-sm">
-                  Vous avez déjà un compte ?{" "}
-                  <Button variant="link" className="pl-1" type="button">
-                    <Link href="/login">Connectez-vous</Link>
-                  </Button>
-                </div>
-                <div className="w-full text-center text-sm">
-                  Vous avez reçu le code par mail ?{" "}
-                  <Button variant="link" className="pl-1" type="button">
-                    <Link href="/reset-password">Continuer</Link>
-                  </Button>
-                </div>
+            <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
+              <div className="w-full text-center text-sm">
+                Vous avez déjà un compte ?{" "}
+                <Button variant="link" className="pl-1" type="button">
+                  <Link href="/login">Connectez-vous</Link>
+                </Button>
+              </div>
+              <div className="w-full text-center text-sm">
+                Vous avez reçu le code par mail ?{" "}
+                <Button variant="link" className="pl-1" type="button">
+                  <Link href="/reset-password">Continuer</Link>
+                </Button>
               </div>
             </div>
-          </form>
-        </Form>
+          </div>
+        </form>
+      </Form>
     </CenteredCard>
   );
 };

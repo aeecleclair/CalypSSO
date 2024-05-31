@@ -1,5 +1,5 @@
-import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
 import { QueryOperation } from "./hyperionComponents";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
 
 export type HyperionContext = {
   fetcherOptions: {

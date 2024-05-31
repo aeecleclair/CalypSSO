@@ -1,7 +1,7 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { FormField } from "../ui/form";
+import { useSearchParams } from "next/navigation";
 
 export interface HiddenFieldProps {
   form: any;
@@ -9,11 +9,7 @@ export interface HiddenFieldProps {
   name: string;
 }
 
-export const HiddenField = ({
-  form,
-  queryParam,
-  name,
-}: HiddenFieldProps) => {
+export const HiddenField = ({ form, queryParam, name }: HiddenFieldProps) => {
   const searchParams = useSearchParams();
   const token = searchParams.get(queryParam);
   form.setValue(name, token);

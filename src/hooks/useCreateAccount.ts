@@ -8,7 +8,6 @@ import {
 } from "../api/hyperionSchemas";
 
 export const useAccountCreation = () => {
-
   const { mutate: mutateRegister, isPending: isRegisteringLoading } =
     usePostUsersCreate();
 

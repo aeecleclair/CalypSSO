@@ -3,11 +3,11 @@
  *
  * @version 2.4.1-alpha
  */
-import * as reactQuery from "@tanstack/react-query";
 import { useHyperionContext, HyperionContext } from "./hyperionContext";
 import type * as Fetcher from "./hyperionFetcher";
 import { hyperionFetch } from "./hyperionFetcher";
 import type * as Schemas from "./hyperionSchemas";
+import * as reactQuery from "@tanstack/react-query";
 
 export type PostAuthSimpleTokenError = Fetcher.ErrorWrapper<{
   status: 422;
@@ -126,7 +126,7 @@ export const fetchGetAuthAuthorize = (
  *
  * **This endpoint is a UI endpoint which send and html page response. It will redirect to `/auth/authorization-flow/authorize-validation`**
  */
-export const useGetAuthAuthorize = <TData = undefined,>(
+export const useGetAuthAuthorize = <TData = undefined>(
   variables: GetAuthAuthorizeVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetAuthAuthorizeError, TData>,
@@ -459,7 +459,7 @@ export const fetchGetAuthUserinfo = (
  * Reference:
  * https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
  */
-export const useGetAuthUserinfo = <TData = void,>(
+export const useGetAuthUserinfo = <TData = void>(
   variables: GetAuthUserinfoVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<void, GetAuthUserinfoError, TData>,
@@ -505,7 +505,7 @@ export const fetchGetOidcAuthorizationFlowJwksUri = (
     signal,
   });
 
-export const useGetOidcAuthorizationFlowJwksUri = <TData = void,>(
+export const useGetOidcAuthorizationFlowJwksUri = <TData = void>(
   variables: GetOidcAuthorizationFlowJwksUriVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -560,7 +560,7 @@ export const fetchGetWellKnownOpenidConfiguration = (
     signal,
   });
 
-export const useGetWellKnownOpenidConfiguration = <TData = void,>(
+export const useGetWellKnownOpenidConfiguration = <TData = void>(
   variables: GetWellKnownOpenidConfigurationVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -614,7 +614,7 @@ export const fetchGetInformation = (
 /**
  * Return information about Hyperion. This endpoint can be used to check if the API is up.
  */
-export const useGetInformation = <TData = Schemas.CoreInformation,>(
+export const useGetInformation = <TData = Schemas.CoreInformation>(
   variables: GetInformationVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -665,7 +665,7 @@ export const fetchGetPrivacy = (
 /**
  * Return Hyperion privacy
  */
-export const useGetPrivacy = <TData = undefined,>(
+export const useGetPrivacy = <TData = undefined>(
   variables: GetPrivacyVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetPrivacyError, TData>,
@@ -708,7 +708,7 @@ export const fetchGetTermsAndConditions = (
 /**
  * Return Hyperion terms and conditions pages
  */
-export const useGetTermsAndConditions = <TData = undefined,>(
+export const useGetTermsAndConditions = <TData = undefined>(
   variables: GetTermsAndConditionsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetTermsAndConditionsError, TData>,
@@ -751,7 +751,7 @@ export const fetchGetSupport = (
 /**
  * Return Hyperion terms and conditions pages
  */
-export const useGetSupport = <TData = undefined,>(
+export const useGetSupport = <TData = undefined>(
   variables: GetSupportVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetSupportError, TData>,
@@ -794,7 +794,7 @@ export const fetchGetSecurityTxt = (
 /**
  * Return Hyperion security.txt file
  */
-export const useGetSecurityTxt = <TData = undefined,>(
+export const useGetSecurityTxt = <TData = undefined>(
   variables: GetSecurityTxtVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetSecurityTxtError, TData>,
@@ -835,7 +835,7 @@ export const fetchGetWellKnownSecurityTxt = (
 /**
  * Return Hyperion security.txt file
  */
-export const useGetWellKnownSecurityTxt = <TData = undefined,>(
+export const useGetWellKnownSecurityTxt = <TData = undefined>(
   variables: GetWellKnownSecurityTxtVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetWellKnownSecurityTxtError, TData>,
@@ -878,7 +878,7 @@ export const fetchGetRobotsTxt = (
 /**
  * Return Hyperion robots.txt file
  */
-export const useGetRobotsTxt = <TData = undefined,>(
+export const useGetRobotsTxt = <TData = undefined>(
   variables: GetRobotsTxtVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetRobotsTxtError, TData>,
@@ -932,7 +932,7 @@ export const fetchGetStyleFileCss = (
 /**
  * Return a style file from the assets folder
  */
-export const useGetStyleFileCss = <TData = undefined,>(
+export const useGetStyleFileCss = <TData = undefined>(
   variables: GetStyleFileCssVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetStyleFileCssError, TData>,
@@ -969,7 +969,7 @@ export const fetchGetFaviconIco = (
     signal,
   });
 
-export const useGetFaviconIco = <TData = undefined,>(
+export const useGetFaviconIco = <TData = undefined>(
   variables: GetFaviconIcoVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetFaviconIcoError, TData>,
@@ -1020,7 +1020,7 @@ export const fetchGetModuleVisibility = (
  *
  * **This endpoint is only usable by administrators**
  */
-export const useGetModuleVisibility = <TData = GetModuleVisibilityResponse,>(
+export const useGetModuleVisibility = <TData = GetModuleVisibilityResponse>(
   variables: GetModuleVisibilityVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -1133,9 +1133,7 @@ export const fetchGetModuleVisibilityMe = (
  *
  * **This endpoint is only usable by everyone**
  */
-export const useGetModuleVisibilityMe = <
-  TData = GetModuleVisibilityMeResponse,
->(
+export const useGetModuleVisibilityMe = <TData = GetModuleVisibilityMeResponse>(
   variables: GetModuleVisibilityMeVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -1245,7 +1243,7 @@ export const fetchGetGroups = (
 /**
  * Return all groups from database as a list of dictionaries
  */
-export const useGetGroups = <TData = GetGroupsResponse,>(
+export const useGetGroups = <TData = GetGroupsResponse>(
   variables: GetGroupsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<GetGroupsResponse, GetGroupsError, TData>,
@@ -1357,7 +1355,7 @@ export const fetchGetGroupsGroupId = (
  *
  * **This endpoint is only usable by administrators**
  */
-export const useGetGroupsGroupId = <TData = Schemas.CoreGroup,>(
+export const useGetGroupsGroupId = <TData = Schemas.CoreGroup>(
   variables: GetGroupsGroupIdVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CoreGroup, GetGroupsGroupIdError, TData>,
@@ -2158,9 +2156,7 @@ export const fetchGetNotificationTopics = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetNotificationTopics = <
-  TData = GetNotificationTopicsResponse,
->(
+export const useGetNotificationTopics = <TData = GetNotificationTopicsResponse>(
   variables: GetNotificationTopicsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -2390,7 +2386,7 @@ export const fetchGetUsers = (
  *
  * **This endpoint is only usable by administrators**
  */
-export const useGetUsers = <TData = GetUsersResponse,>(
+export const useGetUsers = <TData = GetUsersResponse>(
   variables: GetUsersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<GetUsersResponse, GetUsersError, TData>,
@@ -2437,7 +2433,7 @@ export const fetchGetUsersCount = (
  *
  * **This endpoint is only usable by administrators**
  */
-export const useGetUsersCount = <TData = number,>(
+export const useGetUsersCount = <TData = number>(
   variables: GetUsersCountVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<number, GetUsersCountError, TData>,
@@ -2503,7 +2499,7 @@ export const fetchGetUsersSearch = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetUsersSearch = <TData = GetUsersSearchResponse,>(
+export const useGetUsersSearch = <TData = GetUsersSearchResponse>(
   variables: GetUsersSearchVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -2558,7 +2554,7 @@ export const fetchGetUsersMe = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetUsersMe = <TData = Schemas.CoreUser,>(
+export const useGetUsersMe = <TData = Schemas.CoreUser>(
   variables: GetUsersMeVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CoreUser, GetUsersMeError, TData>,
@@ -2799,7 +2795,7 @@ export const fetchGetUsersActivate = (
  *
  * **This endpoint is an UI endpoint which send and html page response.
  */
-export const useGetUsersActivate = <TData = undefined,>(
+export const useGetUsersActivate = <TData = undefined>(
   variables: GetUsersActivateVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetUsersActivateError, TData>,
@@ -3123,7 +3119,7 @@ export const fetchGetUsersMigrateMailConfirm = (
  * Due to a change in the email format, all student users need to migrate their email address.
  * This endpoint will updates the user new email address.
  */
-export const useGetUsersMigrateMailConfirm = <TData = void,>(
+export const useGetUsersMigrateMailConfirm = <TData = void>(
   variables: GetUsersMigrateMailConfirmVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<void, GetUsersMigrateMailConfirmError, TData>,
@@ -3238,7 +3234,7 @@ export const fetchGetUsersUserId = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetUsersUserId = <TData = Schemas.CoreUser,>(
+export const useGetUsersUserId = <TData = Schemas.CoreUser>(
   variables: GetUsersUserIdVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CoreUser, GetUsersUserIdError, TData>,
@@ -3388,7 +3384,7 @@ export const fetchGetUsersMeProfilePicture = (
 /**
  * Get the profile picture of the authenticated user.
  */
-export const useGetUsersMeProfilePicture = <TData = undefined,>(
+export const useGetUsersMeProfilePicture = <TData = undefined>(
   variables: GetUsersMeProfilePictureVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetUsersMeProfilePictureError, TData>,
@@ -3508,7 +3504,7 @@ export const fetchGetUsersUserIdProfilePicture = (
  *
  * Unauthenticated users can use this endpoint (needed for some OIDC services)
  */
-export const useGetUsersUserIdProfilePicture = <TData = undefined,>(
+export const useGetUsersUserIdProfilePicture = <TData = undefined>(
   variables: GetUsersUserIdProfilePictureVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -3566,7 +3562,7 @@ export const fetchGetAdvertAdvertisers = (
 /**
  * Get existing advertisers.
  */
-export const useGetAdvertAdvertisers = <TData = GetAdvertAdvertisersResponse,>(
+export const useGetAdvertAdvertisers = <TData = GetAdvertAdvertisersResponse>(
   variables: GetAdvertAdvertisersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -3886,7 +3882,7 @@ export const fetchGetAdvertAdverts = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetAdvertAdverts = <TData = GetAdvertAdvertsResponse,>(
+export const useGetAdvertAdverts = <TData = GetAdvertAdvertsResponse>(
   variables: GetAdvertAdvertsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -4209,7 +4205,7 @@ export const fetchGetAdvertAdvertsAdvertIdPicture = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetAdvertAdvertsAdvertIdPicture = <TData = undefined,>(
+export const useGetAdvertAdvertsAdvertIdPicture = <TData = undefined>(
   variables: GetAdvertAdvertsAdvertIdPictureVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -4339,7 +4335,7 @@ export const fetchGetAmapProducts = (
  *
  * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const useGetAmapProducts = <TData = GetAmapProductsResponse,>(
+export const useGetAmapProducts = <TData = GetAmapProductsResponse>(
   variables: GetAmapProductsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -4642,7 +4638,7 @@ export const fetchGetAmapDeliveries = (
 /**
  * Get all deliveries.
  */
-export const useGetAmapDeliveries = <TData = GetAmapDeliveriesResponse,>(
+export const useGetAmapDeliveries = <TData = GetAmapDeliveriesResponse>(
   variables: GetAmapDeliveriesVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -5101,7 +5097,7 @@ export const fetchGetAmapOrdersOrderId = (
  *
  * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const useGetAmapOrdersOrderId = <TData = Schemas.OrderReturn,>(
+export const useGetAmapOrdersOrderId = <TData = Schemas.OrderReturn>(
   variables: GetAmapOrdersOrderIdVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -5558,7 +5554,7 @@ export const fetchGetAmapUsersCash = (
  *
  * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const useGetAmapUsersCash = <TData = GetAmapUsersCashResponse,>(
+export const useGetAmapUsersCash = <TData = GetAmapUsersCashResponse>(
   variables: GetAmapUsersCashVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -5624,7 +5620,7 @@ export const fetchGetAmapUsersUserIdCash = (
  *
  * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
  */
-export const useGetAmapUsersUserIdCash = <TData = Schemas.CashComplete,>(
+export const useGetAmapUsersUserIdCash = <TData = Schemas.CashComplete>(
   variables: GetAmapUsersUserIdCashVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -5880,7 +5876,7 @@ export const fetchGetAmapInformation = (
 /**
  * Return all information
  */
-export const useGetAmapInformation = <TData = Schemas.Information,>(
+export const useGetAmapInformation = <TData = Schemas.Information>(
   variables: GetAmapInformationVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -5993,7 +5989,7 @@ export const fetchGetBookingManagers = (
  *
  * **This endpoint is only usable by administrators**
  */
-export const useGetBookingManagers = <TData = GetBookingManagersResponse,>(
+export const useGetBookingManagers = <TData = GetBookingManagersResponse>(
   variables: GetBookingManagersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -6827,7 +6823,7 @@ export const fetchGetBookingRooms = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetBookingRooms = <TData = GetBookingRoomsResponse,>(
+export const useGetBookingRooms = <TData = GetBookingRoomsResponse>(
   variables: GetBookingRoomsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -7053,7 +7049,7 @@ export const fetchGetCalendarEvents = (
 /**
  * Get all events from the database.
  */
-export const useGetCalendarEvents = <TData = GetCalendarEventsResponse,>(
+export const useGetCalendarEvents = <TData = GetCalendarEventsResponse>(
   variables: GetCalendarEventsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -7308,7 +7304,7 @@ export const fetchGetCalendarEventsEventId = (
 /**
  * Get an event's information by its id.
  */
-export const useGetCalendarEventsEventId = <TData = Schemas.EventComplete,>(
+export const useGetCalendarEventsEventId = <TData = Schemas.EventComplete>(
   variables: GetCalendarEventsEventIdVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -7670,7 +7666,7 @@ export const fetchGetCalendarIcal = (
 /**
  * Get the icalendar file corresponding to the event in the database.
  */
-export const useGetCalendarIcal = <TData = undefined,>(
+export const useGetCalendarIcal = <TData = undefined>(
   variables: GetCalendarIcalVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetCalendarIcalError, TData>,
@@ -7721,7 +7717,7 @@ export const fetchGetCampaignSections = (
  *
  * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
-export const useGetCampaignSections = <TData = GetCampaignSectionsResponse,>(
+export const useGetCampaignSections = <TData = GetCampaignSectionsResponse>(
   variables: GetCampaignSectionsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -7905,7 +7901,7 @@ export const fetchGetCampaignLists = (
  *
  * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
-export const useGetCampaignLists = <TData = GetCampaignListsResponse,>(
+export const useGetCampaignLists = <TData = GetCampaignListsResponse>(
   variables: GetCampaignListsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -8210,7 +8206,7 @@ export const fetchGetCampaignVoters = (
 /**
  * Return the voters (groups allowed to vote) for the current campaign.
  */
-export const useGetCampaignVoters = <TData = GetCampaignVotersResponse,>(
+export const useGetCampaignVoters = <TData = GetCampaignVotersResponse>(
   variables: GetCampaignVotersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -8703,7 +8699,7 @@ export const fetchGetCampaignVotes = (
  *
  * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
  */
-export const useGetCampaignVotes = <TData = GetCampaignVotesResponse,>(
+export const useGetCampaignVotes = <TData = GetCampaignVotesResponse>(
   variables: GetCampaignVotesVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -8821,7 +8817,7 @@ export const fetchGetCampaignResults = (
  *
  * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
-export const useGetCampaignResults = <TData = GetCampaignResultsResponse,>(
+export const useGetCampaignResults = <TData = GetCampaignResultsResponse>(
   variables: GetCampaignResultsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -8878,7 +8874,7 @@ export const fetchGetCampaignStatus = (
  *
  * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
-export const useGetCampaignStatus = <TData = Schemas.VoteStatus,>(
+export const useGetCampaignStatus = <TData = Schemas.VoteStatus>(
   variables: GetCampaignStatusVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -8947,7 +8943,7 @@ export const fetchGetCampaignStatsSectionId = (
  *
  * **The user must be a member of the group CAA to use this endpoint**
  */
-export const useGetCampaignStatsSectionId = <TData = Schemas.VoteStats,>(
+export const useGetCampaignStatsSectionId = <TData = Schemas.VoteStats>(
   variables: GetCampaignStatsSectionIdVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -9083,7 +9079,7 @@ export const fetchGetCampaignListsListIdLogo = (
  * Get the logo of a campaign list.
  * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
-export const useGetCampaignListsListIdLogo = <TData = undefined,>(
+export const useGetCampaignListsListIdLogo = <TData = undefined>(
   variables: GetCampaignListsListIdLogoVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -9133,7 +9129,7 @@ export const fetchGetCdrSellers = (
     {}
   >({ url: "/cdr/sellers/", method: "get", ...variables, signal });
 
-export const useGetCdrSellers = <TData = GetCdrSellersResponse,>(
+export const useGetCdrSellers = <TData = GetCdrSellersResponse>(
   variables: GetCdrSellersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -9222,7 +9218,7 @@ export const fetchGetCdrUsersMeSellers = (
     {}
   >({ url: "/cdr/users/me/sellers/", method: "get", ...variables, signal });
 
-export const useGetCdrUsersMeSellers = <TData = GetCdrUsersMeSellersResponse,>(
+export const useGetCdrUsersMeSellers = <TData = GetCdrUsersMeSellersResponse>(
   variables: GetCdrUsersMeSellersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -9271,7 +9267,7 @@ export const fetchGetCdrOnlineSellers = (
     {}
   >({ url: "/cdr/online/sellers/", method: "get", ...variables, signal });
 
-export const useGetCdrOnlineSellers = <TData = GetCdrOnlineSellersResponse,>(
+export const useGetCdrOnlineSellers = <TData = GetCdrOnlineSellersResponse>(
   variables: GetCdrOnlineSellersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -11133,7 +11129,7 @@ export const fetchGetCdrCurriculums = (
     {}
   >({ url: "/cdr/curriculums/", method: "get", ...variables, signal });
 
-export const useGetCdrCurriculums = <TData = GetCdrCurriculumsResponse,>(
+export const useGetCdrCurriculums = <TData = GetCdrCurriculumsResponse>(
   variables: GetCdrCurriculumsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -11761,7 +11757,7 @@ export const fetchGetCdrStatus = (
     signal,
   });
 
-export const useGetCdrStatus = <TData = Schemas.Status,>(
+export const useGetCdrStatus = <TData = Schemas.Status>(
   variables: GetCdrStatusVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Status, GetCdrStatusError, TData>,
@@ -11844,7 +11840,7 @@ export const fetchGetCinemaSessions = (
     {}
   >({ url: "/cinema/sessions", method: "get", ...variables, signal });
 
-export const useGetCinemaSessions = <TData = GetCinemaSessionsResponse,>(
+export const useGetCinemaSessions = <TData = GetCinemaSessionsResponse>(
   variables: GetCinemaSessionsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -12113,7 +12109,7 @@ export const fetchGetCinemaSessionsSessionIdPoster = (
     signal,
   });
 
-export const useGetCinemaSessionsSessionIdPoster = <TData = undefined,>(
+export const useGetCinemaSessionsSessionIdPoster = <TData = undefined>(
   variables: GetCinemaSessionsSessionIdPosterVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -12187,7 +12183,7 @@ export const fetchGetFlappybirdScores = (
 /**
  * Return the leaderboard score of the skip...limit
  */
-export const useGetFlappybirdScores = <TData = GetFlappybirdScoresResponse,>(
+export const useGetFlappybirdScores = <TData = GetFlappybirdScoresResponse>(
   variables: GetFlappybirdScoresVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -12339,7 +12335,7 @@ export const fetchGetLoansLoaners = (
  *
  * **This endpoint is only usable by administrators**
  */
-export const useGetLoansLoaners = <TData = GetLoansLoanersResponse,>(
+export const useGetLoansLoaners = <TData = GetLoansLoanersResponse>(
   variables: GetLoansLoanersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -12966,7 +12962,7 @@ export const fetchGetLoansUsersMe = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetLoansUsersMe = <TData = GetLoansUsersMeResponse,>(
+export const useGetLoansUsersMe = <TData = GetLoansUsersMeResponse>(
   variables: GetLoansUsersMeVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -13377,7 +13373,7 @@ export const fetchGetPhPaperIdPdf = (
     GetPhPaperIdPdfPathParams
   >({ url: "/ph/{paperId}/pdf", method: "get", ...variables, signal });
 
-export const useGetPhPaperIdPdf = <TData = undefined,>(
+export const useGetPhPaperIdPdf = <TData = undefined>(
   variables: GetPhPaperIdPdfVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetPhPaperIdPdfError, TData>,
@@ -13471,7 +13467,7 @@ export const fetchGetPh = (variables: GetPhVariables, signal?: AbortSignal) =>
 /**
  * Return all editions until now, sorted from the latest to the oldest
  */
-export const useGetPh = <TData = GetPhResponse,>(
+export const useGetPh = <TData = GetPhResponse>(
   variables: GetPhVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<GetPhResponse, GetPhError, TData>,
@@ -13559,7 +13555,7 @@ export const fetchGetPhAdmin = (
 /**
  * Return all editions, sorted from the latest to the oldest
  */
-export const useGetPhAdmin = <TData = GetPhAdminResponse,>(
+export const useGetPhAdmin = <TData = GetPhAdminResponse>(
   variables: GetPhAdminVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<GetPhAdminResponse, GetPhAdminError, TData>,
@@ -13610,7 +13606,7 @@ export const fetchGetPhPaperIdCover = (
     GetPhPaperIdCoverPathParams
   >({ url: "/ph/{paperId}/cover", method: "get", ...variables, signal });
 
-export const useGetPhPaperIdCover = <TData = void,>(
+export const useGetPhPaperIdCover = <TData = void>(
   variables: GetPhPaperIdCoverVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<void, GetPhPaperIdCoverError, TData>,
@@ -13873,7 +13869,7 @@ export const fetchGetPhonebookRoletags = (
 /**
  * Return all available role tags from RoleTags enum.
  */
-export const useGetPhonebookRoletags = <TData = Schemas.RoleTagsReturn,>(
+export const useGetPhonebookRoletags = <TData = Schemas.RoleTagsReturn>(
   variables: GetPhonebookRoletagsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -13933,7 +13929,7 @@ export const fetchGetPhonebookAssociationsKinds = (
 /**
  * Return all available kinds of from Kinds enum.
  */
-export const useGetPhonebookAssociationsKinds = <TData = Schemas.KindsReturn,>(
+export const useGetPhonebookAssociationsKinds = <TData = Schemas.KindsReturn>(
   variables: GetPhonebookAssociationsKindsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -14293,7 +14289,7 @@ export const fetchGetPhonebookMemberUserId = (
 /**
  * Return MemberComplete for given user_id.
  */
-export const useGetPhonebookMemberUserId = <TData = Schemas.MemberComplete,>(
+export const useGetPhonebookMemberUserId = <TData = Schemas.MemberComplete>(
   variables: GetPhonebookMemberUserIdVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -14695,7 +14691,7 @@ export const fetchGetTombolaRaffles = (
 /**
  * Return all raffles
  */
-export const useGetTombolaRaffles = <TData = GetTombolaRafflesResponse,>(
+export const useGetTombolaRaffles = <TData = GetTombolaRafflesResponse>(
   variables: GetTombolaRafflesVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -15017,7 +15013,7 @@ export const fetchGetTombolaRafflesRaffleIdStats = (
 /**
  * Return the number of ticket sold and the total amount recollected for a raffle
  */
-export const useGetTombolaRafflesRaffleIdStats = <TData = Schemas.RaffleStats,>(
+export const useGetTombolaRafflesRaffleIdStats = <TData = Schemas.RaffleStats>(
   variables: GetTombolaRafflesRaffleIdStatsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -15151,7 +15147,7 @@ export const fetchGetTombolaRafflesRaffleIdLogo = (
 /**
  * Get the logo of a specific raffle.
  */
-export const useGetTombolaRafflesRaffleIdLogo = <TData = undefined,>(
+export const useGetTombolaRafflesRaffleIdLogo = <TData = undefined>(
   variables: GetTombolaRafflesRaffleIdLogoVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -15209,9 +15205,7 @@ export const fetchGetTombolaPackTickets = (
 /**
  * Return all tickets
  */
-export const useGetTombolaPackTickets = <
-  TData = GetTombolaPackTicketsResponse,
->(
+export const useGetTombolaPackTickets = <TData = GetTombolaPackTicketsResponse>(
   variables: GetTombolaPackTicketsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -15532,7 +15526,7 @@ export const fetchGetTombolaTickets = (
  *
  * **The user must be a member of the group admin to use this endpoint**
  */
-export const useGetTombolaTickets = <TData = GetTombolaTicketsResponse,>(
+export const useGetTombolaTickets = <TData = GetTombolaTicketsResponse>(
   variables: GetTombolaTicketsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -15804,7 +15798,7 @@ export const fetchGetTombolaPrizes = (
 /**
  * Return all prizes
  */
-export const useGetTombolaPrizes = <TData = GetTombolaPrizesResponse,>(
+export const useGetTombolaPrizes = <TData = GetTombolaPrizesResponse>(
   variables: GetTombolaPrizesVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -16190,7 +16184,7 @@ export const fetchGetTombolaPrizesPrizeIdPicture = (
 /**
  * Get the logo of a specific prize.
  */
-export const useGetTombolaPrizesPrizeIdPicture = <TData = undefined,>(
+export const useGetTombolaPrizesPrizeIdPicture = <TData = undefined>(
   variables: GetTombolaPrizesPrizeIdPictureVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -16252,7 +16246,7 @@ export const fetchGetTombolaUsersCash = (
  *
  * **The user must be a member of the group admin to use this endpoint
  */
-export const useGetTombolaUsersCash = <TData = GetTombolaUsersCashResponse,>(
+export const useGetTombolaUsersCash = <TData = GetTombolaUsersCashResponse>(
   variables: GetTombolaUsersCashVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
@@ -16323,7 +16317,7 @@ export const fetchGetTombolaUsersUserIdCash = (
  *
  * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
  */
-export const useGetTombolaUsersUserIdCash = <TData = Schemas.CashComplete,>(
+export const useGetTombolaUsersUserIdCash = <TData = Schemas.CashComplete>(
   variables: GetTombolaUsersUserIdCashVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<

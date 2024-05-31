@@ -15,7 +15,7 @@
     --secondary: 60 4.8% 95.9%;
     --secondary-foreground: 24 9.8% 10%;
     --muted: 60 4.8% 95.9%;
-    --muted-foreground: 211 23.4% 42.0%;
+    --muted-foreground: 211 23.4% 42%;
     --accent: 60 4.8% 95.9%;
     --accent-foreground: 24 9.8% 10%;
     --destructive: 0 84.2% 60.2%;
@@ -54,7 +54,7 @@
     @apply border-border;
   }
   body {
-    @apply text-foreground bg-background;
+    @apply bg-background text-foreground;
   }
 
   .saturn {
@@ -69,12 +69,24 @@
     border-radius: 60px;
     left: -100px;
     top: -100px;
-    box-shadow: -240px 70px #202c39, 200px 70px #202c39, 60px 70px #283845,
-      -180px 140px #283845, 160px 140px #283845, -440px 210px #202c39,
-      -160px 210px #283845, -180px 280px #283845, 340px 280px #283845,
-      540px 350px #202c39, 340px 350px #283845, 300px 420px #283845,
-      -40px 420px #283845, -220px 490px #202c39, 240px 490px #202c39,
-      60px 490px #283845, 100px 560px #283845;
+    box-shadow:
+      -240px 70px #202c39,
+      200px 70px #202c39,
+      60px 70px #283845,
+      -180px 140px #283845,
+      160px 140px #283845,
+      -440px 210px #202c39,
+      -160px 210px #283845,
+      -180px 280px #283845,
+      340px 280px #283845,
+      540px 350px #202c39,
+      340px 350px #283845,
+      300px 420px #283845,
+      -40px 420px #283845,
+      -220px 490px #202c39,
+      240px 490px #202c39,
+      60px 490px #283845,
+      100px 560px #283845;
   }
 
   .clouds:before {
@@ -85,7 +97,10 @@
     width: 14px;
     height: 14px;
     left: -20px;
-    box-shadow: -150px 220px #f2d492, -50px 440px #f2d492, 460px -20px #f2d492,
+    box-shadow:
+      -150px 220px #f2d492,
+      -50px 440px #f2d492,
+      460px -20px #f2d492,
       400px 520px #f2d492;
   }
 
@@ -98,7 +113,9 @@
     height: 8px;
     left: 60px;
     top: 40px;
-    box-shadow: 200px 600px #f2d492, 600px 200px #f2d492;
+    box-shadow:
+      200px 600px #f2d492,
+      600px 200px #f2d492;
   }
 
   .planet {
@@ -119,9 +136,16 @@
     top: 200px;
     background-color: #f29559;
     left: 60px;
-    box-shadow: 120px 0 #f29559, -150px 50px #cc5803, 90px 50px #cc5803,
-      -40px 50px #f29559, 0 100px #f29559, 120px 100px #f29559, -80px 150px #cc5803,
-      160px 150px #cc5803, 60px 150px #f29559;
+    box-shadow:
+      120px 0 #f29559,
+      -150px 50px #cc5803,
+      90px 50px #cc5803,
+      -40px 50px #f29559,
+      0 100px #f29559,
+      120px 100px #f29559,
+      -80px 150px #cc5803,
+      160px 150px #cc5803,
+      60px 150px #f29559;
   }
 
   .planet:after {
@@ -162,8 +186,14 @@
     border-radius: 40px;
     left: 140px;
     background-color: #f29559;
-    box-shadow: -150px 50px #cc5803, 90px 50px #cc5803, -40px 50px #f29559,
-      0 100px #f29559, -160px 100px #f29559, -220px 150px #cc5803, 60px 150px #cc5803,
+    box-shadow:
+      -150px 50px #cc5803,
+      90px 50px #cc5803,
+      -40px 50px #f29559,
+      0 100px #f29559,
+      -160px 100px #f29559,
+      -220px 150px #cc5803,
+      60px 150px #cc5803,
       -100px 150px #f29559;
   }
 
