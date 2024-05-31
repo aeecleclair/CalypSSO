@@ -2,9 +2,10 @@
 
 import { FormField } from "../ui/form";
 import { useSearchParams } from "next/navigation";
+import { UseFormReturn } from "react-hook-form";
 
 export interface HiddenFieldProps {
-  form: any;
+  form: UseFormReturn;
   queryParam: string;
   name: string;
 }

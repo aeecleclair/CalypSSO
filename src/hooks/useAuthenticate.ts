@@ -11,7 +11,7 @@ export const useAuthenticate = () => {
 
   async function authenticate(
     params: BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost,
-    callback: () => void,
+    //callback: () => void,
   ): Promise<void> {
     setIsLoading(true);
     setIsError(false);

@@ -5,10 +5,14 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import {
+  ControllerRenderProps,
+  FieldValues,
+  UseFormReturn,
+} from "react-hook-form";
 
 interface CustomFormFieldProps {
-  form: any;
+  form: UseFormReturn;
   label: string;
   name: string;
   render: (
