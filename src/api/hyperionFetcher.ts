@@ -1,10 +1,13 @@
 import { HyperionContext } from "./hyperionContext";
 
-// We using the current origin as the base URL since pages will be served by the backend
+/**
+ * The base URL for the fetch requests.
+ * If the environment variable NEXT_PUBLIC_OVERRIDE_HYPERION_URL is set, it will be used as the base URL.
+ * Otherwise, the current origin will be used.
+ */
 const baseUrl =
-  process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_UR || typeof window !== "undefined"
-    ? window?.location.origin
-    : "";
+  process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL ||
+  (typeof window !== "undefined" ? window?.location.origin : "");
 
 export type ErrorWrapper<TError> =
   | TError
