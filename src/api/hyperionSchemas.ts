@@ -99,8 +99,6 @@ export type AssociationEdit = {
   mandate_year?: number | null;
 };
 
-export type AvailableMembership = "AEECL" | "USEECL";
-
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
  */
@@ -358,8 +356,6 @@ export type CashEdit = {
   balance: number;
 };
 
-export type CdrStatus = "pending" | "online" | "onsite" | "closed";
-
 export type ChangePasswordRequest = {
   email: string;
   old_password: string;
@@ -563,18 +559,6 @@ export type CoreUserUpdateAdmin = {
   external?: boolean | null;
 };
 
-export type CurriculumBase = {
-  name: string;
-};
-
-export type CurriculumComplete = {
-  name: string;
-  /**
-   * @format uuid
-   */
-  id: string;
-};
-
 export type Decision = "approved" | "declined" | "pending";
 
 /**
@@ -597,7 +581,7 @@ export type DeliveryReturn = {
    * @format date
    */
   delivery_date: string;
-  products?: AppModulesAmapSchemasAmapProductComplete[];
+  products?: ProductComplete[];
   id: string;
   status: DeliveryStatusType;
 };
@@ -612,24 +596,6 @@ export type DeliveryStatusType =
 export type DeliveryUpdate = {
   delivery_date?: string | null;
 };
-
-export type DocumentBase = {
-  name: string;
-};
-
-export type DocumentComplete = {
-  name: string;
-  /**
-   * @format uuid
-   */
-  id: string;
-  /**
-   * @format uuid
-   */
-  seller_id: string;
-};
-
-export type DocumentSignatureType = "material" | "numeric";
 
 export type EventApplicant = {
   name: string;
@@ -1031,7 +997,24 @@ export type MemberComplete = {
   email: string;
   phone?: string | null;
   promo?: number | null;
-  memberships: AppModulesPhonebookSchemasPhonebookMembershipComplete[];
+  memberships: MembershipComplete[];
+};
+
+export type MembershipBase = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+};
+
+export type MembershipComplete = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+  id: string;
 };
 
 export type MembershipEdit = {
@@ -1153,23 +1136,6 @@ export type PaperUpdate = {
   release_date?: string | null;
 };
 
-export type PaymentBase = {
-  total: number;
-  payment_type: PaymentType;
-};
-
-export type PaymentComplete = {
-  total: number;
-  payment_type: PaymentType;
-  /**
-   * @format uuid
-   */
-  id: string;
-  user_id: string;
-};
-
-export type PaymentType = "cash" | "check" | "HelloAsso" | "card" | "archived";
-
 export type PrizeBase = {
   name: string;
   description: string;
@@ -1192,96 +1158,28 @@ export type PrizeSimple = {
   id: string;
 };
 
-export type ProductBase = {
-  name_fr: string;
-  name_en: string;
-  description_fr?: string | null;
-  description_en?: string | null;
-  available_online: boolean;
+export type ProductComplete = {
+  name: string;
+  price: number;
+  category: string;
+  id: string;
 };
 
-export type ProductCompleteNoConstraint = {
-  name_fr: string;
-  name_en: string;
-  description_fr?: string | null;
-  description_en?: string | null;
-  available_online: boolean;
-  /**
-   * @format uuid
-   */
-  id: string;
-  /**
-   * @format uuid
-   */
-  seller_id: string;
-  variants?: ProductVariantComplete[];
+export type ProductEdit = {
+  category?: string | null;
+  name?: string | null;
+  price?: number | null;
 };
 
 export type ProductQuantity = {
   quantity: number;
-  product: AppModulesAmapSchemasAmapProductComplete;
+  product: ProductComplete;
 };
 
 export type ProductSimple = {
   name: string;
   price: number;
   category: string;
-};
-
-export type ProductVariantBase = {
-  name_fr: string;
-  name_en: string;
-  description_fr?: string | null;
-  description_en?: string | null;
-  price: number;
-  enabled: boolean;
-  unique: boolean;
-};
-
-export type ProductVariantComplete = {
-  name_fr: string;
-  name_en: string;
-  description_fr?: string | null;
-  description_en?: string | null;
-  price: number;
-  enabled: boolean;
-  unique: boolean;
-  /**
-   * @format uuid
-   */
-  id: string;
-  /**
-   * @format uuid
-   */
-  product_id: string;
-};
-
-export type ProductVariantEdit = {
-  name_fr?: string | null;
-  name_en?: string | null;
-  description_fr?: string | null;
-  description_en?: string | null;
-  price?: number | null;
-  enabled?: boolean | null;
-  unique?: boolean | null;
-};
-
-export type PurchaseBase = {
-  quantity: number;
-};
-
-export type PurchaseComplete = {
-  quantity: number;
-  user_id: string;
-  /**
-   * @format uuid
-   */
-  product_variant_id: string;
-  validated: boolean;
-};
-
-export type PurchaseEdit = {
-  quantity?: number | null;
 };
 
 /**
@@ -1375,50 +1273,6 @@ export type SectionComplete = {
   name: string;
   description: string;
   id: string;
-};
-
-export type SellerBase = {
-  name: string;
-  group_id: string;
-  order: number;
-};
-
-export type SellerComplete = {
-  name: string;
-  group_id: string;
-  order: number;
-  /**
-   * @format uuid
-   */
-  id: string;
-};
-
-export type SellerEdit = {
-  name?: string | null;
-  group_id?: string | null;
-  order?: number | null;
-};
-
-export type SignatureBase = {
-  signature_type: DocumentSignatureType;
-  numeric_signature_id?: string | null;
-};
-
-export type SignatureComplete = {
-  signature_type: DocumentSignatureType;
-  numeric_signature_id?: string | null;
-  user_id: string;
-  /**
-   * @format uuid
-   */
-  document_id: string;
-};
-
-export type Status = {
-  /**
-   * @default pending
-   */
-  status?: CdrStatus;
 };
 
 /**
@@ -1516,95 +1370,7 @@ export type AppCoreStandardResponsesResult = {
   success?: boolean;
 };
 
-export type AppModulesAmapSchemasAmapProductComplete = {
-  name: string;
-  price: number;
-  category: string;
-  id: string;
-};
-
-export type AppModulesAmapSchemasAmapProductEdit = {
-  category?: string | null;
-  name?: string | null;
-  price?: number | null;
-};
-
 export type AppModulesCampaignSchemasCampaignResult = {
   list_id: string;
   count: number;
-};
-
-export type AppModulesCdrSchemasCdrMembershipBase = {
-  user_id: string;
-  membership: AvailableMembership;
-  /**
-   * @format date
-   */
-  start_date: string;
-  /**
-   * @format date
-   */
-  end_date: string;
-};
-
-export type AppModulesCdrSchemasCdrMembershipComplete = {
-  user_id: string;
-  membership: AvailableMembership;
-  /**
-   * @format date
-   */
-  start_date: string;
-  /**
-   * @format date
-   */
-  end_date: string;
-  /**
-   * @format uuid
-   */
-  id: string;
-};
-
-export type AppModulesCdrSchemasCdrProductComplete = {
-  name_fr: string;
-  name_en: string;
-  description_fr?: string | null;
-  description_en?: string | null;
-  available_online: boolean;
-  /**
-   * @format uuid
-   */
-  id: string;
-  /**
-   * @format uuid
-   */
-  seller_id: string;
-  variants?: ProductVariantComplete[];
-  product_constraints?: ProductCompleteNoConstraint[];
-  document_constraints?: DocumentComplete[];
-};
-
-export type AppModulesCdrSchemasCdrProductEdit = {
-  name_fr?: string | null;
-  name_en?: string | null;
-  description_fr?: string | null;
-  description_en?: string | null;
-  description?: string | null;
-  available_online?: boolean | null;
-};
-
-export type AppModulesPhonebookSchemasPhonebookMembershipBase = {
-  user_id: string;
-  association_id: string;
-  mandate_year: number;
-  role_name: string;
-  role_tags?: string | null;
-};
-
-export type AppModulesPhonebookSchemasPhonebookMembershipComplete = {
-  user_id: string;
-  association_id: string;
-  mandate_year: number;
-  role_name: string;
-  role_tags?: string | null;
-  id: string;
 };
