@@ -1,9 +1,8 @@
+import { baseUrl } from "@/api/hyperionFetcher";
 import { BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost } from "@/api/hyperionSchemas";
 import axios from "axios";
 import { stringify } from "qs";
 import { useState } from "react";
-
-const backUrl: string = window.location.origin; // Using the current origin as the base URL since it will be served by the backend
 
 export const useAuthenticate = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +10,7 @@ export const useAuthenticate = () => {
 
   async function authenticate(
     params: BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost,
-    //callback: () => void,
+    callback: () => void,
   ): Promise<void> {
     setIsLoading(true);
     setIsError(false);
@@ -21,12 +20,19 @@ export const useAuthenticate = () => {
       Accept: "application/json",
     };
     try {
-      const result = await axios.post(`${backUrl}/auth/token`, body, {
-        headers: headers,
-      });
+      const result = await axios.post(
+        `${baseUrl}/auth/authorization-flow/authorize-validation`,
+        body,
+        {
+          headers: headers,
+          maxRedirects: 0,
+        },
+      );
+      console.log(result);
       if (result.status != 200) {
         setIsLoading(false);
         setIsError(true);
+
         return;
       }
       setIsLoading(false);

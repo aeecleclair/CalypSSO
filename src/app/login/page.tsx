@@ -5,7 +5,6 @@ import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
-import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -13,7 +12,6 @@ import { useAuthenticate } from "@/hooks/useAuthenticate";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -31,53 +29,70 @@ const Login = () => {
       .email({
         message: "Veuillez renseigner une adresse email valide",
       }),
-    client_id: z.string(),
-    response_type: z.string(),
-    redirect_uri: z.string(),
-    scope: z.string(),
-    state: z.string(),
-    nonce: z.string(),
-    code_challenge: z.string().optional(),
-    code_challenge_method: z.string().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  useEffect(() => {
-    form.setError("email", {
-      type: "manual",
-      message: isError ? "Identifiants incorrects" : "",
-    });
-    form.setError("password", {
-      type: "manual",
-      message: isError ? "Identifiants incorrects" : "",
-    });
-    form.reset({ ...form.getValues(), password: "" });
-  }, [form, isError]);
+  // useEffect(() => {
+  //   form.setError("email", {
+  //     type: "manual",
+  //     message: isError ? "Identifiants incorrects" : "",
+  //   });
+  //   form.setError("password", {
+  //     type: "manual",
+  //     message: isError ? "Identifiants incorrects" : "",
+  //   });
+  //   form.reset({ ...form.getValues(), password: "" });
+  // }, [form, isError]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const client_id = urlParams.get("client_id");
+    const response_type = urlParams.get("response_type");
+    const redirect_uri = urlParams.get("redirect_uri");
+    const scope = urlParams.get("scope");
+    const state = urlParams.get("state");
+    const nonce = urlParams.get("nonce");
+    const code_challenge = urlParams.get("code_challenge");
+    const code_challenge_method = urlParams.get("code_challenge_method");
+
+    console.log(process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL);
+
+    if (
+      !client_id ||
+      !response_type ||
+      !redirect_uri ||
+      !scope ||
+      !state ||
+      !nonce
+    ) {
+      console.error("Missing parameters");
+      return;
+    }
+
     const body: BodyAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost =
       {
-        client_id: values.client_id,
-        response_type: values.response_type,
+        client_id: client_id,
+        response_type: response_type,
         email: values.email,
         password: values.password,
-        redirect_uri: values.redirect_uri,
-        scope: values.scope,
-        state: values.state,
-        nonce: values.nonce,
+        redirect_uri: redirect_uri,
+        scope: scope,
+        state: state,
+        nonce: nonce,
       };
     // Only for PKCE, if the code_challenge is not present, we don't send it
-    if (values.code_challenge) {
-      body.code_challenge = values.code_challenge;
+    if (code_challenge) {
+      body.code_challenge = code_challenge;
     }
-    if (values.code_challenge_method) {
-      body.code_challenge_method = values.code_challenge_method;
+    if (code_challenge_method) {
+      body.code_challenge_method = code_challenge_method;
     }
     authenticate(body, () => {
       // redirect to the redirect_uri
+      console.log("Success");
     });
   }
 
@@ -89,34 +104,6 @@ const Login = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <SuspenseHiddenField
-              form={form}
-              name="client_id"
-              queryParam="client_id"
-            />
-            <SuspenseHiddenField
-              form={form}
-              name="response_type"
-              queryParam="response_type"
-            />
-            <SuspenseHiddenField
-              form={form}
-              name="redirect_uri"
-              queryParam="redirect_uri"
-            />
-            <SuspenseHiddenField form={form} name="scope" queryParam="scope" />
-            <SuspenseHiddenField form={form} name="state" queryParam="state" />
-            <SuspenseHiddenField form={form} name="nonce" queryParam="nonce" />
-            <SuspenseHiddenField
-              form={form}
-              name="code_challenge"
-              queryParam="code_challenge"
-            />
-            <SuspenseHiddenField
-              form={form}
-              name="code_challenge_method"
-              queryParam="code_challenge_method"
-            />
             <CustomFormField
               form={form}
               name="email"
