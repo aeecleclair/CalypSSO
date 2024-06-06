@@ -8,6 +8,7 @@ import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
 import { Form } from "@/components/ui/form";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -47,11 +48,16 @@ const ResetPasswordPage = () => {
         new_password: values.password,
       },
     });
+    setIsLoading(false);
     if (response.response.status < 300) {
-      setIsLoading(false);
       router.push("/reset-password/success");
       return;
     }
+    toast({
+      title: "Erreur",
+      description: response.error.detail,
+      variant: "destructive",
+    });
   }
 
   return (

@@ -6,13 +6,13 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -38,11 +38,16 @@ const RegisterPage = () => {
         email: values.email,
       },
     });
+    setIsLoading(false);
     if (response.response.status < 300) {
-      setIsLoading(false);
       router.push("/register/success");
       return;
     }
+    toast({
+      title: "Erreur",
+      description: response.error.detail,
+      variant: "destructive",
+    });
   }
   return (
     <CenteredCard

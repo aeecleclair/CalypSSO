@@ -9,6 +9,7 @@ import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -63,11 +64,16 @@ const RegisterPage = () => {
         password: values.password,
       },
     });
+    setIsLoading(false);
     if (response.response.status < 300) {
-      setIsLoading(false);
       router.push("/activate/success");
       return;
     }
+    toast({
+      title: "Erreur",
+      description: response.error.detail,
+      variant: "destructive",
+    });
   }
 
   return (
