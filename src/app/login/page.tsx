@@ -41,7 +41,10 @@ const Login = () => {
         {/* We can't use redirection since it will trigger CORS error, thus we are using the form */}
         <form
           method="POST"
-          action={`${process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL}/auth/authorization-flow/authorize-validation`}
+          action={`${
+            process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL ||
+            (typeof window !== "undefined" ? window?.location.origin : "")
+          }/auth/authorization-flow/authorize-validation`}
         >
           <div className="grid gap-4">
             <CustomFormField
