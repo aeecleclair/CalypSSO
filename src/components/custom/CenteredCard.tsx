@@ -24,7 +24,7 @@ export const CenteredCard = ({
           <CardTitle className="text-xl">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardContent>{children}</CardContent>
+        <CardContent className="lg:w-[700px] w-full">{children}</CardContent>
       </Card>
     </div>
   );

@@ -1,22 +1,22 @@
 "use client";
 
+import { postUsersCreate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAccountCreation } from "@/hooks/useCreateAccount";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+
 const RegisterPage = () => {
-  const { registerAccount, isRegisteringLoading } = useAccountCreation();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     email: z
       .string({
@@ -31,10 +31,18 @@ const RegisterPage = () => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    registerAccount(values.email, () => {
-      router.push("/register/success");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    const response = await postUsersCreate({
+      body: {
+        email: values.email,
+      },
     });
+    if (response.response.status < 300) {
+      setIsLoading(false);
+      router.push("/register/success");
+      return;
+    }
   }
   return (
     <CenteredCard
@@ -56,22 +64,8 @@ const RegisterPage = () => {
               className="w-full mt-2"
               type="submit"
               label="Commencer à créer le compte"
-              isLoading={isRegisteringLoading}
+              isLoading={isLoading}
             />
-            <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
-              <div className="w-full text-center text-sm">
-                Vous avez déjà un compte ?{" "}
-                <Button variant="link" className="pl-1" type="button">
-                  <Link href="/login">Connectez-vous</Link>
-                </Button>
-              </div>
-              <div className="w-full text-center text-sm">
-                Vous avez reçu le code par mail ?{" "}
-                <Button variant="link" className="pl-1" type="button">
-                  <Link href="/activate">Continuer</Link>
-                </Button>
-              </div>
-            </div>
           </div>
         </form>
       </Form>

@@ -1,25 +1,23 @@
 "use client";
 
-import { CoreUserActivateRequest } from "@/api/hyperionSchemas";
+import { postUsersActivate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAccountCreation } from "@/hooks/useCreateAccount";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RegisterPage = () => {
-  const { activateAccount, isActivationLoading } = useAccountCreation();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_code: z
       .string({
@@ -55,16 +53,21 @@ const RegisterPage = () => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const body: CoreUserActivateRequest = {
-      activation_token: values.activation_code,
-      firstname: values.firstname,
-      name: values.name,
-      password: values.password,
-    };
-    activateAccount(body, () => {
-      router.push("/activate/success");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    const response = await postUsersActivate({
+      body: {
+        activation_token: values.activation_code,
+        firstname: values.firstname,
+        name: values.name,
+        password: values.password,
+      },
     });
+    if (response.response.status < 300) {
+      setIsLoading(false);
+      router.push("/activate/success");
+      return;
+    }
   }
 
   return (
@@ -106,22 +109,8 @@ const RegisterPage = () => {
               type="submit"
               className="w-full mt-2"
               label={"Créer le compte"}
-              isLoading={isActivationLoading}
+              isLoading={isLoading}
             />
-            <div className="flex justify-between lg:w-[700px] w-full lg:flex-row flex-col">
-              <div className="w-full text-center text-sm">
-                Vous avez déjà un compte ?{" "}
-                <Button variant="link" className="pl-1" type="button">
-                  <Link href="/login">Connectez-vous</Link>
-                </Button>
-              </div>
-              <div className="w-full text-center text-sm">
-                {"Vous n'avez pas reçu le code par mail ? "}
-                <Button variant="link" className="pl-1" type="button">
-                  <Link href="/register">Revenir</Link>
-                </Button>
-              </div>
-            </div>
           </div>
         </form>
       </Form>

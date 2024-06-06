@@ -1,8 +1,11 @@
 // In Next.js, this file would be called: app/providers.jsx
 "use client";
 
+import { createClient } from "@hey-api/client-fetch";
 // Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+// In Next.js, this file would be called: app/providers.jsx
 
 // In Next.js, this file would be called: app/providers.jsx
 
@@ -40,6 +43,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   //       suspend because React will throw away the client on the initial
   //       render if it suspends and there is no boundary
   const queryClient = getQueryClient();
+
+  createClient({
+    baseUrl:
+      process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL ||
+      (typeof window !== "undefined" ? window?.location.origin : ""),
+  });
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

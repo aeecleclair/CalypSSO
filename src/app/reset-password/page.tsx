@@ -1,23 +1,23 @@
 "use client";
 
+import { postUsersResetPassword } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const ResetPasswordPage = () => {
-  const { resetPassword, isResetLoading } = useRecoverPassword();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_code: z
       .string({
@@ -39,10 +39,19 @@ const ResetPasswordPage = () => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    resetPassword(values.password, values.activation_code, () => {
-      router.push("/reset-password/success");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    const response = await postUsersResetPassword({
+      body: {
+        reset_token: values.activation_code,
+        new_password: values.password,
+      },
     });
+    if (response.response.status < 300) {
+      setIsLoading(false);
+      router.push("/reset-password/success");
+      return;
+    }
   }
 
   return (
@@ -70,22 +79,8 @@ const ResetPasswordPage = () => {
               type="submit"
               className="w-full mt-2"
               label="Réinitialiser le mot de passe"
-              isLoading={isResetLoading}
+              isLoading={isLoading}
             />
-            <div className="flex lg:flex-row lg:w-[700px] w-full flex-col">
-              <div className="w-full text-center text-sm">
-                Vous avez déjà un compte ?{" "}
-                <Button variant="link" className="pl-1" type="button">
-                  <Link href="/login">Connectez-vous</Link>
-                </Button>
-              </div>
-              <div className="w-full text-center text-sm">
-                {"Vous n'avez pas reçu le code par mail ? "}
-                <Button variant="link" className="pl-1" type="button">
-                  <Link href="/recover">Revenir</Link>
-                </Button>
-              </div>
-            </div>
           </div>
         </form>
       </Form>
