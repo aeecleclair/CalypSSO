@@ -1,7 +1,6 @@
 "use client";
 
-import { toast } from "@/components/ui/use-toast";
-import { createClient, client } from "@hey-api/client-fetch";
+import { createClient } from "@hey-api/client-fetch";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   createClient({

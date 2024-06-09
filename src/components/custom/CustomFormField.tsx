@@ -12,7 +12,7 @@ import {
 } from "react-hook-form";
 
 interface CustomFormFieldProps {
-  form: UseFormReturn;
+  form: UseFormReturn<any, any, FieldValues | undefined>; // eslint-disable-line @typescript-eslint/no-explicit-any
   label: string;
   name: string;
   render: (

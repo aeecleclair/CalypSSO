@@ -1,6 +1,5 @@
 "use client";
 
-import { postAuthAuthorizationFlowAuthorizeValidation } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";

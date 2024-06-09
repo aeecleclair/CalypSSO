@@ -2,10 +2,10 @@
 
 import { FormField } from "../ui/form";
 import { useSearchParams } from "next/navigation";
-import { UseFormReturn } from "react-hook-form";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 
 export interface HiddenFieldProps {
-  form: UseFormReturn;
+  form: UseFormReturn<any, any, FieldValues | undefined>; // eslint-disable-line @typescript-eslint/no-explicit-any
   queryParam: string;
   name: string;
 }

@@ -45,7 +45,7 @@ const RegisterPage = () => {
     }
     toast({
       title: "Erreur",
-      description: response.error.detail,
+      description: (response.error as { detail: string }).detail,
       variant: "destructive",
     });
   }
