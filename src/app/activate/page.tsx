@@ -10,6 +10,7 @@ import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -41,29 +42,7 @@ const RegisterPage = () => {
       .min(1, {
         message: "Veuillez renseigner votre nom",
       }),
-    password: z
-      .string({
-        required_error: "Veuillez renseigner un mot de passe",
-      })
-      .min(6, {
-        message: "Le mot de passe doit contenir au moins 6 caractères",
-      })
-      .refine(
-        (value) => /^.*[A-Z].*$/.test(value),
-        "Le mot de passe doit contenir au moins une majuscule",
-      )
-      .refine(
-        (value) => /^.*[a-z].*$/.test(value),
-        "Le mot de passe doit contenir au moins une minucule",
-      )
-      .refine(
-        (value) => /^.*[0-9].*$/.test(value),
-        "Le mot de passe doit contenir au moins un chiffre",
-      )
-      .refine(
-        (value) => /^.*\[!@#\$%\^&\*\(\),\.\?":{}\|<>]-_.*$/.test(value),
-        'Le mot de passe doit contenir au moins un caractère spécial parmi les suivants [!@#$%^&*(),.?":{}|<>]-_',
-      ),
+    password: zPassword,
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -94,8 +73,8 @@ const RegisterPage = () => {
 
   return (
     <CenteredCard
-      title="Créer un compte"
-      description="Entrez vos informations pour créer un compte"
+      title="Activer un compte"
+      description="Entrez vos informations pour activer votre compte"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -104,7 +83,7 @@ const RegisterPage = () => {
               <HiddenField
                 form={form}
                 name="activation_code"
-                queryParam="code"
+                queryParam="activation_code"
               />
             </SuspenseEmbed>
             <div className="grid md:grid-cols-2 gap-4 mt-2 grid-cols-1">

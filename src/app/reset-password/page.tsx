@@ -9,6 +9,7 @@ import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
 import { Form } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
+import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -27,13 +28,7 @@ const ResetPasswordPage = () => {
       .min(8, {
         message: "Le code d'activation doit contenir 8 caractères",
       }),
-    password: z
-      .string({
-        required_error: "Veuillez renseigner un mot de passe",
-      })
-      .min(6, {
-        message: "Le mot de passe doit contenir au moins 6 caractères",
-      }),
+    password: zPassword,
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
