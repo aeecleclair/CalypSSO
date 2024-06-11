@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -46,20 +47,29 @@ const Login = () => {
           }/auth/authorization-flow/authorize-validation`}
         >
           <div className="grid gap-4">
-            <CustomFormField
-              form={form}
-              name="email"
-              label="Email"
-              render={(field) => (
-                <Input placeholder="inscription@raid.fr" required {...field} />
-              )}
-            />
-            <CustomFormField
-              form={form}
-              name="password"
-              label="Mot de passe"
-              render={(field) => <PasswordInput required {...field} />}
-            />
+            <Suspense>
+              <CustomFormField
+                form={form}
+                name="email"
+                label="Email"
+                render={(field) => (
+                  <Input
+                    placeholder="inscription@raid.fr"
+                    required
+                    {...field}
+                  />
+                )}
+              />
+            </Suspense>
+            <Suspense>
+              <CustomFormField
+                form={form}
+                name="password"
+                label="Mot de passe"
+                render={(field) => <PasswordInput required {...field} />}
+                displayError
+              />
+            </Suspense>
             <SuspenseHiddenField
               form={form}
               name="response_type"

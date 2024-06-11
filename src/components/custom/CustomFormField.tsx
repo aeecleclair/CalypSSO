@@ -5,6 +5,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import {
   ControllerRenderProps,
   FieldValues,
@@ -18,6 +20,7 @@ interface CustomFormFieldProps {
   render: (
     field: ControllerRenderProps<FieldValues, string>,
   ) => React.ReactNode;
+  displayError?: boolean;
 }
 
 export const CustomFormField = ({
@@ -25,7 +28,18 @@ export const CustomFormField = ({
   label,
   name,
   render,
+  displayError,
 }: CustomFormFieldProps) => {
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const credentialsError = !!searchParams.get("credentials_error");
+    if (credentialsError && form.watch(name) === undefined) {
+      form.setError(name, {
+        message: "Combinaison email / mot de passe invalide",
+      });
+    }
+  }, [displayError, form, name, searchParams]);
+
   return (
     <FormField
       control={form.control}
@@ -34,7 +48,7 @@ export const CustomFormField = ({
         <FormItem className="grid gap-2">
           <FormLabel>{label}</FormLabel>
           <FormControl>{render(field)}</FormControl>
-          <FormMessage />
+          {displayError && <FormMessage />}
         </FormItem>
       )}
     />
