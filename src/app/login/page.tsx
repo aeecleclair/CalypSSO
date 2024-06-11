@@ -4,6 +4,7 @@ import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
+import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -58,6 +59,34 @@ const Login = () => {
               name="password"
               label="Mot de passe"
               render={(field) => <PasswordInput required {...field} />}
+            />
+            <SuspenseHiddenField
+              form={form}
+              name="response_type"
+              queryParam="response_type"
+            />
+            <SuspenseHiddenField
+              form={form}
+              name="redirect_uri"
+              queryParam="redirect_uri"
+            />
+            <SuspenseHiddenField
+              form={form}
+              name="client_id"
+              queryParam="client_id"
+            />
+            <SuspenseHiddenField form={form} name="scope" queryParam="scope" />
+            <SuspenseHiddenField form={form} name="state" queryParam="state" />
+            <SuspenseHiddenField form={form} name="nonce" queryParam="nonce" />
+            <SuspenseHiddenField
+              form={form}
+              name="code_challenge"
+              queryParam="code_challenge"
+            />
+            <SuspenseHiddenField
+              form={form}
+              name="code_challenge_method"
+              queryParam="code_challenge_method"
             />
             <LoadingButton
               type="submit"
