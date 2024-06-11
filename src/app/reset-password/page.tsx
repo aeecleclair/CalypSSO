@@ -3,10 +3,9 @@
 import { postUsersResetPassword } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
-import { HiddenField } from "@/components/custom/HiddenField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
-import { SuspenseEmbed } from "@/components/custom/SuspenseEmbed";
+import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Form } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
@@ -63,13 +62,11 @@ const ResetPasswordPage = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <SuspenseEmbed>
-              <HiddenField
-                form={form}
-                name="activation_code"
-                queryParam="code"
-              />
-            </SuspenseEmbed>
+            <SuspenseHiddenField
+              form={form}
+              name="activation_code"
+              queryParam="code"
+            />
             <CustomFormField
               form={form}
               name="password"
