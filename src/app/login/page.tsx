@@ -4,7 +4,6 @@ import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,20 +66,12 @@ const Login = () => {
               isLoading={false}
             />
             <div className="flex flex-row justify-between">
-              <Button variant="link">
-                <Link
-                  href="/register"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Créer un compte
-                </Link>
-              </Button>
-              <Button variant="link">
-                <Link href="/recover" target="_blank" rel="noopener noreferrer">
-                  Mot de passe oublié ?
-                </Link>
-              </Button>
+              <Link href="/register" target="_blank" rel="noopener noreferrer">
+                Créer un compte
+              </Link>
+              <Link href="/recover" target="_blank" rel="noopener noreferrer">
+                Mot de passe oublié ?
+              </Link>
             </div>
           </div>
         </form>
