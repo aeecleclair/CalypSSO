@@ -65,7 +65,7 @@ const ResetPasswordPage = () => {
             <SuspenseHiddenField
               form={form}
               name="activation_code"
-              queryParam="code"
+              queryParam="reset_token"
             />
             <CustomFormField
               form={form}
