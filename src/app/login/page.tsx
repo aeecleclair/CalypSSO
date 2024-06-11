@@ -1,8 +1,8 @@
 "use client";
 
 import { CenteredCard } from "@/components/custom/CenteredCard";
-import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { LoginCustomFormField } from "@/components/custom/LoginCustomField";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Form } from "@/components/ui/form";
@@ -48,7 +48,7 @@ const Login = () => {
         >
           <div className="grid gap-4">
             <Suspense>
-              <CustomFormField
+              <LoginCustomFormField
                 form={form}
                 name="email"
                 label="Email"
@@ -62,7 +62,7 @@ const Login = () => {
               />
             </Suspense>
             <Suspense>
-              <CustomFormField
+              <LoginCustomFormField
                 form={form}
                 name="password"
                 label="Mot de passe"
