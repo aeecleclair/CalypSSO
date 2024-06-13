@@ -6,6 +6,7 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PhoneCustomInput } from "@/components/custom/PhoneCustomInput";
+import { CustomSelectTrigger } from "@/components/custom/SelectInput";
 import { SuspenseConditional } from "@/components/custom/SuspenseConditional";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
@@ -16,7 +17,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
@@ -185,9 +185,9 @@ const RegisterPage = () => {
                   label="Étage de votre résidence"
                   render={(field) => (
                     <Select onValueChange={field.onChange}>
-                      <SelectTrigger>
+                      <CustomSelectTrigger>
                         <SelectValue placeholder="Choisissez votre étage" />
-                      </SelectTrigger>
+                      </CustomSelectTrigger>
                       <SelectContent>
                         <SelectGroup>
                           {FloorTypes.map((floor) => (
