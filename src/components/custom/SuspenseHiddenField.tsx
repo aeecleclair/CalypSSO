@@ -7,10 +7,16 @@ export const SuspenseHiddenField = ({
   form,
   queryParam,
   name,
+  optional = false,
 }: HiddenFieldProps) => {
   return (
     <SuspenseEmbed>
-      <HiddenField form={form} name={name} queryParam={queryParam} />
+      <HiddenField
+        form={form}
+        name={name}
+        queryParam={queryParam}
+        optional={optional}
+      />
     </SuspenseEmbed>
   );
 };
