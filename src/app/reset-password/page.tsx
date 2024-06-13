@@ -20,13 +20,9 @@ const ResetPasswordPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
-    activation_code: z
-      .string({
-        required_error: "Veuillez renseigner le code d'activation",
-      })
-      .min(8, {
-        message: "Le code d'activation doit contenir 8 caractères",
-      }),
+    activation_code: z.string({
+      required_error: "Veuillez renseigner le code d'activation",
+    }),
     password: zPassword,
   });
 

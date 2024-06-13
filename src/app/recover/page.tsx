@@ -63,7 +63,7 @@ const RecoverPage = () => {
               name="email"
               label="Email"
               render={(field) => (
-                <Input placeholder="inscription@raid.fr" {...field} />
+                <Input placeholder="prenom.nom@etu.ec-lyon.fr" {...field} />
               )}
             />
             <LoadingButton
