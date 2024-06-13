@@ -1,8 +1,13 @@
+import { Background } from "./Background";
 import "./globals.css";
+import Providers from "./providers";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Signika } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Signika({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-[#202c39]`}>
+        <main className="flex flex-col items-center">
+          <div className="relative z-0 flex h-screen w-full items-center justify-center">
+            <Background />
+            <div className="absolute inset-0 z-10 flex items-center justify-center">
+              <Providers>{children}</Providers>
+            </div>
+          </div>
+        </main>
+        <Toaster />
+      </body>
     </html>
   );
 }

@@ -3,5 +3,6 @@ node_modules
 
 # Shadcn components
 src/components/ui
-src/api/hyperionComponents.ts
-src/api/hyperionSchemas.ts
+
+# Generated Hyperion client
+src/api

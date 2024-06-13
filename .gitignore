@@ -38,3 +38,6 @@ next-env.d.ts
 # Python module
 *.egg-info
 dist
+.env
+.ruff_cache
+.mypy_cache

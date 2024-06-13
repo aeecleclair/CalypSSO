@@ -10,7 +10,9 @@
   "ignorePatterns": [
     "src/components/ui/*",
     "src/api/hyperionComponents.ts",
-    "src/api/hyperionSchemas.ts"
+    "src/api/hyperionSchemas.ts",
+    "src/api/hyperionFetcher.ts",
+    "src/api/hyperionContext.ts"
   ],
   "parser": "@typescript-eslint/parser",
   "root": true
