@@ -133,7 +133,7 @@ const RegisterPage = () => {
               name="activation_token"
               queryParam="activation_token"
             />
-            <div className="grid md:grid-cols-2 gap-4 mt-2 grid-cols-1">
+            <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
               <CustomFormField
                 form={form}
                 name="firstname"
@@ -155,7 +155,7 @@ const RegisterPage = () => {
                 label="Surnom"
                 render={(field) => <Input {...field} />}
               />
-              <div className="grid md:grid-cols-2 gap-4 mt-2 grid-cols-1">
+              <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
                 <CustomFormField
                   form={form}
                   name="birthday"
@@ -172,7 +172,7 @@ const RegisterPage = () => {
               </div>
 
               <TextSeparator text="Informations sur votre scolarité" />
-              <div className="grid md:grid-cols-2 gap-4 mt-2 grid-cols-1">
+              <div className="mt-2 grid grid-cols-1 gap-4  md:grid-cols-2">
                 <CustomFormField
                   form={form}
                   name="promo"
@@ -211,7 +211,7 @@ const RegisterPage = () => {
             />
             <LoadingButton
               type="submit"
-              className="w-full mt-2"
+              className="mt-2 w-full"
               label={"Créer le compte"}
               isLoading={isLoading}
             />

@@ -68,7 +68,7 @@ const RecoverPage = () => {
             />
             <LoadingButton
               type="submit"
-              className="w-full mt-2"
+              className="mt-2 w-full"
               label={"Recevoir le code de réinitialisation"}
               isLoading={isLoading}
             />

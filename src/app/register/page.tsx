@@ -85,7 +85,7 @@ const RegisterContent = () => {
               )}
             />
             <LoadingButton
-              className="w-full mt-2"
+              className="mt-2 w-full"
               type="submit"
               label="Commencer à créer le compte"
               isLoading={isLoading}

@@ -71,7 +71,7 @@ const ResetPasswordPage = () => {
             />
             <LoadingButton
               type="submit"
-              className="w-full mt-2"
+              className="mt-2 w-full"
               label="Réinitialiser le mot de passe"
               isLoading={isLoading}
             />

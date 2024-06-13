@@ -123,7 +123,7 @@ const Login = () => {
             />
             <LoadingButton
               type="submit"
-              className="w-full mt-2"
+              className="mt-2 w-full"
               label="Se connecter"
               isLoading={false}
             />

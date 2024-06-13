@@ -23,9 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-[#202c39]`}>
         <main className="flex flex-col items-center">
-          <div className="relative z-0 w-full h-screen flex items-center justify-center">
+          <div className="relative z-0 flex h-screen w-full items-center justify-center">
             <Background />
-            <div className="absolute inset-0 flex justify-center items-center z-10">
+            <div className="absolute inset-0 z-10 flex items-center justify-center">
               <Providers>{children}</Providers>
             </div>
           </div>

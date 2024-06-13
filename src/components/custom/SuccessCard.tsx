@@ -15,23 +15,23 @@ interface SuccessCardProps {
 
 export const SuccessCard = ({ title, description, icon }: SuccessCardProps) => {
   return (
-    <div className="flex [&>div]:w-full h-screen m-4">
-      <Card className="rounded-xl border shadow m-auto backdrop-blur bg-opacity-80 bg-white">
+    <div className="m-4 flex h-screen [&>div]:w-full">
+      <Card className="m-auto rounded-xl border bg-white bg-opacity-80 shadow backdrop-blur">
         <CardHeader>
           <CardTitle>
-            <div className="items-center flex w-full">
+            <div className="flex w-full items-center">
               {icon({ className: "w-32 h-32 m-auto" })}
             </div>
             <div>
-              <h1 className="text-2xl text-center">{title}</h1>
+              <h1 className="text-center text-2xl">{title}</h1>
             </div>
           </CardTitle>
-          <CardDescription className="min-w-[400px] w-full text-center text-base">
+          <CardDescription className="w-full min-w-[400px] text-center text-base">
             {description}
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <div className="text-center w-full text-sm">
+          <div className="w-full text-center text-sm">
             Vous pouvez fermer cette fenêtre
           </div>
         </CardFooter>
