@@ -19,7 +19,8 @@ const RegisterContent = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
-  const acceptExternalUser = searchParams.get("external") === "true";
+  const acceptExternalUser =
+    searchParams.get("external")?.toLocaleLowerCase() === "True";
 
   let emailField = z
     .string({

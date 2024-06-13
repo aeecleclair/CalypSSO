@@ -13,7 +13,8 @@ const SuspenseConditionalContent = ({
   children,
 }: SuspenseConditionalProps) => {
   const searchParams = useSearchParams();
-  const showComponent = searchParams.get(showComponentParam) === "true";
+  const showComponent =
+    searchParams.get(showComponentParam)?.toLocaleLowerCase() === "true";
 
   return showComponent && children;
 };
