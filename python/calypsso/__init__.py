@@ -1,5 +1,6 @@
 import importlib.resources
 import urllib.parse
+from typing import Any
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
@@ -23,13 +24,13 @@ def get_calypsso_app() -> FastAPI:
 
     app.mount(
         "/",
-        StaticFiles(directory=MODULE_PATH / "public", html=True),
+        StaticFiles(directory=str(MODULE_PATH / "public"), html=True),
         name="calypsso",
     )
     return app
 
 
-def exclude_none(original: dict[str, any]) -> dict[str, any]:
+def exclude_none(original: dict[str, Any]) -> dict[str, Any]:
     return {k: v for k, v in original.items() if v is not None}
 
 
