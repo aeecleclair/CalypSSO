@@ -16,7 +16,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -149,7 +148,7 @@ const RegisterPage = () => {
               />
             </div>
 
-            <SuspenseConditional showComponentParam="external">
+            <SuspenseConditional maskComponentParam="external">
               <CustomFormField
                 form={form}
                 name="nickname"

@@ -4,28 +4,28 @@ import { SuspenseEmbed } from "./SuspenseEmbed";
 import { useSearchParams } from "next/navigation";
 
 interface SuspenseConditionalProps {
-  showComponentParam: string;
+  maskComponentParam: string;
   children: React.ReactNode;
 }
 
 const SuspenseConditionalContent = ({
-  showComponentParam,
+  maskComponentParam,
   children,
 }: SuspenseConditionalProps) => {
   const searchParams = useSearchParams();
-  const showComponent =
-    searchParams.get(showComponentParam)?.toLocaleLowerCase() === "true";
+  const maskComponent =
+    searchParams.get(maskComponentParam)?.toLocaleLowerCase() === "true";
 
-  return showComponent && children;
+  return !maskComponent && children;
 };
 
 export const SuspenseConditional = ({
   children,
-  showComponentParam,
+  maskComponentParam,
 }: SuspenseConditionalProps) => {
   return (
     <SuspenseEmbed>
-      <SuspenseConditionalContent showComponentParam={showComponentParam}>
+      <SuspenseConditionalContent maskComponentParam={maskComponentParam}>
         {children}
       </SuspenseConditionalContent>
     </SuspenseEmbed>
