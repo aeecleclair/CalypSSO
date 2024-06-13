@@ -19,13 +19,17 @@ const Login = () => {
     password: z.string({
       required_error: "Veuillez renseigner un mot de passe",
     }),
-    email: z
-      .string({
-        required_error: "Veuillez renseigner votre adresse email",
-      })
-      .email({
-        message: "Veuillez renseigner une adresse email valide",
-      }),
+    email: z.string({
+      required_error: "Veuillez renseigner votre adresse email",
+    }),
+    response_type: z.string().optional(),
+    redirect_uri: z.string().optional(),
+    client_id: z.string(),
+    scope: z.string().optional(),
+    state: z.string().optional(),
+    nonce: z.string().optional(),
+    code_challenge: z.string().optional(),
+    code_challenge_method: z.string().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,7 +58,7 @@ const Login = () => {
                 label="Email"
                 render={(field) => (
                   <Input
-                    placeholder="inscription@raid.fr"
+                    placeholder="prenom.nom@etu.ec-lyon.fr"
                     required
                     {...field}
                   />
@@ -74,29 +78,48 @@ const Login = () => {
               form={form}
               name="response_type"
               queryParam="response_type"
+              optional
             />
             <SuspenseHiddenField
               form={form}
               name="redirect_uri"
               queryParam="redirect_uri"
+              optional
             />
             <SuspenseHiddenField
               form={form}
               name="client_id"
               queryParam="client_id"
             />
-            <SuspenseHiddenField form={form} name="scope" queryParam="scope" />
-            <SuspenseHiddenField form={form} name="state" queryParam="state" />
-            <SuspenseHiddenField form={form} name="nonce" queryParam="nonce" />
+            <SuspenseHiddenField
+              form={form}
+              name="scope"
+              queryParam="scope"
+              optional
+            />
+            <SuspenseHiddenField
+              form={form}
+              name="state"
+              queryParam="state"
+              optional
+            />
+            <SuspenseHiddenField
+              form={form}
+              name="nonce"
+              queryParam="nonce"
+              optional
+            />
             <SuspenseHiddenField
               form={form}
               name="code_challenge"
               queryParam="code_challenge"
+              optional
             />
             <SuspenseHiddenField
               form={form}
               name="code_challenge_method"
               queryParam="code_challenge_method"
+              optional
             />
             <LoadingButton
               type="submit"
