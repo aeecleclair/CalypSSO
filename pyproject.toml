@@ -5,7 +5,8 @@ build-backend = "hatchling.build"
 [project]
 name = "CalypSSO"
 dynamic = ["version"]
-description = "FastAPI app to serve react webpages for Hyperion"
+description = "FastAPI app to serve static react webpages for Hyperion"
+readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
 keywords = []
