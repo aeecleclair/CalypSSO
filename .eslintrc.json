@@ -7,13 +7,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["@typescript-eslint"],
-  "ignorePatterns": [
-    "src/components/ui/*",
-    "src/api/hyperionComponents.ts",
-    "src/api/hyperionSchemas.ts",
-    "src/api/hyperionFetcher.ts",
-    "src/api/hyperionContext.ts"
-  ],
+  "ignorePatterns": ["src/components/ui/*"],
   "parser": "@typescript-eslint/parser",
   "root": true
 }
