@@ -37,6 +37,9 @@ packages = ["python/calypsso"]
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
+[tool.hatch.envs.default]
+installer = "uv"
+
 [tool.ruff]
 # By default ruff also respect gitignore files
 # Same as Black.
