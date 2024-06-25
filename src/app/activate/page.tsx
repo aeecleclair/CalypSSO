@@ -3,6 +3,7 @@
 import { FloorsType, postUsersActivate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
+import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PhoneCustomInput } from "@/components/custom/PhoneCustomInput";
@@ -22,6 +23,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { addYears } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -160,7 +162,14 @@ const RegisterPage = () => {
                   form={form}
                   name="birthday"
                   label="Date de naissance"
-                  render={(field) => <Input {...field} />}
+                  render={(field) => (
+                    <DatePicker
+                      date={field.value}
+                      setDate={field.onChange}
+                      defaultDate={field.value || addYears(new Date(), -21)}
+                      {...field}
+                    />
+                  )}
                 />
                 {/* TODO: Add animation */}
                 <CustomFormField

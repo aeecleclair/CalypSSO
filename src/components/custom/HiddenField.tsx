@@ -15,18 +15,18 @@ export const HiddenField = ({
   form,
   queryParam,
   name,
-  optional = false,
+  // optional = false,
 }: HiddenFieldProps) => {
   const searchParams = useSearchParams();
   const value = searchParams.get(queryParam);
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  if (!optional && !value) {
-    router.push(
-      encodeURI(`/error?message=Url invalide : ${queryParam} manquant`),
-    );
-  }
+  // if (!optional && !value) {
+  //   router.push(
+  //     encodeURI(`/error?message=Url invalide : ${queryParam} manquant`),
+  //   );
+  // }
 
   form.setValue(name, value);
 
