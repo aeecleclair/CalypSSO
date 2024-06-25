@@ -13,13 +13,7 @@ import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectValue } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
 
 const FloorTypes: Readonly<[string, ...string[]]> = [
   "Autre",
@@ -87,7 +82,13 @@ const RegisterPage = () => {
     birthday: z.date().optional(),
     phone: z.string().optional(), // phone
     floor: z.enum(FloorTypes).optional(),
-    promo: z.number().optional(),
+    promo: z.string().refine(
+      (value) => {
+        const parsedValue = parseInt(value);
+        return !isNaN(parsedValue) && parsedValue >= 0;
+      },
+      { message: "Veuillez renseigner une promo valide" },
+    ),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -107,7 +108,7 @@ const RegisterPage = () => {
         birthday: values.birthday?.toString(),
         phone: values.phone,
         floor: values.floor as FloorsType | undefined | null,
-        promo: values.promo,
+        promo: parseInt(values.promo),
       },
     });
     setIsLoading(false);
@@ -186,7 +187,27 @@ const RegisterPage = () => {
                   form={form}
                   name="promo"
                   label="Promotion"
-                  render={(field) => <Input {...field} />}
+                  render={(field) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <CustomSelectTrigger>
+                        {field.value
+                          ? `Promo ${field.value}`
+                          : "Séléctionner votre promo"}
+                      </CustomSelectTrigger>
+                      <SelectContent>
+                        {[...Array(10)].map((_, index) => {
+                          const year = (
+                            new Date().getFullYear() - index
+                          ).toString();
+                          return (
+                            <SelectItem key={index} value={year}>
+                              Promo {year}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
                 <CustomFormField
                   form={form}
