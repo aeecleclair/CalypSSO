@@ -24,6 +24,7 @@ import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addYears } from "date-fns";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -85,7 +86,12 @@ const RegisterPage = () => {
       })
       .optional(),
     birthday: z.date().optional(),
-    phone: z.string().optional(), // phone
+    phone: z
+      .string()
+      .refine((value) => isValidPhoneNumber("+" + value), {
+        message: "Veuillez renseigner un numéro valide",
+      })
+      .optional(), // phone
     floor: z.enum(FloorTypes).optional(),
     promo: z
       .string()
