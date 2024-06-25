@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { FieldValues, UseFormReturn } from "react-hook-form";
 
-
 export interface HiddenFieldProps {
   form: UseFormReturn<any, any, FieldValues | undefined>; // eslint-disable-line @typescript-eslint/no-explicit-any
   queryParam: string;
@@ -28,8 +27,7 @@ export const HiddenField = ({
       router.push(
         encodeURI(`/error?message=Url invalide : ${queryParam} manquant`),
       );
-    }
-    else if (value) {
+    } else if (value) {
       form.setValue(name, value);
     }
   });
