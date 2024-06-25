@@ -13,7 +13,13 @@ import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,7 +28,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 
 const FloorTypes: Readonly<[string, ...string[]]> = [
   "Autre",
