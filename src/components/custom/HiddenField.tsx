@@ -2,6 +2,7 @@
 
 import { FormField } from "../ui/form";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { FieldValues, UseFormReturn } from "react-hook-form";
 
 export interface HiddenFieldProps {
@@ -19,16 +20,17 @@ export const HiddenField = ({
 }: HiddenFieldProps) => {
   const searchParams = useSearchParams();
   const value = searchParams.get(queryParam);
-
   const router = useRouter();
 
-  if (!optional && !value) {
-    router.push(
-      encodeURI(`/error?message=Url invalide : ${queryParam} manquant`),
-    );
-  }
-
-  form.setValue(name, value);
+  useEffect(() => {
+    if (!optional && !value) {
+      router.push(
+        encodeURI(`/error?message=Url invalide : ${queryParam} manquant`),
+      );
+    } else if (value) {
+      form.setValue(name, value);
+    }
+  });
 
   return (
     <FormField

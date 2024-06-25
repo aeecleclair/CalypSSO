@@ -31,23 +31,32 @@ const ResetPasswordPage = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    const response = await postUsersResetPassword({
-      body: {
-        reset_token: values.activation_code,
-        new_password: values.password,
-      },
-    });
-    setIsLoading(false);
-    if (response.response.status < 300) {
-      router.push("/reset-password/success");
-      return;
+    try {
+      setIsLoading(true);
+      const response = await postUsersResetPassword({
+        body: {
+          reset_token: values.activation_code,
+          new_password: values.password,
+        },
+      });
+      setIsLoading(false);
+      if (response.response.status < 300) {
+        router.push("/reset-password/success");
+        return;
+      }
+      toast({
+        title: "Erreur",
+        description: (response.error as { detail: string }).detail,
+        variant: "destructive",
+      });
+    } catch (e) {
+      setIsLoading(false);
+      toast({
+        title: "Erreur",
+        description: `${e}`,
+        variant: "destructive",
+      });
     }
-    toast({
-      title: "Erreur",
-      description: (response.error as { detail: string }).detail,
-      variant: "destructive",
-    });
   }
 
   return (
