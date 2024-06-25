@@ -82,13 +82,16 @@ const RegisterPage = () => {
     birthday: z.date().optional(),
     phone: z.string().optional(), // phone
     floor: z.enum(FloorTypes).optional(),
-    promo: z.string().refine(
-      (value) => {
-        const parsedValue = parseInt(value);
-        return !isNaN(parsedValue) && parsedValue >= 0;
-      },
-      { message: "Veuillez renseigner une promo valide" },
-    ),
+    promo: z
+      .string()
+      .refine(
+        (value) => {
+          const parsedValue = parseInt(value);
+          return !isNaN(parsedValue) && parsedValue >= 0;
+        },
+        { message: "Veuillez renseigner une promo valide" },
+      )
+      .optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -108,7 +111,7 @@ const RegisterPage = () => {
         birthday: values.birthday?.toString(),
         phone: values.phone,
         floor: values.floor as FloorsType | undefined | null,
-        promo: parseInt(values.promo),
+        promo: values.promo ? parseInt(values.promo) : undefined,
       },
     });
     setIsLoading(false);
@@ -141,12 +144,14 @@ const RegisterPage = () => {
                 form={form}
                 name="firstname"
                 label="Prénom"
+                neighborName="name"
                 render={(field) => <Input {...field} />}
               />
               <CustomFormField
                 form={form}
                 name="name"
                 label="Nom"
+                neighborName="firstname"
                 render={(field) => <Input {...field} />}
               />
             </div>
@@ -163,6 +168,7 @@ const RegisterPage = () => {
                   form={form}
                   name="birthday"
                   label="Date de naissance"
+                  neighborName="phone"
                   render={(field) => (
                     <DatePicker
                       date={field.value}
@@ -177,6 +183,7 @@ const RegisterPage = () => {
                   form={form}
                   name="phone"
                   label="Numéro de téléphone"
+                  neighborName="birthday"
                   render={(field) => <PhoneCustomInput {...field} />}
                 />
               </div>
@@ -187,6 +194,7 @@ const RegisterPage = () => {
                   form={form}
                   name="promo"
                   label="Promotion"
+                  neighborName="floor"
                   render={(field) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <CustomSelectTrigger>
@@ -213,6 +221,7 @@ const RegisterPage = () => {
                   form={form}
                   name="floor"
                   label="Étage de votre résidence"
+                  neighborName="promo"
                   render={(field) => (
                     <Select onValueChange={field.onChange}>
                       <CustomSelectTrigger>
