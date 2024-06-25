@@ -110,31 +110,39 @@ const RegisterPage = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-
-    const response = await postUsersActivate({
-      body: {
-        activation_token: values.activation_token,
-        firstname: values.firstname,
-        name: values.name,
-        password: values.password,
-        nickname: values.nickname,
-        birthday: values.birthday?.toString(),
-        phone: values.phone,
-        floor: values.floor as FloorsType | undefined | null,
-        promo: values.promo ? parseInt(values.promo) : undefined,
-      },
-    });
-    setIsLoading(false);
-    if (response.response.status < 300) {
-      router.push("/activate/success");
-      return;
+    try {
+      setIsLoading(true);
+      const response = await postUsersActivate({
+        body: {
+          activation_token: values.activation_token,
+          firstname: values.firstname,
+          name: values.name,
+          password: values.password,
+          nickname: values.nickname,
+          birthday: values.birthday?.toString(),
+          phone: values.phone,
+          floor: values.floor as FloorsType | undefined | null,
+          promo: values.promo ? parseInt(values.promo) : undefined,
+        },
+      });
+      setIsLoading(false);
+      if (response.response.status < 300) {
+        router.push("/activate/success");
+        return;
+      }
+      toast({
+        title: "Erreur",
+        description: (response.error as { detail: string }).detail,
+        variant: "destructive",
+      });
+    } catch (e) {
+      setIsLoading(false);
+      toast({
+        title: "Erreur",
+        description: `${e}`,
+        variant: "destructive",
+      });
     }
-    toast({
-      title: "Erreur",
-      description: (response.error as { detail: string }).detail,
-      variant: "destructive",
-    });
   }
 
   return (

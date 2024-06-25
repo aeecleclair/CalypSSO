@@ -50,23 +50,32 @@ const RegisterContent = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    const response = await postUsersCreate({
-      body: {
-        email: values.email,
-        accept_external: acceptExternalUser,
-      },
-    });
-    setIsLoading(false);
-    if (response.response.status < 300) {
-      router.push("/register/success");
-      return;
+    try {
+      setIsLoading(true);
+      const response = await postUsersCreate({
+        body: {
+          email: values.email,
+          accept_external: acceptExternalUser,
+        },
+      });
+      setIsLoading(false);
+      if (response.response.status < 300) {
+        router.push("/register/success");
+        return;
+      }
+      toast({
+        title: "Erreur",
+        description: (response.error as { detail: string }).detail,
+        variant: "destructive",
+      });
+    } catch (e) {
+      setIsLoading(false);
+      toast({
+        title: "Erreur",
+        description: `${e}`,
+        variant: "destructive",
+      });
     }
-    toast({
-      title: "Erreur",
-      description: (response.error as { detail: string }).detail,
-      variant: "destructive",
-    });
   }
   return (
     <CenteredCard

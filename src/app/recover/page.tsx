@@ -32,22 +32,31 @@ const RecoverPage = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    const response = await postUsersRecover({
-      body: {
-        email: values.email,
-      },
-    });
-    setIsLoading(false);
-    if (response.response.status < 300) {
-      router.push("/recover/success");
-      return;
+    try {
+      setIsLoading(true);
+      const response = await postUsersRecover({
+        body: {
+          email: values.email,
+        },
+      });
+      setIsLoading(false);
+      if (response.response.status < 300) {
+        router.push("/recover/success");
+        return;
+      }
+      toast({
+        title: "Erreur",
+        description: (response.error as { detail: string }).detail,
+        variant: "destructive",
+      });
+    } catch (e) {
+      setIsLoading(false);
+      toast({
+        title: "Erreur",
+        description: `${e}`,
+        variant: "destructive",
+      });
     }
-    toast({
-      title: "Erreur",
-      description: (response.error as { detail: string }).detail,
-      variant: "destructive",
-    });
   }
 
   return (
