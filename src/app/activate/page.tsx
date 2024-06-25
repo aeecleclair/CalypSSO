@@ -23,7 +23,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addYears } from "date-fns";
+import { addYears, format } from "date-fns";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -119,7 +119,9 @@ const RegisterPage = () => {
           name: values.name,
           password: values.password,
           nickname: values.nickname,
-          birthday: values.birthday?.toString(),
+          birthday: values.birthday
+            ? format(values.birthday, "yyyy-MM-dd")
+            : undefined,
           phone: values.phone,
           floor: values.floor as FloorsType | undefined | null,
           promo: values.promo ? parseInt(values.promo) : undefined,
