@@ -28,6 +28,7 @@ const ResetPasswordPage = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -76,7 +77,9 @@ const ResetPasswordPage = () => {
               form={form}
               name="password"
               label="Mot de passe"
-              render={(field) => <PasswordInput {...field} />}
+              render={(field) => {
+                return <PasswordInput {...field} />;
+              }}
             />
             <LoadingButton
               type="submit"

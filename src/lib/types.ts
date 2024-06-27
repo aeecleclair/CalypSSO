@@ -1,25 +1,46 @@
+import { zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
+import * as zxcvbnCommonPackage from "@zxcvbn-ts/language-common";
+import * as zxcvbnEnPackage from "@zxcvbn-ts/language-en";
+import * as zxcvbnFrPackage from "@zxcvbn-ts/language-fr";
 import { z } from "zod";
+
+const options = {
+  translations: zxcvbnFrPackage.translations,
+  graphs: zxcvbnCommonPackage.adjacencyGraphs,
+  dictionary: {
+    ...zxcvbnCommonPackage.dictionary,
+    ...zxcvbnEnPackage.dictionary,
+    ...zxcvbnFrPackage.dictionary,
+  },
+};
+
+zxcvbnOptions.setOptions(options);
 
 export const zPassword = z
   .string({
-    required_error: "Veuillez renseigner un mot de passe",
+    required_error: "Le mot de passe n'est pas assez fort",
   })
-  .min(6, {
-    message: "Le mot de passe doit contenir au moins 6 caractères",
-  })
-  .refine(
-    (value) => /^.*[A-Z].*$/.test(value),
-    "Le mot de passe doit contenir au moins une majuscule",
-  )
-  .refine(
-    (value) => /^.*[a-z].*$/.test(value),
-    "Le mot de passe doit contenir au moins une minucule",
-  )
-  .refine(
-    (value) => /^.*[0-9].*$/.test(value),
-    "Le mot de passe doit contenir au moins un chiffre",
-  )
-  .refine(
-    (value) => /^.*[!@#$%^&*(),.?":{}|<>\-_[\]+=;].*$/.test(value),
-    'Le mot de passe doit contenir au moins un caractère spécial parmi les suivants [!@#$%^&*(),.?":{}|<>]-_',
-  );
+  .superRefine((value, ctx) => {
+    const zxcvbnResult = zxcvbn(value || "");
+
+    if (zxcvbnResult.score >= 4) {
+      return;
+    }
+
+    if (zxcvbnResult.feedback.warning) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: zxcvbnResult.feedback.warning,
+      });
+    } else if (zxcvbnResult.feedback.suggestions.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: zxcvbnResult.feedback.suggestions[0],
+      });
+    } else {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Le mot de passe n'est pas assez fort",
+      });
+    }
+  });
