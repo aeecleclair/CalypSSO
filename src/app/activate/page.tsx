@@ -103,6 +103,7 @@ const RegisterPage = () => {
         { message: "Veuillez renseigner une promo valide" },
       )
       .optional(),
+    score: z.number().int().min(0).max(4),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
