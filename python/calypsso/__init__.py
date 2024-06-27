@@ -2,15 +2,14 @@ import importlib.resources
 import urllib.parse
 from typing import Any
 
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
+from starlette.staticfiles import StaticFiles
 
 MODULE_PATH = importlib.resources.files(__package__)
 
 
-def get_calypsso_app() -> FastAPI:
+def get_calypsso_app() -> StaticFiles:
     """
-    Construct a FastAPI application serving CalypSSO compiled ressources.
+    Construct a Starlette StaticFiles application serving CalypSSO compiled ressources.
 
     This application MUST be mounted on the subpath `/calypsso`.
 
@@ -20,14 +19,7 @@ def get_calypsso_app() -> FastAPI:
     app.mount("/calypsso", calypsso)
     ```
     """
-    app = FastAPI()
-
-    app.mount(
-        "/",
-        StaticFiles(directory=str(MODULE_PATH / "public"), html=True),
-        name="calypsso",
-    )
-    return app
+    return StaticFiles(directory=str(MODULE_PATH / "public"), html=True)
 
 
 def exclude_none(original: dict[str, Any]) -> dict[str, Any]:
