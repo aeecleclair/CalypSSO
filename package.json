@@ -21,6 +21,10 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@tabler/icons-react": "^3.5.0",
     "@tanstack/react-query": "^5.40.0",
+    "@zxcvbn-ts/core": "^3.0.4",
+    "@zxcvbn-ts/language-common": "^3.0.4",
+    "@zxcvbn-ts/language-en": "^3.0.2",
+    "@zxcvbn-ts/language-fr": "^3.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
@@ -36,8 +40,7 @@
     "react-phone-input-2": "^2.15.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8",
-    "zxcvbn": "^4.4.2"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.46.3",
@@ -46,7 +49,6 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/zxcvbn": "^4.4.4",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
