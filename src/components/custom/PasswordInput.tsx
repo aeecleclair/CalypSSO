@@ -6,21 +6,26 @@ import { zxcvbn } from "@zxcvbn-ts/core";
 import * as React from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
+
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }) => {
+  ({ className, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [score, setScore] = React.useState(0);
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
+    const previousChange = props.onChange;
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (props.onChange) {
+      if (previousChange) {
         const zxcvbnResult = zxcvbn(e.target.value);
         setScore(zxcvbnResult.score);
-        props.onChange(e);
+        previousChange(e);
       }
     };
+
+    props.onChange = onChange;
 
     function color(strength: number, index: number, length: number): string {
       if (!length) return "bg-gray-200";
@@ -40,8 +45,8 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           <Input
             type={showPassword ? "text" : "password"}
             className={cn(className)}
-            onChange={onChange}
-            value={props.value}
+            ref={ref}
+            {...props}
           />
           <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400 hover:text-[hsl(var(--ring))]">
             {showPassword ? (
