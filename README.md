@@ -1,6 +1,6 @@
 # CalypSSO
 
-A Next.js small and static frontend for Hyperion
+A small and static Next.js frontend for Hyperion
 
 ## Next.js development
 
