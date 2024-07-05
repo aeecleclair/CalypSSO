@@ -18,9 +18,8 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Framework :: FastAPI",
 ]
-dependencies = ["fastapi>=0.110.1"]
+dependencies = ["starlette>=0.37"]
 
 [project.urls]
 Source = "https://github.com/aeecleclair/CalypSSO"
