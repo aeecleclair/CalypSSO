@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "CalypSSO"
 dynamic = ["version"]
-description = "FastAPI app to serve static react webpages for Hyperion"
+description = "A small and static Next.js frontend for Hyperion"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
@@ -18,9 +18,8 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Framework :: FastAPI",
 ]
-dependencies = ["fastapi>=0.110.1"]
+dependencies = ["starlette>=0.37"]
 
 [project.urls]
 Source = "https://github.com/aeecleclair/CalypSSO"
@@ -98,5 +97,8 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 strict = true
+exclude = '''(?x)(
+    dist/*$
+)'''  # TOML's single-quoted strings do not require escaping backslashes
