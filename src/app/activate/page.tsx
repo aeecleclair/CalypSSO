@@ -5,7 +5,7 @@ import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { PasswordInput } from "@/components/custom/PasswordInput";
+import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
 import { PhoneCustomInput } from "@/components/custom/PhoneCustomInput";
 import { CustomSelectTrigger } from "@/components/custom/SelectInput";
 import { SuspenseConditional } from "@/components/custom/SuspenseConditional";
@@ -268,7 +268,7 @@ const RegisterPage = () => {
               form={form}
               name="password"
               label="Mot de passe"
-              render={(field) => <PasswordInput {...field} />}
+              render={(field) => <PasswordInputWithStrength {...field} />}
             />
             <LoadingButton
               type="submit"
