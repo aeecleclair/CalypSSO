@@ -4,7 +4,7 @@ import { postUsersResetPassword } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { PasswordInput } from "@/components/custom/PasswordInput";
+import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Form } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
@@ -78,7 +78,7 @@ const ResetPasswordPage = () => {
               name="password"
               label="Mot de passe"
               render={(field) => {
-                return <PasswordInput {...field} />;
+                return <PasswordInputWithStrength {...field} />;
               }}
             />
             <LoadingButton
