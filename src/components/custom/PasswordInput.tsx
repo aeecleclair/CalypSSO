@@ -6,7 +6,6 @@ import { zxcvbn } from "@zxcvbn-ts/core";
 import * as React from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
-
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
