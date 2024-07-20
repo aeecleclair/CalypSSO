@@ -42,6 +42,14 @@ def get_reset_password_relative_url(reset_token: str) -> str:
     return f"calypsso/reset-password/?{urllib.parse.urlencode(exclude_none(params))}"
 
 
+def get_register_relative_url(external: bool) -> str:
+    """
+    Return CalypSSO register page relative url: `calypsso/register?external=...`
+    """
+    params = {"external": external}
+    return f"calypsso/register/?{urllib.parse.urlencode(exclude_none(params))}"
+
+
 def get_activate_relative_url(activation_token: str, external: bool) -> str:
     """
     Return CalypSSO account activation page relative url: `calypsso/activate?activation_code=...`
