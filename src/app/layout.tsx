@@ -1,7 +1,7 @@
-import DynamicTitle from "@/components/custom/DynamicTitle";
 import { Background } from "./Background";
 import "./globals.css";
 import Providers from "./providers";
+import DynamicTitle from "@/components/custom/DynamicTitle";
 import { Toaster } from "@/components/ui/toaster";
 import { Signika } from "next/font/google";
 
