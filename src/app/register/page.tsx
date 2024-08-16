@@ -20,7 +20,7 @@ const RegisterContent = () => {
 
   const searchParams = useSearchParams();
   const acceptExternalUser =
-    searchParams.get("external")?.toLocaleLowerCase() === "True";
+    searchParams.get("external")?.toLocaleLowerCase() === "true";
 
   let emailField = z
     .string({
