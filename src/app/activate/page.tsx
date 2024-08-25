@@ -122,7 +122,7 @@ const RegisterPage = () => {
           birthday: values.birthday
             ? format(values.birthday, "yyyy-MM-dd")
             : undefined,
-          phone: values.phone,
+          phone: values.phone ? "+" + values.phone : undefined,
           floor: values.floor as FloorsType | undefined | null,
           promo: values.promo ? parseInt(values.promo) : undefined,
         },
