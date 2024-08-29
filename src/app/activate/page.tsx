@@ -175,6 +175,27 @@ const RegisterPage = () => {
                 neighborName="firstname"
                 render={(field) => <Input {...field} />}
               />
+              <CustomFormField
+                form={form}
+                name="birthday"
+                label="Date de naissance"
+                neighborName="phone"
+                render={(field) => (
+                  <DatePicker
+                    date={field.value}
+                    setDate={field.onChange}
+                    defaultDate={field.value || addYears(new Date(), -21)}
+                    {...field}
+                  />
+                )}
+              />
+              <CustomFormField
+                form={form}
+                name="phone"
+                label="Numéro de téléphone"
+                neighborName="birthday"
+                render={(field) => <PhoneCustomInput {...field} />}
+              />
             </div>
 
             <SuspenseConditional maskComponentParam="external">
@@ -184,30 +205,6 @@ const RegisterPage = () => {
                 label="Surnom"
                 render={(field) => <Input {...field} />}
               />
-              <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <CustomFormField
-                  form={form}
-                  name="birthday"
-                  label="Date de naissance"
-                  neighborName="phone"
-                  render={(field) => (
-                    <DatePicker
-                      date={field.value}
-                      setDate={field.onChange}
-                      defaultDate={field.value || addYears(new Date(), -21)}
-                      {...field}
-                    />
-                  )}
-                />
-                {/* TODO: Add animation */}
-                <CustomFormField
-                  form={form}
-                  name="phone"
-                  label="Numéro de téléphone"
-                  neighborName="birthday"
-                  render={(field) => <PhoneCustomInput {...field} />}
-                />
-              </div>
 
               <TextSeparator text="Informations sur votre scolarité" />
               <div className="mt-2 grid grid-cols-1 gap-4  md:grid-cols-2">
