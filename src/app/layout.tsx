@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <DynamicTitle />
       <body className={`${inter.className} bg-[#202c39]`}>
         <main className="flex flex-col items-center">
