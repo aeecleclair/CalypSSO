@@ -51,7 +51,14 @@ const Login = () => {
           }/auth/authorization-flow/authorize-validation`}
         >
           <div className="grid gap-4">
-            <Suspense>
+            <Suspense
+              fallback={
+                <>
+                  <div className="skeleton skeleton-formlabel"></div>
+                  <div className="skeleton"></div>
+                </>
+              }
+            >
               <LoginCustomFormField
                 form={form}
                 name="email"
@@ -65,7 +72,14 @@ const Login = () => {
                 )}
               />
             </Suspense>
-            <Suspense>
+            <Suspense
+              fallback={
+                <>
+                  <div className="skeleton skeleton-formlabel"></div>
+                  <div className="skeleton"></div>
+                </>
+              }
+            >
               <LoginCustomFormField
                 form={form}
                 name="password"
