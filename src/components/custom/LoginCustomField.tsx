@@ -5,8 +5,9 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { Skeleton } from "../ui/skeleton";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import {
   ControllerRenderProps,
   FieldValues,
@@ -23,7 +24,7 @@ interface LoginCustomFormFieldProps {
   displayError?: boolean;
 }
 
-export const LoginCustomFormField = ({
+const LoginCustomFormFieldInternal = ({
   form,
   label,
   name,
@@ -41,16 +42,58 @@ export const LoginCustomFormField = ({
   }, [displayError, form, name, searchParams]);
 
   return (
-    <FormField
-      control={form.control}
-      name={name}
-      render={({ field }) => (
-        <FormItem className="grid gap-2">
-          <FormLabel>{label}</FormLabel>
-          <FormControl>{render(field)}</FormControl>
-          {displayError && <FormMessage />}
-        </FormItem>
-      )}
-    />
+    <Suspense
+      fallback={
+        <>
+          <Skeleton className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" />
+          <Skeleton
+            className={`flex h-10 w-full border-none bg-background rounded-md px-3 py-2 text-sm file:border-0 file:bg-transparent 
+            file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:ring-ring focus-visible:ring-offset-2
+            focus-visible:outline-none focus-visible:ring-[2px]  
+            disabled:cursor-not-allowed disabled:opacity-50
+            dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
+            group-hover/input:shadow-none transition duration-400
+            `}
+          />
+        </>
+      }
+    >
+      <FormField
+        control={form.control}
+        name={name}
+        render={({ field }) => (
+          <FormItem className="grid gap-2">
+            <FormLabel>{label}</FormLabel>
+            <FormControl>{render(field)}</FormControl>
+            {displayError && <FormMessage />}
+          </FormItem>
+        )}
+      />
+    </Suspense>
+  );
+};
+
+export const LoginCustomFormField = ({
+  ...props
+}: LoginCustomFormFieldProps) => {
+  return (
+    <Suspense
+      fallback={
+        <>
+          <Skeleton className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" />
+          <Skeleton
+            className={`flex h-10 w-full border-none bg-background rounded-md px-3 py-2 text-sm file:border-0 file:bg-transparent 
+            file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:ring-ring focus-visible:ring-offset-2
+            focus-visible:outline-none focus-visible:ring-[2px]  
+            disabled:cursor-not-allowed disabled:opacity-50
+            dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
+            group-hover/input:shadow-none transition duration-400
+            `}
+          />
+        </>
+      }
+    >
+      <LoginCustomFormFieldInternal {...props} />
+    </Suspense>
   );
 };

@@ -5,5 +5,5 @@ interface SuspenseEmbedProps {
 }
 
 export const SuspenseEmbed = ({ children }: SuspenseEmbedProps) => {
-  return <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>;
+  return <Suspense fallback={<></>}>{children}</Suspense>;
 };
