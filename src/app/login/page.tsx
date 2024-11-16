@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
-import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -51,29 +50,25 @@ const Login = () => {
           }/auth/authorization-flow/authorize-validation`}
         >
           <div className="grid gap-4">
-            <Suspense>
-              <LoginCustomFormField
-                form={form}
-                name="email"
-                label="Email"
-                render={(field) => (
-                  <Input
-                    placeholder="prenom.nom@etu.ec-lyon.fr"
-                    required
-                    {...field}
-                  />
-                )}
-              />
-            </Suspense>
-            <Suspense>
-              <LoginCustomFormField
-                form={form}
-                name="password"
-                label="Mot de passe"
-                render={(field) => <PasswordInput required {...field} />}
-                displayError
-              />
-            </Suspense>
+            <LoginCustomFormField
+              form={form}
+              name="email"
+              label="Email"
+              render={(field) => (
+                <Input
+                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  required
+                  {...field}
+                />
+              )}
+            />
+            <LoginCustomFormField
+              form={form}
+              name="password"
+              label="Mot de passe"
+              render={(field) => <PasswordInput required {...field} />}
+              displayError
+            />
             <SuspenseHiddenField
               form={form}
               name="response_type"
