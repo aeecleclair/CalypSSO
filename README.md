@@ -19,6 +19,7 @@ You will find:
 
 - http://localhost:3000/calypsso/register
 - http://localhost:3000/calypsso/activate?activation_token=12345
+- http://localhost:3000/calypsso/activate?activation_token=12345&external=true
 - http://localhost:3000/calypsso/recover
 - http://localhost:3000/calypsso/reset-password?reset_token=12345
 - http://localhost:3000/calypsso/login?client_id=Titan&response_type=code&scope=API&redirect_uri=https://localhost:8000/static.html&code_challenge=3sMJwwv1xfZK6yay-HkpseTGMUrmwWx5B9zVAxGfrb0=&code_challenge_method=S256
