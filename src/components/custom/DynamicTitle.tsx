@@ -15,6 +15,8 @@ const getTitle = (route: string) => {
       return "Récupérer le compte";
     case "reset-password":
       return "Réinitialiser le mot de passe";
+    case "payment":
+      return "Paiement";
     default:
       return "Erreur";
   }
