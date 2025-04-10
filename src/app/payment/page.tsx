@@ -7,17 +7,22 @@ import { HiOutlineBanknotes } from "react-icons/hi2";
 
 const PaymentPageContent = () => {
   const searchParams = useSearchParams();
-  const redirectUri = searchParams.get("url");
+  const wantedRedirectUri = searchParams.get("url");
 
   const checkoutIntentId = searchParams.get("checkoutIntentId");
   const code = searchParams.get("code");
   const orderId = searchParams.get("orderId");
   const error = searchParams.get("error");
 
-  if (redirectUri !== null) {
-    redirect(
-      `${redirectUri}?checkoutIntentId=${checkoutIntentId}&code=${code}&orderId=${orderId}&error=${error}`,
-    );
+  const redirectUrl = new URL(wantedRedirectUri || "");
+  if (checkoutIntentId !== null)
+    redirectUrl.searchParams.set("checkoutIntentId", checkoutIntentId);
+  if (code !== null) redirectUrl.searchParams.set("code", code);
+  if (orderId !== null) redirectUrl.searchParams.set("orderId", orderId);
+  if (error !== null) redirectUrl.searchParams.set("error", error);
+
+  if (redirectUrl !== null) {
+    redirect(`${redirectUrl}`);
   }
 
   const description = error ? "Le paiement a réussi" : "Le paiement a échoué";
