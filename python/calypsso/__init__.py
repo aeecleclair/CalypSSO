@@ -85,3 +85,16 @@ def get_login_relative_url(
     }
 
     return f"calypsso/login/?{urllib.parse.urlencode(exclude_none(params))}"
+
+
+def get_payment_redirecting_url(
+    url: str,
+) -> str:
+    """
+    Return CalypSSO payment redirecting page relative url: `calypsso/payment?url=...`
+    """
+    params = {
+        "url": url,
+    }
+
+    return f"calypsso/payment/?{urllib.parse.urlencode(exclude_none(params))}"
