@@ -1,0 +1,43 @@
+<!--
+  Create a card with a button that links to a URL.
+  The card contains a title, a content, and an action button.
+-->
+<script props>
+  module.exports = {
+    title: props.title,
+    url: props.url,
+    button: props.button,
+    lang: props.lang || "en",
+  };
+</script>
+
+<x-card title="{{ title }}" lang="{{ lang }}">
+  <p class="m-0 mb-6 text-base/6 text-slate-600">
+    <yield />
+  </p>
+
+  <x-button href="{{ url }}" class="bg-slate-950 hover:bg-slate-800">
+    {{ button }}
+  </x-button>
+
+  <if condition="$slots.complementary_info?.filled">
+    <x-spacer height="24px" />
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      <slot:complementary_info />
+    </p>
+  </if>
+
+  <fill:footer>
+    <p class="mso-break-all m-0 text-xs/5 text-slate-600">
+      <if condition="lang === 'fr'">
+        Si vous ne pouvez pas cliquer sur le bouton "{{ button }}", copiez et
+        collez l'url suivante sur votre navigateur :
+      </if>
+      <else>
+        If you're having trouble clicking the "{{ button }}" button, copy and
+        paste the following URL into your web browser:
+      </else>
+      <a href="{{ url }}">{{ url }}</a>
+    </p>
+  </fill:footer>
+</x-card>

@@ -1,0 +1,26 @@
+---
+preheader: Welcome to MyECL! Please activate your account.
+---
+
+<x-default>
+  <x-button-card
+    title="Welcome to MyECL!"
+    url="@{{ activation_url }}"
+    button="Activate your account"
+  >
+    We're happy to have you on board! To complete your registration, please
+    activate your account by clicking the button below:
+  </x-button-card>
+
+  <x-spacer height="24px" />
+
+  <x-button-card
+    lang="fr"
+    title="Bienvenue sur MyECL !"
+    url="@{{ activation_url }}"
+    button="Activer votre compte"
+  >
+    Nous sommes heureux de t'accueillir ! Pour finaliser ton inscription, nous
+    te prions d'activer ton compte en cliquant sur le bouton ci-dessous :
+  </x-button-card>
+</x-default>

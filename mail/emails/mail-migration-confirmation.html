@@ -1,0 +1,24 @@
+---
+preheader: Confirm your new MyECL e-mail address
+---
+
+<x-default>
+  <x-button-card
+    title="MyECL - Confirm your new e-mail address"
+    url="@{{ confirmation_url }}"
+    button="Activate your account"
+  >
+    To confirm your new e-mail address, use the following button: :
+  </x-button-card>
+
+  <x-spacer height="24px" />
+
+  <x-button-card
+    lang="fr"
+    title="MyECL - Confirme ta nouvelle adresse e-mail"
+    url="@{{ confirmation_url }}"
+    button="Activer votre compte"
+  >
+    Pour confirmer ta nouvelle adresse mail, clique sur le bouton suivant :
+  </x-button-card>
+</x-default>

@@ -1,0 +1,52 @@
+<!--
+  Base card component. Prefer using button-card or info-card.
+-->
+<script props>
+  module.exports = {
+    title: props.title,
+    lang: props.lang || "en",
+  };
+</script>
+
+<table class="w-full">
+  <tr>
+    <td
+      class="rounded-lg bg-white px-9 py-6 [border:1px_solid_theme(colors.slate.200)] sm:p-6"
+    >
+      <a href="https://maizzle.com">
+        <img
+          src="logo.png"
+          src-production="images/logo.png"
+          width="70"
+          alt="Maizzle"
+        />
+      </a>
+
+      <x-spacer height="24px" />
+
+      <h1 class="m-0 mb-6 text-2xl/8 font-semibold text-slate-900">
+        {{ title }}
+      </h1>
+
+      <!-- 
+       Embed the text of the card in
+       <p class="m-0 mb-6 text-base/6 text-slate-600"></p>
+      -->
+      <yield />
+
+      <x-spacer height="24px" />
+
+      <p class="m-0 text-base/6 text-slate-600">
+        <if condition="lang === 'fr'">Merci,</if>
+        <else>Thanks,</else>
+        <br />
+        <span class="font-semibold">ÉCLAIR</span>
+      </p>
+
+      <if condition="$slots.footer?.filled">
+        <x-divider />
+        <slot:footer />
+      </if>
+    </td>
+  </tr>
+</table>
