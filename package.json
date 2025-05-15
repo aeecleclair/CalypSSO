@@ -1,0 +1,20 @@
+{
+  "name": "calypsso",
+  "private": true,
+  "workspaces": [
+    "web",
+  ],
+  "scripts": {
+    "dev:web": "yarn workspace web dev",
+    "build:web": "yarn workspace web build",
+    "start:web": "yarn workspace web start",
+    "lint:web": "yarn workspace web lint",
+    "generate": "yarn workspace web generate",
+    "format": "npx prettier . --write"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.5"
+  }
+}
