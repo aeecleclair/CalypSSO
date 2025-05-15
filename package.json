@@ -2,7 +2,8 @@
   "name": "calypsso",
   "private": true,
   "workspaces": [
-    "web"
+    "web",
+    "mail"
   ],
   "scripts": {
     "dev:web": "yarn workspace web dev",
@@ -10,7 +11,9 @@
     "start:web": "yarn workspace web start",
     "lint:web": "yarn workspace web lint",
     "generate": "yarn workspace web generate",
-    "build": "yarn build:web",
+    "dev:mail": "yarn workspace mail dev",
+    "build:mail": "yarn workspace mail build",
+    "build": "yarn build:web && yarn build:mail",
     "format": "npx prettier . --write"
   },
   "devDependencies": {
