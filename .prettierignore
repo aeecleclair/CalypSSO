@@ -1,8 +1,8 @@
-node_modules
-.next
+**/node_modules
+**/.next
 
 # Shadcn components
-src/components/ui
+web/src/components/ui
 
 # Generated Hyperion client
-src/api
+web/src/api
