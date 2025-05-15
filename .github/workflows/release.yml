@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
 
       - name: Build Next site
-        run: CI=false yarn build:web # Using CI=false remove Treat warning as error that make the compilation fail
+        run: CI=false yarn build # Using CI=false remove Treat warning as error that make the compilation fail
 
       - name: Install Python
         uses: actions/setup-python@v5

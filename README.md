@@ -1,6 +1,9 @@
 # CalypSSO
 
-A small and static Next.js frontend for Hyperion
+Node project build as a Python module for Hyperion.
+CalypSSO is composed of:
+
+- A small and static Next.js frontend for Hyperion
 
 ## Next.js development
 
@@ -8,10 +11,10 @@ You can set Hyperion base url in a dotenv `.env`
 
 ```bash
 yarn install
-yarn dev
+yarn dev:web
 ```
 
-## Pages
+### Pages
 
 The base url of this project is `/calypsso`.
 
@@ -24,7 +27,7 @@ You will find:
 - http://localhost:3000/calypsso/reset-password?reset_token=12345
 - http://localhost:3000/calypsso/login?client_id=Titan&response_type=code&scope=API&redirect_uri=https://localhost:8000/static.html&code_challenge=3sMJwwv1xfZK6yay-HkpseTGMUrmwWx5B9zVAxGfrb0=&code_challenge_method=S256
 
-## Compilation
+## Build Python module
 
 First you need to compile the Next.js project
 

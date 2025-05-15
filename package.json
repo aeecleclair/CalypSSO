@@ -10,6 +10,7 @@
     "start:web": "yarn workspace web start",
     "lint:web": "yarn workspace web lint",
     "generate": "yarn workspace web generate",
+    "build": "yarn build:web",
     "format": "npx prettier . --write"
   },
   "devDependencies": {

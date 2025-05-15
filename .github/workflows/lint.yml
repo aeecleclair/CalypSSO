@@ -49,7 +49,7 @@ jobs:
         run: npx prettier . --check
 
       - name: Build
-        run: CI=false yarn build:web # Using CI=false remove Treat warning as error that make the compilation fail
+        run: CI=false yarn build # Using CI=false remove Treat warning as error that make the compilation fail
 
   lintPython:
     runs-on: ubuntu-latest
