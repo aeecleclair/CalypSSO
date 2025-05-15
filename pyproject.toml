@@ -32,7 +32,7 @@ packages = ["python/calypsso"]
 
 [tool.hatch.build.force-include]
 # We want to mount the out directory inside the package folder
-"out" = "python/calypsso/public"
+"web/out" = "python/calypsso/public"
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
