@@ -2,7 +2,7 @@
   "name": "calypsso",
   "private": true,
   "workspaces": [
-    "web",
+    "web"
   ],
   "scripts": {
     "dev:web": "yarn workspace web dev",
