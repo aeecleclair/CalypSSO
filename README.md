@@ -44,6 +44,8 @@ Emails, layout and components are based on [maizzle base template repository and
 
 You can set the frontmatter `preheader` of a mail to customize the text preview of the email. See [preview-text](https://maizzle.com/glossary#preview-text)
 
+Variable starting with an underscore (ex: `_logo_url`) will be set globally by CalypSSO Python module.
+
 ## Build Python module
 
 First you need to compile the Next.js project
