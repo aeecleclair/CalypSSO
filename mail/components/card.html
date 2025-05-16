@@ -13,12 +13,12 @@
     <td
       class="rounded-lg bg-white px-9 py-6 [border:1px_solid_theme(colors.slate.200)] sm:p-6"
     >
-      <a href="https://maizzle.com">
+      <a href="@{{ _entity_site_url }}">
         <img
           src="logo.png"
-          src-production="images/logo.png"
+          src-production="@{{ _logo_url }}"
           width="70"
-          alt="Maizzle"
+          alt="@{{ _product_name }} Logo"
         />
       </a>
 
@@ -40,7 +40,7 @@
         <if condition="lang === 'fr'">Merci,</if>
         <else>Thanks,</else>
         <br />
-        <span class="font-semibold">ÉCLAIR</span>
+        <span class="font-semibold">@{{ _entity_name }}</span>
       </p>
 
       <if condition="$slots.footer?.filled">

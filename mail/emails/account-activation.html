@@ -1,10 +1,10 @@
 ---
-preheader: Welcome to MyECL! Please activate your account.
+preheader: Welcome to @{{ _product_name }}! Please activate your account.
 ---
 
 <x-default>
   <x-button-card
-    title="Welcome to MyECL!"
+    title="Welcome to @{{ _product_name }}!"
     url="@{{ activation_url }}"
     button="Activate your account"
   >
@@ -16,7 +16,7 @@ preheader: Welcome to MyECL! Please activate your account.
 
   <x-button-card
     lang="fr"
-    title="Bienvenue sur MyECL !"
+    title="Bienvenue sur @{{ _product_name }} !"
     url="@{{ activation_url }}"
     button="Activer votre compte"
   >

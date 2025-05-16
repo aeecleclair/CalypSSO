@@ -1,14 +1,14 @@
 ---
-preheader: Activate your MyECLPay device
+preheader: Activate your @{{ _payment_product_name }} device
 ---
 
 <x-default>
   <x-button-card
-    title="MyECLPay - Activate your device"
+    title="@{{ _payment_product_name }} - Activate your device"
     url="@{{ activation_url }}"
     button="Activate your device"
   >
-    To activate your MyECLPay device, please click the button below:
+    To activate your @{{ _payment_product_name }} device, please click the button below:
 
     <fill:complementary_info>
       After activation you will be able to use your device to make payments. If
@@ -21,11 +21,11 @@ preheader: Activate your MyECLPay device
 
   <x-button-card
     lang="fr"
-    title="MyECLPay - Activer son appareil"
+    title="@{{ _payment_product_name }} - Activer son appareil"
     url="@{{ activation_url }}"
     button="Active ton appareil"
   >
-    Pour activer ton appareil MyECLPay, clique sur le bouton ci-dessous :
+    Pour activer ton appareil @{{ _payment_product_name }}, clique sur le bouton ci-dessous :
     <fill:complementary_info>
       Après activation, tu pourras utiliser ton appareil pour effectuer des
       paiements. Si tu n'es pas à l'origine de cette demande change immédiatement ton mot de
