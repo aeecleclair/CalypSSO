@@ -7,7 +7,7 @@ CalypSSO is composed of:
 
 ## Next.js development
 
-You can set Hyperion base url in a dotenv `.env`
+You can set Hyperion base url in a dotenv `/web/.env`
 
 ```bash
 yarn install
@@ -26,6 +26,23 @@ You will find:
 - http://localhost:3000/calypsso/recover
 - http://localhost:3000/calypsso/reset-password?reset_token=12345
 - http://localhost:3000/calypsso/login?client_id=Titan&response_type=code&scope=API&redirect_uri=https://localhost:8000/static.html&code_challenge=3sMJwwv1xfZK6yay-HkpseTGMUrmwWx5B9zVAxGfrb0=&code_challenge_method=S256
+
+## Maizzle emails template
+
+Email templates are build using [Maizzle](https://maizzle.com/).
+
+To preview mails during development use:
+
+```bash
+yarn install
+yarn dev:mail
+```
+
+Email contains escaped template strings:`@{{ variable_name }}` will be rendered by Maizzle as `{{ variable_name }}`. Then the Python module will process these expressions using Jinja2
+
+Emails, layout and components are based on [maizzle base template repository and design](https://github.com/maizzle/maizzle).
+
+You can set the frontmatter `preheader` of a mail to customize the text preview of the email. See [preview-text](https://maizzle.com/glossary#preview-text)
 
 ## Build Python module
 
