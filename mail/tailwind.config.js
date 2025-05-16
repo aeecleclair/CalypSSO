@@ -6,4 +6,11 @@ module.exports = {
     "./emails/**/*.html",
     "./layouts/**/*.html",
   ],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#f97316",
+      },
+    },
+  },
 };
