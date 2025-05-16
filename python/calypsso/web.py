@@ -32,6 +32,7 @@ def logo_png_relative_url() -> str:
     """
     return "calypsso/logo.png"
 
+
 def get_error_relative_url(message: str) -> str:
     """
     Return CalypSSO error page relative url: `calypsso/error?message=...`
