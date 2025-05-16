@@ -1,13 +1,10 @@
 import importlib
 
-from fastapi.templating import Jinja2Templates
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from .web import logo_png_relative_url
 
 MODULE_PATH = importlib.resources.files(__package__)
-
-
-mail_templates = Jinja2Templates(directory=str(MODULE_PATH / "mail_templates"))
 
 
 class MailTemplates:
@@ -28,7 +25,7 @@ class MailTemplates:
         api_base_url: URL of the API serving CalypSSO
         primary_color: Primary color of the application (e.g. "#FF5733")
         """
-        self.environment = {
+        self.environment_variables = {
             "_product_name": product_name,
             "_payment_product_name": payment_product_name,
             "_entity_name": entity_name,
@@ -36,12 +33,21 @@ class MailTemplates:
             "_entity_site_url": entity_site_url,
         }
 
+        loader = FileSystemLoader(str(MODULE_PATH / "mail_templates"))
+        self.jinja_env = Environment(
+            loader=loader,
+            autoescape=select_autoescape(
+                default_for_string=True,
+                default=True,
+            ),
+        )
+
     def get_mail_account_activation(self, activation_url: str) -> str:
         """
         Return the mail template for account activation.
         """
-        return mail_templates.get_template("account-activation.html").render(
-            self.environment,
+        return self.jinja_env.get_template("account-activation.html").render(
+            self.environment_variables,
             activation_url=activation_url,
         )
 
@@ -49,24 +55,24 @@ class MailTemplates:
         """
         Return the mail template for account already existing.
         """
-        return mail_templates.get_template("account-exist.html").render(
-            self.environment,
+        return self.jinja_env.get_template("account-exist.html").render(
+            self.environment_variables,
         )
 
     def get_mail_mail_migration_already_exist(self) -> str:
         """
         Return the mail template for already existing email when migrating email.
         """
-        return mail_templates.get_template("mail-migration-already-exist.html").render(
-            self.environment,
+        return self.jinja_env.get_template("mail-migration-already-exist.html").render(
+            self.environment_variables,
         )
 
     def get_mail_mail_migration_confirm(self, confirmation_url: str) -> str:
         """
         Return the mail template for email migration confirmation.
         """
-        return mail_templates.get_template("mail-migration-confirmation.html").render(
-            self.environment,
+        return self.jinja_env.get_template("mail-migration-confirmation.html").render(
+            self.environment_variables,
             confirmation_url=confirmation_url,
         )
 
@@ -74,8 +80,8 @@ class MailTemplates:
         """
         Return the mail template for MyECLPay device activation.
         """
-        return mail_templates.get_template("myeclpay-device-activation.html").render(
-            self.environment,
+        return self.jinja_env.get_template("myeclpay-device-activation.html").render(
+            self.environment_variables,
             activation_url=activation_url,
         )
 
@@ -83,8 +89,8 @@ class MailTemplates:
         """
         Return the mail template for MyECLPay structure transfer validation.
         """
-        return mail_templates.get_template("myeclpay-structure-transfer.html").render(
-            self.environment,
+        return self.jinja_env.get_template("myeclpay-structure-transfer.html").render(
+            self.environment_variables,
             confirmation_url=confirmation_url,
         )
 
@@ -92,8 +98,8 @@ class MailTemplates:
         """
         Return the mail template to inform about TOS signature.
         """
-        return mail_templates.get_template("myeclpay-tos-signed.html").render(
-            self.environment,
+        return self.jinja_env.get_template("myeclpay-tos-signed.html").render(
+            self.environment_variables,
             tos_version=tos_version,
         )
 
@@ -101,15 +107,15 @@ class MailTemplates:
         """
         Return the mail template to inform that the account requested to change password does not exist.
         """
-        return mail_templates.get_template(
+        return self.jinja_env.get_template(
             "reset-password-account-does-not-exist.html",
-        ).render(self.environment, register_url=register_url)
+        ).render(self.environment_variables, register_url=register_url)
 
     def get_mail_reset_password(self, confirmation_url: str) -> str:
         """
         Return the mail template for password reset confirmation.
         """
-        return mail_templates.get_template("reset-password.html").render(
-            self.environment,
+        return self.jinja_env.get_template("reset-password.html").render(
+            self.environment_variables,
             confirmation_url=confirmation_url,
         )
