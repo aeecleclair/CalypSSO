@@ -1,0 +1,16 @@
+<!--
+  Create a card with a button that links to a URL.
+  The card contains a title and a content.
+-->
+<script props>
+  module.exports = {
+    title: props.title,
+    lang: props.lang || "en",
+  };
+</script>
+
+<x-card title="{{ title }}" lang="{{ lang }}">
+  <p class="m-0 mb-6 text-base/6 text-slate-600">
+    <yield />
+  </p>
+</x-card>

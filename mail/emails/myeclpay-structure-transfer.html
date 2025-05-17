@@ -1,0 +1,37 @@
+---
+preheader: Activate your MyECLPay device
+---
+
+<x-default>
+  <x-button-card
+    title="Confirm MyECLPay structure @{{ structure_name }} transfer"
+    url="@{{ confirmation_url }}"
+    button="Confirm the transfer"
+  >
+    To confirm the structure manager transfer, you can click on the following
+    button:
+
+    <fill:complementary_info>
+      The link is valid for 20 minutes. The action is irreversible. If you did
+      not request this, change your password immediately, your account may have
+      been compromised.
+    </fill:complementary_info>
+  </x-button-card>
+
+  <x-spacer height="24px" />
+
+  <x-button-card
+    lang="fr"
+    title="Confirmer le transfert de la structure MyECLPay @{{ structure_name }}"
+    url="@{{ confirmation_url }}"
+    button="Confirmer le transfert"
+  >
+    Pour confirmer le transfert de la structure, clique sur le bouton ci-dessous
+    :
+    <fill:complementary_info>
+      Le lien est valide 20 minutes. L'action est irréversible. Si tu n'es pas à
+      l'origine de cette demande change immédiatement ton mot de passe, ton
+      compte a peut-être été compromis.
+    </fill:complementary_info>
+  </x-button-card>
+</x-default>
