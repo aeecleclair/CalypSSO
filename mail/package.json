@@ -1,0 +1,14 @@
+{
+  "name": "mail",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "maizzle serve",
+    "build": "maizzle build production"
+  },
+  "dependencies": {
+    "@maizzle/framework": "latest",
+    "tailwindcss-preset-email": "latest"
+  }
+}
