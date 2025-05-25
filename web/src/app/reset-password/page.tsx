@@ -78,7 +78,7 @@ const ResetPasswordPage = () => {
               name="password"
               label="Mot de passe"
               render={(field) => {
-                return <PasswordInputWithStrength {...field} />;
+                return <PasswordInputWithStrength autoFocus {...field} />;
               }}
             />
             <LoadingButton

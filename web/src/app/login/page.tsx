@@ -56,6 +56,7 @@ const Login = () => {
               label="Email"
               render={(field) => (
                 <Input
+                  autoFocus
                   placeholder="prenom.nom@etu.ec-lyon.fr"
                   required
                   {...field}

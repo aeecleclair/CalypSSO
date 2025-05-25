@@ -166,7 +166,7 @@ const RegisterPage = () => {
                 name="firstname"
                 label="Prénom"
                 neighborName="name"
-                render={(field) => <Input {...field} />}
+                render={(field) => <Input autoFocus {...field} />}
               />
               <CustomFormField
                 form={form}

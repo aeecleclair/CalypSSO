@@ -72,7 +72,11 @@ const RecoverPage = () => {
               name="email"
               label="Email"
               render={(field) => (
-                <Input placeholder="prenom.nom@etu.ec-lyon.fr" {...field} />
+                <Input
+                  autoFocus
+                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  {...field}
+                />
               )}
             />
             <LoadingButton
