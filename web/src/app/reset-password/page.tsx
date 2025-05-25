@@ -4,6 +4,7 @@ import { postUsersResetPassword } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Form } from "@/components/ui/form";
@@ -19,16 +20,23 @@ import { z } from "zod";
 const ResetPasswordPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z.object({
-    activation_code: z.string({
-      required_error: "Veuillez renseigner le code d'activation",
-    }),
-    password: zPassword,
-  });
+  const formSchema = z
+    .object({
+      activation_code: z.string({
+        required_error: "Veuillez renseigner le code d'activation",
+      }),
+      password: zPassword,
+      confirm: z.string({
+        required_error: "Veuillez confirmer votre mot de passe",
+      }),
+    })
+    .refine((value) => value.password === value.confirm, {
+      message: "Le mot de passe ne correspond pas",
+      path: ["confirm"],
+    });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    mode: "onChange",
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -77,9 +85,13 @@ const ResetPasswordPage = () => {
               form={form}
               name="password"
               label="Mot de passe"
-              render={(field) => {
-                return <PasswordInputWithStrength {...field} />;
-              }}
+              render={(field) => <PasswordInputWithStrength {...field} />}
+            />
+            <CustomFormField
+              form={form}
+              name="confirm"
+              label="Confirmez votre mot de passe"
+              render={(field) => <PasswordInput {...field} />}
             />
             <LoadingButton
               type="submit"

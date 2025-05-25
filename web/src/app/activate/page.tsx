@@ -5,6 +5,7 @@ import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
 import { PhoneCustomInput } from "@/components/custom/PhoneCustomInput";
 import { CustomSelectTrigger } from "@/components/custom/SelectInput";
@@ -60,50 +61,58 @@ const FloorTypes: Readonly<[string, ...string[]]> = [
 const RegisterPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z.object({
-    activation_token: z.string({
-      required_error: "Veuillez renseigner le code d'activation",
-    }),
-    firstname: z
-      .string({
-        required_error: "Veuillez renseigner votre prénom",
-      })
-      .min(1, {
-        message: "Veuillez renseigner votre prénom",
+  const formSchema = z
+    .object({
+      activation_token: z.string({
+        required_error: "Veuillez renseigner le code d'activation",
       }),
-    name: z
-      .string({
-        required_error: "Veuillez renseigner votre nom",
-      })
-      .min(1, {
-        message: "Veuillez renseigner votre nom",
+      firstname: z
+        .string({
+          required_error: "Veuillez renseigner votre prénom",
+        })
+        .min(1, {
+          message: "Veuillez renseigner votre prénom",
+        }),
+      name: z
+        .string({
+          required_error: "Veuillez renseigner votre nom",
+        })
+        .min(1, {
+          message: "Veuillez renseigner votre nom",
+        }),
+      password: zPassword,
+      confirm: z.string({
+        required_error: "Veuillez confirmer votre mot de passe",
       }),
-    password: zPassword,
-    nickname: z
-      .string()
-      .min(1, {
-        message: "Veuillez renseigner votre prénom",
-      })
-      .optional(),
-    birthday: z.date().optional(),
-    phone: z
-      .string()
-      .refine((value) => isValidPhoneNumber("+" + value), {
-        message: "Veuillez renseigner un numéro valide",
-      })
-      .optional(), // phone
-    floor: z.enum(FloorTypes).optional(),
-    promo: z
-      .string()
-      .refine(
-        (value) => {
-          const parsedValue = parseInt(value);
-          return !isNaN(parsedValue) && parsedValue >= 0;
-        },
-        { message: "Veuillez renseigner une promo valide" },
-      )
-      .optional(),
-  });
+      nickname: z
+        .string()
+        .min(1, {
+          message: "Veuillez renseigner votre prénom",
+        })
+        .optional(),
+      birthday: z.date().optional(),
+      phone: z
+        .string()
+        .refine((value) => isValidPhoneNumber("+" + value), {
+          message: "Veuillez renseigner un numéro valide",
+        })
+        .optional(), // phone
+      floor: z.enum(FloorTypes).optional(),
+      promo: z
+        .string()
+        .refine(
+          (value) => {
+            const parsedValue = parseInt(value);
+            return !isNaN(parsedValue) && parsedValue >= 0;
+          },
+          { message: "Veuillez renseigner une promo valide" },
+        )
+        .optional(),
+    })
+    .refine((value) => value.password === value.confirm, {
+      message: "Le mot de passe ne correspond pas",
+      path: ["confirm"],
+    });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -265,6 +274,12 @@ const RegisterPage = () => {
               name="password"
               label="Mot de passe"
               render={(field) => <PasswordInputWithStrength {...field} />}
+            />
+            <CustomFormField
+              form={form}
+              name="confirm"
+              label="Confirmez votre mot de passe"
+              render={(field) => <PasswordInput {...field} />}
             />
             <LoadingButton
               type="submit"
