@@ -1,0 +1,32 @@
+---
+preheader: Your @{{ _product_name }} accounts have been merged
+---
+
+<x-default>
+  <x-card title="Your @{{ _product_name }} accounts has been merged">
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      The account associated with the address @{{ old_email }} has been merged
+      with the account @{{ new_email }}. All content associated with the old
+      account has been transferred to the account @{{ old_email }}.
+    </p>
+
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      Please log in with the address @{{ old_email }} to access your data.
+    </p>
+  </x-card>
+
+  <x-spacer height="24px" />
+
+  <x-card lang="fr" title="Vos comptes @{{ _product_name }} ont été fusionnés">
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      Le compte associé à l'adresse @{{ old_email }} a été fusionné avec le
+      compte @{{ new_email }}. Tout le contenu associé à l'ancien compte à été
+      transféré sur le compte @{{ old_email }}.
+    </p>
+
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      Merci de vous connecter avec l'adresse @{{ old_email }} pour accéder à vos
+      données.
+    </p>
+  </x-card>
+</x-default>

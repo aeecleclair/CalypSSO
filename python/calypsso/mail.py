@@ -59,6 +59,16 @@ class MailTemplates:
             self.environment_variables,
         )
 
+    def get_mail_account_merged(self, old_email: str, new_email: str) -> str:
+        """
+        Return the mail template for successful account merged.
+        """
+        return self.jinja_env.get_template("account-fusion.html").render(
+            self.environment_variables,
+            old_email=old_email,
+            new_email=new_email,
+        )
+
     def get_mail_mail_migration_already_exist(self) -> str:
         """
         Return the mail template for already existing email when migrating email.
