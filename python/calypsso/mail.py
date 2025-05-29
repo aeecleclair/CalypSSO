@@ -59,6 +59,16 @@ class MailTemplates:
             self.environment_variables,
         )
 
+    def get_mail_account_merged(self, deleted_mail: str, kept_mail: str) -> str:
+        """
+        Return the mail template for successful account merged.
+        """
+        return self.jinja_env.get_template("account-fusion.html").render(
+            self.environment_variables,
+            deleted_mail=deleted_mail,
+            kept_mail=kept_mail,
+        )
+
     def get_mail_mail_migration_already_exist(self) -> str:
         """
         Return the mail template for already existing email when migrating email.
@@ -94,13 +104,14 @@ class MailTemplates:
             confirmation_url=confirmation_url,
         )
 
-    def get_mail_myeclpay_tos_signed(self, tos_version: int) -> str:
+    def get_mail_myeclpay_tos_signed(self, tos_version: int, tos_url: str) -> str:
         """
         Return the mail template to inform about TOS signature.
         """
         return self.jinja_env.get_template("myeclpay-tos-signed.html").render(
             self.environment_variables,
             tos_version=tos_version,
+            tos_url=tos_url,
         )
 
     def get_mail_reset_password_account_does_not_exist(self, register_url: str) -> str:
