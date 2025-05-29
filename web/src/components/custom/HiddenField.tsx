@@ -24,9 +24,8 @@ export const HiddenField = ({
 
   useEffect(() => {
     if (!optional && !value) {
-      router.push(
-        encodeURI(`/error?message=Url invalide : ${queryParam} manquant`),
-      );
+      console.error(`Missing required query parameter: ${queryParam}`);
+      router.push(encodeURI(`/message?type=missing_query_param`));
     } else if (value) {
       form.setValue(name, value);
     }

@@ -51,10 +51,10 @@ def logo_png_relative_url() -> str:
 
 def get_message_relative_url(message_type: TypeMessage) -> str:
     """
-    Return CalypSSO error page relative url: `calypsso/error?message=...`
+    Return CalypSSO message page relative url: `calypsso/message?type=...`
     """
     params = {"type": message_type.value}
-    return f"calypsso/error?{urllib.parse.urlencode(exclude_none(params))}"
+    return f"calypsso/message?{urllib.parse.urlencode(exclude_none(params))}"
 
 
 def get_reset_password_relative_url(reset_token: str) -> str:
