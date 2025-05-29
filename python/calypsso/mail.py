@@ -63,7 +63,7 @@ class MailTemplates:
         """
         Return the mail template for successful account merged.
         """
-        return self.jinja_env.get_template("account-fusion.html").render(
+        return self.jinja_env.get_template("account-merged.html").render(
             self.environment_variables,
             deleted_mail=deleted_mail,
             kept_mail=kept_mail,
