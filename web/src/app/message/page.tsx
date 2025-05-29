@@ -21,7 +21,7 @@ const TypeMap: Record<string, Type> = {
     icon: HiExclamation,
   },
   mismatching_redirect_uri: {
-    message: "Invalid client_id",
+    message: "Mismatching redirect_uri",
     icon: HiExclamation,
   },
   user_not_member_of_allowed_group: {
@@ -46,6 +46,10 @@ const TypeMap: Record<string, Type> = {
   },
   token_expired: {
     message: "The token has expired",
+    icon: HiExclamation,
+  },
+  missing_query_param: {
+    message: "Missing required query parameter in url",
     icon: HiExclamation,
   },
 };
