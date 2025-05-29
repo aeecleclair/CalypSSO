@@ -1,10 +1,26 @@
 import importlib.resources
 import urllib.parse
+from enum import Enum
 from typing import Any
 
 from starlette.staticfiles import StaticFiles
 
 MODULE_PATH = importlib.resources.files(__package__)
+
+
+class TypeMessage(str, Enum):
+    invalid_client_id = "invalid_client_id"
+    mismatching_redirect_uri = "mismatching_redirect_uri"
+    user_not_member_of_allowed_group = "user_not_member_of_allowed_group"
+    user_account_type_not_allowed = "user_account_type_not_allowed"
+    myeclpay_structure_transfer_success = "myeclpay_structure_transfer_success"
+    myeclpay_wallet_device_activation_success = (
+        "myeclpay_wallet_device_activation_success"
+    )
+    myeclpay_wallet_device_already_activated_or_revoked = (
+        "myeclpay_wallet_device_already_activated_or_revoked"
+    )
+    token_expired = "token_expired"  # noqa: S105
 
 
 def get_calypsso_app() -> StaticFiles:
@@ -33,12 +49,12 @@ def logo_png_relative_url() -> str:
     return "calypsso/logo.png"
 
 
-def get_error_relative_url(message: str) -> str:
+def get_message_relative_url(message_type: TypeMessage) -> str:
     """
-    Return CalypSSO error page relative url: `calypsso/error?message=...`
+    Return CalypSSO message page relative url: `calypsso/message?type=...`
     """
-    params = {"message": message}
-    return f"calypsso/error?{urllib.parse.urlencode(exclude_none(params))}"
+    params = {"type": message_type.value}
+    return f"calypsso/message?{urllib.parse.urlencode(exclude_none(params))}"
 
 
 def get_reset_password_relative_url(reset_token: str) -> str:
