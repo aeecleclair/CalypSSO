@@ -40,7 +40,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.46.3",
+    "@hey-api/openapi-ts": "^0.69.1",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "^20",
     "@types/react": "^18",
