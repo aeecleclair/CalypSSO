@@ -18,7 +18,10 @@ const assetPage = async (props: { params: { path: string } }) => {
   const { path } = props.params;
   if (!assets.includes(path)) notFound(); // https://github.com/vercel/next.js/issues/56253
   const text = await fetch(
-    process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL + "/" + path,
+    (process.env.NEXT_PUBLIC_OVERRIDE_HYPERION_URL ??
+      "https://hyperion.myecl.fr") +
+      "/" +
+      path,
   ).then((data) => data.text());
   return (
     <CenteredCard title="Document" description="Consultez son contenu">
