@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 
 const assets = [
   "privacy",
-  "terms-and-confitions",
+  "terms-and-conditions",
   "myeclpay-terms-of-service",
   "support",
 ];
