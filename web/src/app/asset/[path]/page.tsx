@@ -26,7 +26,7 @@ const assetPage = async (props: { params: { path: string } }) => {
   return (
     <CenteredCard title="Document" description="Consultez son contenu">
       <ScrollArea className="rounded-md bg-background h-[62vh]">
-        <article className="mx-3">
+        <article className="mx-3 text-justify">
           <Markdown>{text}</Markdown>
         </article>
       </ScrollArea>
