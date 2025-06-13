@@ -27,7 +27,7 @@ const ChangePasswordPage = () => {
       old_password: zPassword,
       new_password: zPassword,
     })
-    .refine((value) => value.new_password === value.old_password, {
+    .refine((value) => value.new_password !== value.old_password, {
       message: "Le nouveau mot de passe doit être différent de l'ancien",
       path: ["new_password"],
     });
