@@ -1,3 +1,5 @@
+"use client";
+
 import { postUsersChangePassword } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
