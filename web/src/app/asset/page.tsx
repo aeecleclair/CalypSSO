@@ -9,7 +9,8 @@ import {
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RequestResult } from "@hey-api/client-fetch";
-import { useRouter, useSearchParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import Markdown from "react-markdown";
 
 const assets: Record<string, () => RequestResult> = {
@@ -19,27 +20,32 @@ const assets: Record<string, () => RequestResult> = {
   support: getSupport,
 };
 
-const assetPage = async () => {
+const AssetPageContent = () => {
   const searchParams = useSearchParams();
   const path = searchParams.get("path");
-  const router = useRouter();
-  if (!path || !(path in assets)) {
-    router.push(encodeURI(`/message?type=missing_query_param`));
-    return;
-  }
-  const text = await assets[path!]().then((result) => result.data);
+  if (!path || !(path in assets)) notFound();
+  const [text, setText] = useState("");
+  useEffect(() => {
+    (async () => {
+      const text2 = await assets[path]().then((result) => result.data);
+      if (typeof text2 === "string") setText(text2);
+    })();
+  }, [path]);
+  return <Markdown>{text}</Markdown>;
+};
 
+const AssetPage = () => {
   return (
-    typeof text === "string" && (
-      <CenteredCard title="Document" description="Consultez son contenu">
-        <ScrollArea className="rounded-md bg-background h-[62vh]">
-          <article className="mx-3 text-justify">
-            <Markdown>{text}</Markdown>
-          </article>
-        </ScrollArea>
-      </CenteredCard>
-    )
+    <CenteredCard title="Document" description="Consultez son contenu">
+      <ScrollArea className="rounded-md bg-background h-[62vh]">
+        <article className="mx-3 text-justify">
+          <Suspense>
+            <AssetPageContent />
+          </Suspense>
+        </article>
+      </ScrollArea>
+    </CenteredCard>
   );
 };
 
-export default assetPage;
+export default AssetPage;
