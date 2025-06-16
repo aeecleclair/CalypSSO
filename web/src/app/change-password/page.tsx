@@ -19,18 +19,13 @@ import z from "zod";
 const ChangePasswordPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z
-    .object({
-      email: z.string({
-        required_error: "Veuillez renseigner l'adresse email",
-      }),
-      old_password: zPassword,
-      new_password: zPassword,
-    })
-    .refine((value) => value.new_password !== value.old_password, {
-      message: "Le nouveau mot de passe doit être différent de l'ancien",
-      path: ["new_password"],
-    });
+  const formSchema = z.object({
+    email: z.string({
+      required_error: "Veuillez renseigner l'adresse email",
+    }),
+    old_password: zPassword,
+    new_password: zPassword,
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
