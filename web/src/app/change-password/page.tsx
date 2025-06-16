@@ -6,17 +6,19 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
-import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { Form } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
 const ChangePasswordPage = () => {
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
@@ -76,7 +78,18 @@ const ChangePasswordPage = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <SuspenseHiddenField form={form} name="email" queryParam="email" />
+            <CustomFormField
+              form={form}
+              name="email"
+              label="Email"
+              render={(field) => (
+                <Input
+                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  {...field}
+                  defaultValue={email ?? ""}
+                />
+              )}
+            />
             <CustomFormField
               form={form}
               name="old_password"
