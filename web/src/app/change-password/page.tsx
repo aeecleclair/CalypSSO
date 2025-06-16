@@ -20,9 +20,13 @@ const ChangePasswordPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
-    email: z.string({
-      required_error: "Veuillez renseigner l'adresse email",
-    }),
+    email: z
+      .string({
+        required_error: "Veuillez renseigner l'adresse email",
+      })
+      .email({
+        message: "Veuillez renseigner une adresse email valide",
+      }),
     old_password: z.string().min(6, {
       message: "Veuillez renseigner votre mot de passe actuel",
     }),
