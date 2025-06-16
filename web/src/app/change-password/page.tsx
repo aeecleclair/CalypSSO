@@ -23,7 +23,9 @@ const ChangePasswordPage = () => {
     email: z.string({
       required_error: "Veuillez renseigner l'adresse email",
     }),
-    old_password: zPassword,
+    old_password: z.string().min(6, {
+      message: "Veuillez renseigner votre mot de passe actuel",
+    }),
     new_password: zPassword,
   });
 
