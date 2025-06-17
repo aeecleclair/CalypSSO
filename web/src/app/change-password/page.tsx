@@ -38,6 +38,9 @@ const ChangePasswordContent = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
+    defaultValues: {
+      email: email ?? "",
+    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -83,11 +86,7 @@ const ChangePasswordContent = () => {
               name="email"
               label="Email"
               render={(field) => (
-                <Input
-                  placeholder="prenom.nom@etu.ec-lyon.fr"
-                  {...field}
-                  defaultValue={email ?? ""}
-                />
+                <Input placeholder="prenom.nom@etu.ec-lyon.fr" {...field} />
               )}
             />
             <CustomFormField
