@@ -102,7 +102,7 @@ const ChangePasswordContent = () => {
               name="new_password"
               label="Nouveau mot de passe"
               render={(field) => {
-                return <PasswordInputWithStrength autoFocus {...field} />;
+                return <PasswordInputWithStrength {...field} />;
               }}
             />
             <LoadingButton
