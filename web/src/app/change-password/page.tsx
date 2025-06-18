@@ -22,13 +22,9 @@ const ChangePasswordContent = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
-    email: z
-      .string({
-        required_error: "Veuillez renseigner l'adresse email",
-      })
-      .email({
-        message: "Veuillez renseigner une adresse email valide",
-      }),
+    email: z.string({
+      required_error: "Veuillez renseigner l'adresse email",
+    }),
     old_password: z.string({
       required_error: "Veuillez renseigner votre mot de passe actuel",
     }),
