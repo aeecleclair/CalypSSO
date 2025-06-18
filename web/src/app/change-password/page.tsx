@@ -29,8 +29,8 @@ const ChangePasswordContent = () => {
       .email({
         message: "Veuillez renseigner une adresse email valide",
       }),
-    old_password: z.string().min(6, {
-      message: "Veuillez renseigner votre mot de passe actuel",
+    old_password: z.string({
+      required_error: "Veuillez renseigner votre mot de passe actuel",
     }),
     new_password: zPassword,
   });
