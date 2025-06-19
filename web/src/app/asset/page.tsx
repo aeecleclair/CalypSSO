@@ -33,11 +33,26 @@ const AssetPageContent = () => {
       if (typeof text2 === "string") setText(text2);
     })();
   }, [path]);
-  return <Markdown>{text}</Markdown>;
+
+  return (
+    <article
+      className="prose lg:prose-lg
+        prose-p:text-justify prose-p:leading-6 prose-p:my-4
+        prose-ul:list-outside prose-ul:pl-4 prose-ul:my-0
+        prose-li:my-0 prose-li:pl-0
+        prose-headings:font-semibold prose-headings:my-4
+        prose-h2:text-2xl prose-h1:text-4xl
+        marker:text-foreground marker:mx-0
+        max-w-none mx-3 
+      "
+    >
+      <Markdown>{text}</Markdown>
+    </article>
+  );
 };
 
 const AssetPage = () => {
-  const radius = 100; // change this to increase the radius of the hover effect
+  const radius = 300; // change this to increase the radius of the hover effect
   const [visible, setVisible] = React.useState(false);
 
   const mouseX = useMotionValue(0);
@@ -68,11 +83,9 @@ const AssetPage = () => {
         className="p-[2px] rounded-lg transition duration-300 group/input"
       >
         <ScrollArea className="rounded-md bg-background h-[62vh]">
-          <article className="mx-3 text-justify">
-            <Suspense>
-              <AssetPageContent />
-            </Suspense>
-          </article>
+          <Suspense>
+            <AssetPageContent />
+          </Suspense>
         </ScrollArea>
       </motion.div>
     </CenteredCard>

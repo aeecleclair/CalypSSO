@@ -206,24 +206,3 @@
     box-shadow: inset -20px 20px rgba(0, 0, 0, 0.2);
   }
 }
-
-article > h1 {
-  font-size: xx-large;
-  padding-top: 1rem;
-}
-
-article > h2 {
-  font-size: x-large;
-  padding-top: 1rem;
-}
-
-article > ul {
-  list-style-type: disc;
-  list-style-position: outside;
-  padding-left: 1rem;
-}
-
-article > p {
-  padding-top: 1rem;
-  line-height: 130%;
-}
