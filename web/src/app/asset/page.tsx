@@ -7,9 +7,9 @@ import {
   getMyeclpayTermsOfService,
 } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
+import { MotionField } from "@/components/custom/MotionField";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RequestResult } from "@hey-api/client-fetch";
-import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { notFound, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { Suspense, useEffect, useState } from "react";
@@ -52,42 +52,15 @@ const AssetPageContent = () => {
 };
 
 const AssetPage = () => {
-  const radius = 300; // change this to increase the radius of the hover effect
-  const [visible, setVisible] = React.useState(false);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
   return (
     <CenteredCard title="Document" description="Consultez son contenu">
-      <motion.div
-        style={{
-          background: useMotionTemplate`
-              radial-gradient(
-                ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
-                hsl(var(--ring)),
-                transparent 80%
-              )
-            `,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setVisible(true)}
-        onMouseLeave={() => setVisible(false)}
-        className="p-[2px] rounded-lg transition duration-300 group/input"
-      >
+      <MotionField radius={400}>
         <ScrollArea className="rounded-md bg-background h-[62vh]">
           <Suspense>
             <AssetPageContent />
           </Suspense>
         </ScrollArea>
-      </motion.div>
+      </MotionField>
     </CenteredCard>
   );
 };
