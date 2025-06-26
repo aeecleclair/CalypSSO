@@ -27,6 +27,7 @@ You will find:
 - http://localhost:3000/calypsso/reset-password?reset_token=12345
 - http://localhost:3000/calypsso/login?client_id=Titan&response_type=code&scope=API&redirect_uri=https://localhost:8000/static.html&code_challenge=3sMJwwv1xfZK6yay-HkpseTGMUrmwWx5B9zVAxGfrb0=&code_challenge_method=S256
 - http://localhost:3000/calypsso/change-password/?email=prenom.nom%40etu.ec-lyon.fr
+- http://localhost:3000/calypsso/asset/?path=myeclpay_terms_of_service
 
 ## Maizzle emails template
 

@@ -5,6 +5,7 @@ import React from "react";
 
 interface MotionFieldProps {
   children: React.ReactNode;
+  radius?: number;
 }
 /**
  *  You need to add the following classes to the <input> component
@@ -17,8 +18,8 @@ interface MotionFieldProps {
  *          group-hover/input:shadow-none transition duration-400
  *          `
  */
-export const MotionField = ({ children }: MotionFieldProps) => {
-  const radius = 100; // change this to increase the rdaius of the hover effect
+export const MotionField = (props: MotionFieldProps) => {
+  const radius = props.radius ?? 100; // change this to increase the radius of the hover effect
   const [visible, setVisible] = React.useState(false);
 
   const mouseX = useMotionValue(0);
@@ -47,7 +48,7 @@ export const MotionField = ({ children }: MotionFieldProps) => {
       onMouseLeave={() => setVisible(false)}
       className="group/input rounded-lg p-[2px] transition duration-300"
     >
-      {children}
+      {props.children}
     </motion.div>
   );
 };
