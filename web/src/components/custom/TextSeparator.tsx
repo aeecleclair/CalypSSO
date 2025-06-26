@@ -1,5 +1,6 @@
 "use client";
 
+import { Separator } from "../ui/separator";
 import * as React from "react";
 
 export type TextSeparatorProps = {
@@ -7,13 +8,10 @@ export type TextSeparatorProps = {
 };
 
 const TextSeparator = ({ text }: TextSeparatorProps) => (
-  <div className="relative">
-    <div className="absolute inset-0 flex items-center">
-      <span className="w-full border-t"></span>
-    </div>
-    <div className="relative flex justify-center text-xs uppercase">
-      <span className="bg-transparent px-2 text-muted-foreground">{text}</span>
-    </div>
+  <div className="flex items-center gap-2">
+    <Separator className="bg-border h-[1px] w-full flex-1" />
+    <span className="text-muted-foreground text-xs uppercase">{text}</span>
+    <Separator className="bg-border h-[1px] w-full flex-1" />
   </div>
 );
 TextSeparator.displayName = "TextSeparator";
