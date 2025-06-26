@@ -2,11 +2,13 @@ import type { Config } from "tailwindcss";
 
 const {
   default: flattenColorPalette,
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   );
 
@@ -92,7 +94,11 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), addVariablesForColors],
+  plugins: [
+    require("tailwindcss-animate"),
+    addVariablesForColors,
+    require("@tailwindcss/typography"),
+  ],
 } satisfies Config;
 
 export default config;
