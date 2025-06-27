@@ -23,6 +23,13 @@ class TypeMessage(str, Enum):
     token_expired = "token_expired"  # noqa: S105
 
 
+class Asset(str, Enum):
+    privacy = "privacy"
+    terms_and_conditions = "terms_and_conditions"
+    myeclpay_terms_of_service = "myeclpay_terms_of_service"
+    support = "support"
+
+
 def get_calypsso_app() -> StaticFiles:
     """
     Construct a Starlette StaticFiles application serving CalypSSO compiled ressources.
@@ -55,6 +62,14 @@ def get_message_relative_url(message_type: TypeMessage) -> str:
     """
     params = {"type": message_type.value}
     return f"calypsso/message?{urllib.parse.urlencode(exclude_none(params))}"
+
+
+def get_asset_relative_url(asset: Asset) -> str:
+    """
+    Return CalypSSO asset page relative url: `calypsso/asset?path=...`
+    """
+    params = {"path": asset.value}
+    return f"calypsso/asset?{urllib.parse.urlencode(exclude_none(params))}"
 
 
 def get_reset_password_relative_url(reset_token: str) -> str:
