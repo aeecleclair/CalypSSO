@@ -21,6 +21,7 @@ const RegisterContent = () => {
   const searchParams = useSearchParams();
   const acceptExternalUser =
     searchParams.get("external")?.toLocaleLowerCase() === "true";
+  const email = searchParams.get("email");
 
   let emailField = z
     .string({
@@ -47,6 +48,9 @@ const RegisterContent = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: email ?? "",
+    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
