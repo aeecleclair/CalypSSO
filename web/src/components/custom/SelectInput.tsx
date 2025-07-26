@@ -4,13 +4,14 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 
+
 export const CustomSelectTrigger = ({
   ref,
   className,
   children,
   ...props
 }: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
-  ref: React.RefObject<React.ElementRef<typeof SelectPrimitive.Trigger>>;
+  ref?: React.Ref<HTMLButtonElement>;
 }) => (
   <MotionField>
     <SelectPrimitive.Trigger
