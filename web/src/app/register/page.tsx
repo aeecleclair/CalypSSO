@@ -23,44 +23,31 @@ const RegisterContent = () => {
     searchParams.get("external")?.toLocaleLowerCase() === "true";
   const email = searchParams.get("email");
 
-  let emailField = z
-    .string({
-      required_error: "Veuillez renseigner votre adresse email",
-    })
-    .email({
-      message: "Veuillez renseigner une adresse email valide",
-    });
+  let emailField = z.email({
+    message: "Veuillez renseigner une adresse email valide",
+  });
 
   if (!acceptExternalUser) {
     emailField = emailField.regex(
       new RegExp(
         /^[\w\-.]*@(((etu(-enise)?|enise)\.)?ec-lyon\.fr|centraliens-lyon\.net)$/,
       ),
-      {
-        message: "Veuillez utiliser une adresse email centralienne",
-      },
+      { message: "Veuillez utiliser une adresse email centralienne" },
     );
   }
 
-  const formSchema = z.object({
-    email: emailField,
-  });
+  const formSchema = z.object({ email: emailField });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: email ?? "",
-    },
+    defaultValues: { email: email ?? "" },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
       const response = await postUsersCreate({
-        body: {
-          email: values.email,
-          accept_external: acceptExternalUser,
-        },
+        body: { email: values.email, accept_external: acceptExternalUser },
       });
       setIsLoading(false);
       if (response.response.status < 300) {
@@ -74,11 +61,7 @@ const RegisterContent = () => {
       });
     } catch (e) {
       setIsLoading(false);
-      toast({
-        title: "Erreur",
-        description: `${e}`,
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: `${e}`, variant: "destructive" });
     }
   }
   return (

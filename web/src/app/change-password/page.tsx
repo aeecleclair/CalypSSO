@@ -22,11 +22,9 @@ const ChangePasswordContent = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
-    email: z.string({
-      required_error: "Veuillez renseigner l'adresse email",
-    }),
+    email: z.string({ error: "Veuillez renseigner l'adresse email" }),
     old_password: z.string({
-      required_error: "Veuillez renseigner votre mot de passe actuel",
+      error: "Veuillez renseigner votre mot de passe actuel",
     }),
     new_password: zPassword,
   });
@@ -34,9 +32,7 @@ const ChangePasswordContent = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
-    defaultValues: {
-      email: email ?? "",
-    },
+    defaultValues: { email: email ?? "" },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -61,11 +57,7 @@ const ChangePasswordContent = () => {
       });
     } catch (e) {
       setIsLoading(false);
-      toast({
-        title: "Erreur",
-        description: `${e}`,
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: `${e}`, variant: "destructive" });
     }
   }
 

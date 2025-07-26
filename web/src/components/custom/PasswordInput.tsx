@@ -3,7 +3,9 @@
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import * as React from "react";
+import { RefCallBack } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -11,9 +13,7 @@ const PasswordInput = ({
   ref,
   className,
   ...props
-}: InputProps & {
-  ref: React.RefObject<HTMLInputElement>;
-}) => {
+}: InputProps & { ref: RefCallBack }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 

@@ -3,15 +3,15 @@
 import { PasswordInput } from "./PasswordInput";
 import { zxcvbn } from "@zxcvbn-ts/core";
 import * as React from "react";
+import { RefCallBack } from "react-hook-form";
+
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const PasswordInputWithStrength = ({
   ref,
   ...props
-}: InputProps & {
-  ref: React.RefObject<HTMLInputElement>;
-}) => {
+}: InputProps & { ref: RefCallBack }) => {
   const [score, setScore] = React.useState(0);
 
   const previousChange = props.onChange;

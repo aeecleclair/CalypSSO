@@ -62,28 +62,18 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_token: z.string({
-      required_error: "Veuillez renseigner le code d'activation",
+      error: "Veuillez renseigner le code d'activation",
     }),
     firstname: z
-      .string({
-        required_error: "Veuillez renseigner votre prénom",
-      })
-      .min(1, {
-        message: "Veuillez renseigner votre prénom",
-      }),
+      .string({ error: "Veuillez renseigner votre prénom" })
+      .min(1, { message: "Veuillez renseigner votre prénom" }),
     name: z
-      .string({
-        required_error: "Veuillez renseigner votre nom",
-      })
-      .min(1, {
-        message: "Veuillez renseigner votre nom",
-      }),
+      .string({ error: "Veuillez renseigner votre nom" })
+      .min(1, { message: "Veuillez renseigner votre nom" }),
     password: zPassword,
     nickname: z
       .string()
-      .min(1, {
-        message: "Veuillez renseigner votre prénom",
-      })
+      .min(1, { message: "Veuillez renseigner votre prénom" })
       .optional(),
     birthday: z.date().optional(),
     phone: z
@@ -139,11 +129,7 @@ const RegisterPage = () => {
       });
     } catch (e) {
       setIsLoading(false);
-      toast({
-        title: "Erreur",
-        description: `${e}`,
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: `${e}`, variant: "destructive" });
     }
   }
 

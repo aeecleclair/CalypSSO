@@ -17,9 +17,7 @@ const options = {
 zxcvbnOptions.setOptions(options);
 
 export const zPassword = z
-  .string({
-    required_error: "Le mot de passe n'est pas assez fort",
-  })
+  .string({ error: "Le mot de passe n'est pas assez fort" })
   .superRefine((value, ctx) => {
     const zxcvbnResult = zxcvbn(value || "");
 
