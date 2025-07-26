@@ -9,9 +9,9 @@ export type TextSeparatorProps = {
 
 const TextSeparator = ({ text }: TextSeparatorProps) => (
   <div className="flex items-center gap-2">
-    <Separator className="bg-border h-[1px] w-full flex-1" />
+    <Separator className="bg-border h-px w-full flex-1" />
     <span className="text-muted-foreground text-xs uppercase">{text}</span>
-    <Separator className="bg-border h-[1px] w-full flex-1" />
+    <Separator className="bg-border h-px w-full flex-1" />
   </div>
 );
 TextSeparator.displayName = "TextSeparator";

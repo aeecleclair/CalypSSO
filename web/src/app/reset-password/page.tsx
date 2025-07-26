@@ -21,7 +21,7 @@ const ResetPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_code: z.string({
-      required_error: "Veuillez renseigner le code d'activation",
+      error: "Veuillez renseigner le code d'activation",
     }),
     password: zPassword,
   });
@@ -52,11 +52,7 @@ const ResetPasswordPage = () => {
       });
     } catch (e) {
       setIsLoading(false);
-      toast({
-        title: "Erreur",
-        description: `${e}`,
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: `${e}`, variant: "destructive" });
     }
   }
 

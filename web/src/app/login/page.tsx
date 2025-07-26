@@ -15,12 +15,8 @@ import { z } from "zod";
 
 const Login = () => {
   const formSchema = z.object({
-    password: z.string({
-      required_error: "Veuillez renseigner un mot de passe",
-    }),
-    email: z.string({
-      required_error: "Veuillez renseigner votre adresse email",
-    }),
+    password: z.string({ error: "Veuillez renseigner un mot de passe" }),
+    email: z.string({ error: "Veuillez renseigner votre adresse email" }),
     response_type: z.string().optional(),
     redirect_uri: z.string().optional(),
     client_id: z.string(),

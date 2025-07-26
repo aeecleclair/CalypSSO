@@ -18,13 +18,7 @@ const RecoverPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
-    email: z
-      .string({
-        required_error: "Veuillez renseigner votre adresse email",
-      })
-      .email({
-        message: "Veuillez renseigner une adresse email valide",
-      }),
+    email: z.email({ message: "Veuillez renseigner une adresse email valide" }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -35,9 +29,7 @@ const RecoverPage = () => {
     try {
       setIsLoading(true);
       const response = await postUsersRecover({
-        body: {
-          email: values.email,
-        },
+        body: { email: values.email },
       });
       setIsLoading(false);
       if (response.response.status < 300) {
@@ -51,11 +43,7 @@ const RecoverPage = () => {
       });
     } catch (e) {
       setIsLoading(false);
-      toast({
-        title: "Erreur",
-        description: `${e}`,
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: `${e}`, variant: "destructive" });
     }
   }
 

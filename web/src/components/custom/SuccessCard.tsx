@@ -20,7 +20,7 @@ export const SuccessCard = ({ title, description, icon }: SuccessCardProps) => {
         <CardHeader>
           <CardTitle>
             <div className="flex w-full items-center">
-              {icon({ className: "w-32 h-32 m-auto" })}
+              {icon({ className: "size-32 m-auto" })}
             </div>
             <div>
               <h1 className="text-center text-2xl">{title}</h1>
