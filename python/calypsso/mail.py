@@ -42,6 +42,15 @@ class MailTemplates:
             ),
         )
 
+    def get_mail_account_invitation(self, creation_url: str) -> str:
+        """
+        Return the mail template for account invitation.
+        """
+        return self.jinja_env.get_template("account-invitation.html").render(
+            self.environment_variables,
+            creation_url=creation_url,
+        )
+
     def get_mail_account_activation(self, activation_url: str) -> str:
         """
         Return the mail template for account activation.
@@ -56,6 +65,14 @@ class MailTemplates:
         Return the mail template for account already existing.
         """
         return self.jinja_env.get_template("account-exist.html").render(
+            self.environment_variables,
+        )
+
+    def get_mail_account_invitation_required(self) -> str:
+        """
+        Return the mail template for account invitation required.
+        """
+        return self.jinja_env.get_template("account-invitation-required.html").render(
             self.environment_variables,
         )
 

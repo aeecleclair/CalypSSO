@@ -80,11 +80,11 @@ def get_reset_password_relative_url(reset_token: str) -> str:
     return f"calypsso/reset-password/?{urllib.parse.urlencode(exclude_none(params))}"
 
 
-def get_register_relative_url(external: bool) -> str:
+def get_register_relative_url(external: bool, email: str | None = None) -> str:
     """
     Return CalypSSO register page relative url: `calypsso/register?external=...`
     """
-    params = {"external": external}
+    params = {"external": external, "email": email}
     return f"calypsso/register/?{urllib.parse.urlencode(exclude_none(params))}"
 
 
