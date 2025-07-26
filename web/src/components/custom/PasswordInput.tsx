@@ -6,7 +6,6 @@ import * as React from "react";
 import { RefCallBack } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
-
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const PasswordInput = ({
