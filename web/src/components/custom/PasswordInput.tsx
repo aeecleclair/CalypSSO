@@ -7,15 +7,13 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-const PasswordInput = (
-  {
-    ref,
-    className,
-    ...props
-  }: InputProps & {
-    ref: React.RefObject<HTMLInputElement>;
-  }
-) => {
+const PasswordInput = ({
+  ref,
+  className,
+  ...props
+}: InputProps & {
+  ref: React.RefObject<HTMLInputElement>;
+}) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 

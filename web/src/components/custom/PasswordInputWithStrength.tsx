@@ -6,14 +6,12 @@ import * as React from "react";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-const PasswordInputWithStrength = (
-  {
-    ref,
-    ...props
-  }: InputProps & {
-    ref: React.RefObject<HTMLInputElement>;
-  }
-) => {
+const PasswordInputWithStrength = ({
+  ref,
+  ...props
+}: InputProps & {
+  ref: React.RefObject<HTMLInputElement>;
+}) => {
   const [score, setScore] = React.useState(0);
 
   const previousChange = props.onChange;
