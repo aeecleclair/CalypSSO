@@ -4,15 +4,15 @@ import { postUsersCreate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { Input } from "@/components/custom/input";
 import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 const RegisterContent = () => {
   const router = useRouter();
@@ -23,13 +23,12 @@ const RegisterContent = () => {
     searchParams.get("external")?.toLocaleLowerCase() === "true";
   const email = searchParams.get("email");
 
-  let emailField = z
-    .string({
-      required_error: "Veuillez renseigner votre adresse email",
-    })
-    .email({
-      message: "Veuillez renseigner une adresse email valide",
-    });
+  let emailField = z.email({
+    error: (issue) =>
+      issue.input === undefined
+        ? "Veuillez renseigner votre adresse email"
+        : undefined,
+  });
 
   if (!acceptExternalUser) {
     emailField = emailField.regex(

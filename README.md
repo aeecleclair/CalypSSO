@@ -29,6 +29,13 @@ You will find:
 - http://localhost:3000/calypsso/change-password/?email=prenom.nom%40etu.ec-lyon.fr
 - http://localhost:3000/calypsso/asset/?path=myeclpay_terms_of_service
 
+### Upgrade Shadcn components
+
+```bash
+cd web
+for file in src/components/ui/*.tsx; do npx shadcn@latest add -y -o $(basename "$file" .tsx); done
+```
+
 ## Maizzle emails template
 
 Email templates are build using [Maizzle](https://maizzle.com/).

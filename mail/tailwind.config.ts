@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+const config: Config = {
   presets: [require("tailwindcss-preset-email")],
   content: [
     "./components/**/*.html",
@@ -14,3 +15,5 @@ module.exports = {
     },
   },
 };
+
+export default config;
