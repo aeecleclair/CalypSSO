@@ -16,7 +16,7 @@ interface SuccessCardProps {
 export const SuccessCard = ({ title, description, icon }: SuccessCardProps) => {
   return (
     <div className="m-4 flex h-screen [&>div]:w-full">
-      <Card className="m-auto rounded-xl border bg-white bg-opacity-80 shadow backdrop-blur">
+      <Card className="m-auto rounded-xl border bg-white bg-opacity-80 shadow-sm backdrop-blur-sm">
         <CardHeader>
           <CardTitle>
             <div className="flex w-full items-center">
