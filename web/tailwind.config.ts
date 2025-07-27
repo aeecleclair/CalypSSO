@@ -17,7 +17,7 @@ function addVariablesForColors({ addBase, theme }: any) {
   });
 }
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
