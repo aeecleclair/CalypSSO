@@ -829,7 +829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@maizzle/framework@npm:latest":
+"@maizzle/framework@npm:^5.2.2":
   version: 5.2.2
   resolution: "@maizzle/framework@npm:5.2.2"
   dependencies:
@@ -6049,8 +6049,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mail@workspace:mail"
   dependencies:
-    "@maizzle/framework": "npm:latest"
-    tailwindcss-preset-email: "npm:latest"
+    "@maizzle/framework": "npm:^5.2.2"
+    tailwindcss-preset-email: "npm:^1.4.0"
   languageName: unknown
   linkType: soft
 
@@ -9186,7 +9186,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss-preset-email@npm:latest":
+"tailwindcss-preset-email@npm:^1.4.0":
   version: 1.4.0
   resolution: "tailwindcss-preset-email@npm:1.4.0"
   dependencies:
