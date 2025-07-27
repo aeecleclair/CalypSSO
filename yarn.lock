@@ -3029,7 +3029,8 @@ __metadata:
   dependencies:
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     prettier: "npm:^3.3.3"
-    prettier-plugin-tailwindcss: "npm:^0.6.5"
+    prettier-plugin-tailwindcss: "npm:^0.6.14"
+    tailwindcss: "npm:^4.1.11"
   languageName: unknown
   linkType: soft
 
@@ -8093,11 +8094,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-tailwindcss@npm:^0.6.5":
-  version: 0.6.11
-  resolution: "prettier-plugin-tailwindcss@npm:0.6.11"
+"prettier-plugin-tailwindcss@npm:^0.6.14":
+  version: 0.6.14
+  resolution: "prettier-plugin-tailwindcss@npm:0.6.14"
   peerDependencies:
     "@ianvs/prettier-plugin-sort-imports": "*"
+    "@prettier/plugin-hermes": "*"
+    "@prettier/plugin-oxc": "*"
     "@prettier/plugin-pug": "*"
     "@shopify/prettier-plugin-liquid": "*"
     "@trivago/prettier-plugin-sort-imports": "*"
@@ -8116,6 +8119,10 @@ __metadata:
     prettier-plugin-svelte: "*"
   peerDependenciesMeta:
     "@ianvs/prettier-plugin-sort-imports":
+      optional: true
+    "@prettier/plugin-hermes":
+      optional: true
+    "@prettier/plugin-oxc":
       optional: true
     "@prettier/plugin-pug":
       optional: true
@@ -8147,7 +8154,7 @@ __metadata:
       optional: true
     prettier-plugin-svelte:
       optional: true
-  checksum: 10c0/e5688a86f457b4eaa682d83a86702826d2d828db4cfc153b8b1f0b8409c94530a4bde8deb3e819497ba8e4bd0eda08ed55468a41a8138f82db43d633cf332121
+  checksum: 10c0/1bf635be28b30b3f171a184497eecf512601d19328e402dd2eb1ede52aa57b4f5b605eae2929f4916de9ba22526f3d730d9afa90334db09d17c59f463f7b26d8
   languageName: node
   linkType: hard
 
