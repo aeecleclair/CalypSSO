@@ -11,8 +11,8 @@ import { CustomSelectTrigger } from "@/components/custom/SelectInput";
 import { SuspenseConditional } from "@/components/custom/SuspenseConditional";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
+import { Input } from "@/components/custom/input";
 import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
