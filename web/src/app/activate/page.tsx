@@ -28,7 +28,7 @@ import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 const FloorTypes: Readonly<[string, ...string[]]> = [
   "Autre",
@@ -62,35 +62,35 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_token: z.string({
-      required_error: "Veuillez renseigner le code d'activation",
+        error: (issue) => issue.input === undefined ? "Veuillez renseigner le code d'activation" : undefined
     }),
     firstname: z
       .string({
-        required_error: "Veuillez renseigner votre prénom",
-      })
+          error: (issue) => issue.input === undefined ? "Veuillez renseigner votre prénom" : undefined
+    })
       .min(1, {
-        message: "Veuillez renseigner votre prénom",
-      }),
+          error: "Veuillez renseigner votre prénom"
+    }),
     name: z
       .string({
-        required_error: "Veuillez renseigner votre nom",
-      })
+          error: (issue) => issue.input === undefined ? "Veuillez renseigner votre nom" : undefined
+    })
       .min(1, {
-        message: "Veuillez renseigner votre nom",
-      }),
+          error: "Veuillez renseigner votre nom"
+    }),
     password: zPassword,
     nickname: z
       .string()
       .min(1, {
-        message: "Veuillez renseigner votre prénom",
-      })
+          error: "Veuillez renseigner votre prénom"
+    })
       .optional(),
     birthday: z.date().optional(),
     phone: z
       .string()
       .refine((value) => isValidPhoneNumber("+" + value), {
-        message: "Veuillez renseigner un numéro valide",
-      })
+          error: "Veuillez renseigner un numéro valide"
+    })
       .optional(), // phone
     floor: z.enum(FloorTypes).optional(),
     promo: z
@@ -100,7 +100,9 @@ const RegisterPage = () => {
           const parsedValue = parseInt(value);
           return !isNaN(parsedValue) && parsedValue >= 0;
         },
-        { message: "Veuillez renseigner une promo valide" },
+        {
+            error: "Veuillez renseigner une promo valide"
+        },
       )
       .optional(),
   });

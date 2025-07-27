@@ -11,15 +11,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 const Login = () => {
   const formSchema = z.object({
     password: z.string({
-      required_error: "Veuillez renseigner un mot de passe",
+        error: (issue) => issue.input === undefined ? "Veuillez renseigner un mot de passe" : undefined
     }),
     email: z.string({
-      required_error: "Veuillez renseigner votre adresse email",
+        error: (issue) => issue.input === undefined ? "Veuillez renseigner votre adresse email" : undefined
     }),
     response_type: z.string().optional(),
     redirect_uri: z.string().optional(),

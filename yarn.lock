@@ -8356,12 +8356,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.51.5":
-  version: 7.56.3
-  resolution: "react-hook-form@npm:7.56.3"
+"react-hook-form@npm:^7.61.1":
+  version: 7.61.1
+  resolution: "react-hook-form@npm:7.61.1"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10c0/9467b027fd030d93ba3c8de85853d381ca92ba70bfdb9d0569a63dae44c1459082f5863a4ceb8690789a7185a588516182904db4c72546119c966bf25316d591
+  checksum: 10c0/c241bca80f6d5f9f8b4f24b668670a3ee7249f9cf99537219c4ac1072431493d3768a910b6f2aaff20689a727d0e2797aeacb1ab9285b3e59309de3dd1bead41
   languageName: node
   linkType: hard
 
@@ -10210,7 +10210,7 @@ __metadata:
     react: "npm:19.1.0"
     react-day-picker: "npm:^9.8.1"
     react-dom: "npm:19.1.0"
-    react-hook-form: "npm:^7.51.5"
+    react-hook-form: "npm:^7.61.1"
     react-icons: "npm:^5.2.1"
     react-markdown: "npm:^10.1.0"
     react-phone-input-2: "npm:^2.15.1"
@@ -10218,7 +10218,7 @@ __metadata:
     tailwindcss: "npm:^4.1.11"
     tailwindcss-animate: "npm:^1.0.7"
     typescript: "npm:^5"
-    zod: "npm:^3.23.8"
+    zod: "npm:^4.0.10"
   languageName: unknown
   linkType: soft
 
@@ -10409,10 +10409,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.23.8":
-  version: 3.24.4
-  resolution: "zod@npm:3.24.4"
-  checksum: 10c0/ab3112f017562180a41a0f83d870b333677f7d6b77f106696c56894567051b91154714a088149d8387a4f50806a2520efcb666f108cd384a35c236a191186d91
+"zod@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "zod@npm:4.0.10"
+  checksum: 10c0/8d1145e767c22b571a7967c198632f69ef15ce571b5021cdba84cf31d9af2ca40b033ea2fcbe5797cfd2da9c67b3a6ebe435938eabfbb1d1f3ab2f17f00f443b
   languageName: node
   linkType: hard
 
