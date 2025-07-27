@@ -18,8 +18,11 @@ zxcvbnOptions.setOptions(options);
 
 export const zPassword = z
   .string({
-      error: (issue) => issue.input === undefined ? "Le mot de passe n'est pas assez fort" : undefined
-})
+    error: (issue) =>
+      issue.input === undefined
+        ? "Le mot de passe n'est pas assez fort"
+        : undefined,
+  })
   .superRefine((value, ctx) => {
     const zxcvbnResult = zxcvbn(value || "");
 
@@ -29,21 +32,21 @@ export const zPassword = z
 
     if (zxcvbnResult.feedback.warning) {
       ctx.issues.push({
-                code: z.ZodIssueCode.custom,
-                message: zxcvbnResult.feedback.warning,
-                  input: ''
-            });
+        code: z.ZodIssueCode.custom,
+        message: zxcvbnResult.feedback.warning,
+        input: "",
+      });
     } else if (zxcvbnResult.feedback.suggestions.length) {
       ctx.issues.push({
-                code: z.ZodIssueCode.custom,
-                message: zxcvbnResult.feedback.suggestions[0],
-                  input: ''
-            });
+        code: z.ZodIssueCode.custom,
+        message: zxcvbnResult.feedback.suggestions[0],
+        input: "",
+      });
     } else {
       ctx.issues.push({
-                code: z.ZodIssueCode.custom,
-                  error: "Le mot de passe n'est pas assez fort",
-                  input: ''
-            });
+        code: z.ZodIssueCode.custom,
+        error: "Le mot de passe n'est pas assez fort",
+        input: "",
+      });
     }
   });

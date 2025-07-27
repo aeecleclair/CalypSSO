@@ -24,8 +24,11 @@ const RegisterContent = () => {
   const email = searchParams.get("email");
 
   let emailField = z.email({
-          error: (issue) => issue.input === undefined ? "Veuillez renseigner votre adresse email" : undefined
-      });
+    error: (issue) =>
+      issue.input === undefined
+        ? "Veuillez renseigner votre adresse email"
+        : undefined,
+  });
 
   if (!acceptExternalUser) {
     emailField = emailField.regex(

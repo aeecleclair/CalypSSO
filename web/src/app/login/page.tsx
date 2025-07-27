@@ -16,10 +16,16 @@ import { z } from "zod/v4";
 const Login = () => {
   const formSchema = z.object({
     password: z.string({
-        error: (issue) => issue.input === undefined ? "Veuillez renseigner un mot de passe" : undefined
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner un mot de passe"
+          : undefined,
     }),
     email: z.string({
-        error: (issue) => issue.input === undefined ? "Veuillez renseigner votre adresse email" : undefined
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner votre adresse email"
+          : undefined,
     }),
     response_type: z.string().optional(),
     redirect_uri: z.string().optional(),

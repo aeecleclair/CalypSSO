@@ -21,7 +21,10 @@ const ResetPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_code: z.string({
-        error: (issue) => issue.input === undefined ? "Veuillez renseigner le code d'activation" : undefined
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner le code d'activation"
+          : undefined,
     }),
     password: zPassword,
   });

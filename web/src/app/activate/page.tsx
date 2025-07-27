@@ -62,35 +62,44 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_token: z.string({
-        error: (issue) => issue.input === undefined ? "Veuillez renseigner le code d'activation" : undefined
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner le code d'activation"
+          : undefined,
     }),
     firstname: z
       .string({
-          error: (issue) => issue.input === undefined ? "Veuillez renseigner votre prénom" : undefined
-    })
+        error: (issue) =>
+          issue.input === undefined
+            ? "Veuillez renseigner votre prénom"
+            : undefined,
+      })
       .min(1, {
-          error: "Veuillez renseigner votre prénom"
-    }),
+        error: "Veuillez renseigner votre prénom",
+      }),
     name: z
       .string({
-          error: (issue) => issue.input === undefined ? "Veuillez renseigner votre nom" : undefined
-    })
+        error: (issue) =>
+          issue.input === undefined
+            ? "Veuillez renseigner votre nom"
+            : undefined,
+      })
       .min(1, {
-          error: "Veuillez renseigner votre nom"
-    }),
+        error: "Veuillez renseigner votre nom",
+      }),
     password: zPassword,
     nickname: z
       .string()
       .min(1, {
-          error: "Veuillez renseigner votre prénom"
-    })
+        error: "Veuillez renseigner votre prénom",
+      })
       .optional(),
     birthday: z.date().optional(),
     phone: z
       .string()
       .refine((value) => isValidPhoneNumber("+" + value), {
-          error: "Veuillez renseigner un numéro valide"
-    })
+        error: "Veuillez renseigner un numéro valide",
+      })
       .optional(), // phone
     floor: z.enum(FloorTypes).optional(),
     promo: z
@@ -101,7 +110,7 @@ const RegisterPage = () => {
           return !isNaN(parsedValue) && parsedValue >= 0;
         },
         {
-            error: "Veuillez renseigner une promo valide"
+          error: "Veuillez renseigner une promo valide",
         },
       )
       .optional(),

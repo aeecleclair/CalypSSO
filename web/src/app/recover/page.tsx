@@ -19,8 +19,11 @@ const RecoverPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     email: z.email({
-                error: (issue) => issue.input === undefined ? "Veuillez renseigner votre adresse email" : undefined
-          }),
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner votre adresse email"
+          : undefined,
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
