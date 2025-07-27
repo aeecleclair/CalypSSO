@@ -12,19 +12,18 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 const RecoverPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
-    email: z
-      .string({
-        required_error: "Veuillez renseigner votre adresse email",
-      })
-      .email({
-        message: "Veuillez renseigner une adresse email valide",
-      }),
+    email: z.email({
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner votre adresse email"
+          : undefined,
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

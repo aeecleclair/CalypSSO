@@ -2,7 +2,7 @@ import { zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
 import * as zxcvbnCommonPackage from "@zxcvbn-ts/language-common";
 import * as zxcvbnEnPackage from "@zxcvbn-ts/language-en";
 import * as zxcvbnFrPackage from "@zxcvbn-ts/language-fr";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 const options = {
   translations: zxcvbnFrPackage.translations,
@@ -18,7 +18,10 @@ zxcvbnOptions.setOptions(options);
 
 export const zPassword = z
   .string({
-    required_error: "Le mot de passe n'est pas assez fort",
+    error: (issue) =>
+      issue.input === undefined
+        ? "Le mot de passe n'est pas assez fort"
+        : undefined,
   })
   .superRefine((value, ctx) => {
     const zxcvbnResult = zxcvbn(value || "");
@@ -28,19 +31,22 @@ export const zPassword = z
     }
 
     if (zxcvbnResult.feedback.warning) {
-      ctx.addIssue({
+      ctx.issues.push({
         code: z.ZodIssueCode.custom,
         message: zxcvbnResult.feedback.warning,
+        input: "",
       });
     } else if (zxcvbnResult.feedback.suggestions.length) {
-      ctx.addIssue({
+      ctx.issues.push({
         code: z.ZodIssueCode.custom,
         message: zxcvbnResult.feedback.suggestions[0],
+        input: "",
       });
     } else {
-      ctx.addIssue({
+      ctx.issues.push({
         code: z.ZodIssueCode.custom,
-        message: "Le mot de passe n'est pas assez fort",
+        error: "Le mot de passe n'est pas assez fort",
+        input: "",
       });
     }
   });
