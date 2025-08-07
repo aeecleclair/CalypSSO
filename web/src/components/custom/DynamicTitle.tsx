@@ -1,5 +1,6 @@
 "use client";
 
+import { getVariables } from "@/api";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -27,17 +28,42 @@ const getTitle = (route: string) => {
 };
 
 export default function DynamicTitle() {
-  const [title, setTitle] = useState("MyECL");
+  const [name, setName] = useState("CalypSSO");
+
+  const [title, setTitle] = useState("CalypSSO");
   const pathname = usePathname();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        console.log("Loading settings...");
+        const { data: variables } = await getVariables();
+        console.log("Settings loaded:", variables);
+
+        setName(variables?.name || "CalypSSO");
+
+        if (variables?.primary_color) {
+          document.documentElement.style.setProperty(
+            "--primary",
+            variables.primary_color,
+          );
+        }
+      } catch (error) {
+        console.error("Error loading settings:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const foundTitle = pathname.split("/")[1];
     if (foundTitle) {
-      setTitle(`Myecl - ${getTitle(foundTitle)}`);
+      setTitle(`${name} - ${getTitle(foundTitle)}`);
     } else {
-      setTitle("MyECL");
+      setTitle(name);
     }
-  }, [pathname]);
+  }, [pathname, name]);
 
   return <title>{title}</title>;
 }
