@@ -4,7 +4,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 interface LoadingButtonProps {
   variant?:
     | "link"
-    | "outline"
+    | "outline-solid"
     | "default"
     | "destructive"
     | "secondary"

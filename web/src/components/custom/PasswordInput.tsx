@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/custom/input";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";

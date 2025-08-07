@@ -14,14 +14,17 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 const ResetPasswordPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
     activation_code: z.string({
-      required_error: "Veuillez renseigner le code d'activation",
+      error: (issue) =>
+        issue.input === undefined
+          ? "Veuillez renseigner le code d'activation"
+          : undefined,
     }),
     password: zPassword,
   });

@@ -6,15 +6,15 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
+import { Input } from "@/components/custom/input";
 import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import z from "zod/v4";
 
 const ChangePasswordContent = () => {
   const searchParams = useSearchParams();
