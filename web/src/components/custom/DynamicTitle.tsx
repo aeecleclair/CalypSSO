@@ -13,10 +13,14 @@ const getTitle = (route: string) => {
       return "Se connecter";
     case "recover":
       return "Récupérer le compte";
+    case "change-password":
+      return "Changer le mot de passe";
     case "reset-password":
       return "Réinitialiser le mot de passe";
     case "payment":
       return "Paiement";
+    case "message":
+      return "Message";
     default:
       return "Erreur";
   }
