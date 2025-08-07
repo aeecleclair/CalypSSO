@@ -46,7 +46,7 @@ export function DatePicker({
             background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
-          hsl(var(--ring)),
+          hsl(var(--primary)),
           transparent 80%
         )
       `,
