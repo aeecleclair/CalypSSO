@@ -1871,6 +1871,17 @@ export const $CoreBatchUserCreateRequest = {
         email: {
             type: 'string',
             title: 'Email'
+        },
+        default_group_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Default Group Id'
         }
     },
     type: 'object',
@@ -2599,6 +2610,23 @@ export const $CoreUserUpdateAdmin = {
     name: 'Backend',
     nickname: 'Hyperion',
     promo: 2021
+} as const;
+
+export const $CoreVariables = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        primary_color: {
+            type: 'string',
+            title: 'Primary Color'
+        }
+    },
+    type: 'object',
+    required: ['name', 'primary_color'],
+    title: 'CoreVariables',
+    description: 'Variables used by Hyperion'
 } as const;
 
 export const $CurriculumBase = {
@@ -3422,6 +3450,26 @@ export const $GenerateTicketComplete = {
     type: 'object',
     required: ['name', 'max_use', 'expiration', 'id'],
     title: 'GenerateTicketComplete'
+} as const;
+
+export const $GroupNotificationRequest = {
+    properties: {
+        group_id: {
+            type: 'string',
+            title: 'Group Id'
+        },
+        title: {
+            type: 'string',
+            title: 'Title'
+        },
+        content: {
+            type: 'string',
+            title: 'Content'
+        }
+    },
+    type: 'object',
+    required: ['group_id', 'title', 'content'],
+    title: 'GroupNotificationRequest'
 } as const;
 
 export const $HTTPValidationError = {
@@ -6806,6 +6854,17 @@ export const $RaidPrice = {
             ],
             title: 'Partner Price'
         },
+        external_price: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'External Price'
+        },
         t_shirt_price: {
             anyOf: [
                 {
@@ -8725,11 +8784,40 @@ export const $TokenResponse = {
     title: 'TokenResponse'
 } as const;
 
-export const $Topic = {
-    type: 'string',
-    enum: ['cinema', 'advert', 'amap', 'booking', 'event', 'loan', 'raffle', 'vote', 'ph', 'test'],
-    title: 'Topic',
-    description: 'A list of topics. An user can suscribe to a topic to receive notifications about it.'
+export const $TopicUser = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        module_root: {
+            type: 'string',
+            title: 'Module Root'
+        },
+        topic_identifier: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Topic Identifier'
+        },
+        is_user_subscribed: {
+            type: 'boolean',
+            title: 'Is User Subscribed'
+        }
+    },
+    type: 'object',
+    required: ['id', 'name', 'module_root', 'topic_identifier', 'is_user_subscribed'],
+    title: 'TopicUser'
 } as const;
 
 export const $TransactionBase = {
