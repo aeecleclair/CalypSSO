@@ -4,17 +4,20 @@ import { postUsersCreate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { VariablesContext } from "@/components/custom/Variables";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
-import { Suspense, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RegisterContent = () => {
+  const { projectName } = useContext(VariablesContext);
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -83,7 +86,7 @@ const RegisterContent = () => {
   }
   return (
     <CenteredCard
-      title={"Créer un compte"}
+      title={`Créer un compte ${projectName}`}
       description={"Vous n'avez besoin que de votre email pour commencer"}
     >
       <Form {...form}>

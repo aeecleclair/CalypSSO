@@ -11,6 +11,7 @@ import { CustomSelectTrigger } from "@/components/custom/SelectInput";
 import { SuspenseConditional } from "@/components/custom/SuspenseConditional";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
+import { VariablesContext } from "@/components/custom/Variables";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -26,7 +27,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addYears, format } from "date-fns";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -58,6 +59,8 @@ const FloorTypes: Readonly<[string, ...string[]]> = [
 ];
 
 const RegisterPage = () => {
+  const { projectName } = useContext(VariablesContext);
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
@@ -149,7 +152,7 @@ const RegisterPage = () => {
 
   return (
     <CenteredCard
-      title="Activer un compte"
+      title={`Activer un compte ${projectName}`}
       description="Entrez vos informations pour activer votre compte"
     >
       <Form {...form}>
