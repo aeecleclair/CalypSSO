@@ -2618,13 +2618,17 @@ export const $CoreVariables = {
             type: 'string',
             title: 'Name'
         },
+        entity_name: {
+            type: 'string',
+            title: 'Entity Name'
+        },
         primary_color: {
             type: 'string',
             title: 'Primary Color'
         }
     },
     type: 'object',
-    required: ['name', 'primary_color'],
+    required: ['name', 'entity_name', 'primary_color'],
     title: 'CoreVariables',
     description: 'Variables used by Hyperion'
 } as const;

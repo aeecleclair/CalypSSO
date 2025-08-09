@@ -561,6 +561,7 @@ export type CoreUserUpdateAdmin = {
  */
 export type CoreVariables = {
     name: string;
+    entity_name: string;
     primary_color: string;
 };
 

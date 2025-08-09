@@ -3616,7 +3616,7 @@ export const getRobotsTxt = (options?: Options) => { return (options?.client ?? 
 }); };
 
 /**
- * Get Style File
+ * Get Variables
  * Return a style file from the assets folder
  */
 export const getVariables = (options?: Options) => { return (options?.client ?? client).get<GetVariablesResponse, GetVariablesError>({
