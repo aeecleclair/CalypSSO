@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "./button";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -46,7 +46,7 @@ export function DatePicker({
             background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
-          hsl(var(--ring)),
+          hsl(var(--primary)),
           transparent 80%
         )
       `,

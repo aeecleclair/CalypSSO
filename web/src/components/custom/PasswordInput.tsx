@@ -20,7 +20,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-        <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400 hover:text-[hsl(var(--ring))]">
+        <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400 hover:text-[hsl(var(--primary))]">
           {showPassword ? (
             <HiEye className="h-4 w-4" onClick={togglePasswordVisibility} />
           ) : (

@@ -6,7 +6,7 @@ import { DayPicker, useDayPicker, useNavigation } from "react-day-picker";
 import { fr } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "./button";
+import { buttonVariants } from "../custom/button";
 import { Select, SelectItem, SelectContent, SelectTrigger } from "./select";
 import { format } from "date-fns";
 

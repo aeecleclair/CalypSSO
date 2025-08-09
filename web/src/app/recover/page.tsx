@@ -4,17 +4,20 @@ import { postUsersRecover } from "@/api/services.gen";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { VariablesContext } from "@/components/custom/Variables";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RecoverPage = () => {
+  const { projectName } = useContext(VariablesContext);
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
@@ -61,7 +64,7 @@ const RecoverPage = () => {
 
   return (
     <CenteredCard
-      title={"Réinitialiser le mot de passe"}
+      title={`Réinitialiser le mot de passe ${projectName}`}
       description={"Entrez votre email pour commencer"}
     >
       <Form {...form}>

@@ -6,17 +6,20 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
+import { VariablesContext } from "@/components/custom/Variables";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
 const ChangePasswordContent = () => {
+  const { projectName } = useContext(VariablesContext);
+
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
   const router = useRouter();
@@ -71,7 +74,7 @@ const ChangePasswordContent = () => {
 
   return (
     <CenteredCard
-      title="Modifier le mot de passe"
+      title={`Modifier le mot de passe ${projectName}`}
       description="Entrez votre ancien puis nouveau mot de passe"
     >
       <Form {...form}>
