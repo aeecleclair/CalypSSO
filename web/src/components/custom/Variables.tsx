@@ -26,6 +26,10 @@ export default function Variables({ children }: { children: React.ReactNode }) {
             "--primary",
             variables.primary_color,
           );
+          document.documentElement.style.setProperty(
+            "--ring",
+            variables.primary_color,
+          );
         }
       } catch (error) {
         console.error("Error loading settings:", error);
