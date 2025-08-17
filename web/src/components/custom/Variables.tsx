@@ -4,22 +4,29 @@ import { getVariables } from "@/api";
 import { useEffect, createContext, useState } from "react";
 
 export const VariablesContext = createContext({
-  projectName: "CalypSSO",
-  entityName: "Eclair",
+  projectName: "",
+  entityName: "",
+  emailPlaceholder: "",
 });
 
 export default function Variables({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [projectName, setProjectName] = useState("CalypSSO");
-  const [entityName, setEntityName] = useState("Eclair");
+  const [projectName, setProjectName] = useState("MyECL");
+  const [entityName, setEntityName] = useState("ÉCLAIR");
+  const [emailPlaceholder, setEmailPlaceholder] = useState(
+    "prenom.nom@etu.ec-lyon.fr",
+  );
 
   useEffect(() => {
     async function fetchData() {
       try {
         const { data: variables } = await getVariables();
 
-        setProjectName(variables?.name || "CalypSSO");
-        setEntityName(variables?.entity_name || "Eclair");
+        setProjectName(variables?.name || "MyECL");
+        setEntityName(variables?.entity_name || "ÉCLAIR");
+        setEmailPlaceholder(
+          variables?.email_placeholder || "prenom.nom@etu.ec-lyon.fr",
+        );
 
         if (variables?.primary_color) {
           document.documentElement.style.setProperty(
@@ -42,7 +49,9 @@ export default function Variables({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <VariablesContext.Provider value={{ projectName, entityName }}>
+    <VariablesContext.Provider
+      value={{ projectName, entityName, emailPlaceholder }}
+    >
       {isLoading ? (
         <></>
       ) : (

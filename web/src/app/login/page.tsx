@@ -16,7 +16,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const Login = () => {
-  const { projectName, entityName } = useContext(VariablesContext);
+  const { projectName, entityName, emailPlaceholder } =
+    useContext(VariablesContext);
 
   const formSchema = z.object({
     password: z.string({
@@ -62,7 +63,7 @@ const Login = () => {
                 <Input
                   type="email"
                   autoFocus
-                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  placeholder={emailPlaceholder}
                   required
                   {...field}
                 />

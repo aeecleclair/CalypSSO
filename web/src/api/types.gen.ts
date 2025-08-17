@@ -15,14 +15,20 @@ export type AdvertBase = {
     title: string;
     content: string;
     advertiser_id: string;
-    tags?: string | null;
+    /**
+     * If the advert should be posted in the feed. It will be pending validation be admin
+     */
+    post_to_feed?: boolean;
 };
 
 export type AdvertReturnComplete = {
     title: string;
     content: string;
     advertiser_id: string;
-    tags?: string | null;
+    /**
+     * If the advert should be posted in the feed. It will be pending validation be admin
+     */
+    post_to_feed?: boolean;
     id: string;
     advertiser: AdvertiserComplete;
     date?: string | null;
@@ -72,7 +78,7 @@ export type Applicant = {
 
 export type AssociationBase = {
     name: string;
-    kind: Kinds;
+    groupement_id: string;
     mandate_year: number;
     description?: string | null;
     associated_groups?: Array<(string)>;
@@ -81,7 +87,7 @@ export type AssociationBase = {
 
 export type AssociationComplete = {
     name: string;
-    kind: Kinds;
+    groupement_id: string;
     mandate_year: number;
     description?: string | null;
     associated_groups?: Array<(string)>;
@@ -91,9 +97,18 @@ export type AssociationComplete = {
 
 export type AssociationEdit = {
     name?: string | null;
-    kind?: Kinds | null;
+    groupement_id?: string | null;
     description?: string | null;
     mandate_year?: number | null;
+};
+
+export type AssociationGroupement = {
+    name: string;
+    id: string;
+};
+
+export type AssociationGroupementBase = {
+    name: string;
 };
 
 export type AssociationGroupsEdit = {
@@ -143,6 +158,10 @@ export type Body_create_current_raffle_logo_tombola_raffles__raffle_id__logo_pos
 };
 
 export type Body_create_current_user_profile_picture_users_me_profile_picture_post = {
+    image: (Blob | File);
+};
+
+export type Body_create_group_logo_groups__group_id__logo_post = {
     image: (Blob | File);
 };
 
@@ -562,6 +581,10 @@ export type CoreUserUpdateAdmin = {
 export type CoreVariables = {
     name: string;
     entity_name: string;
+    email_placeholder: string;
+    /**
+     * Returned as an HSL triplet (ex: `24.6 95% 53.1%`)
+     */
     primary_color: string;
 };
 
@@ -887,12 +910,6 @@ export type ItemUpdate = {
     suggested_lending_duration?: number | null;
 };
 
-export type Kinds = 'Comité' | 'Section AE' | 'Club AE' | 'Section USE' | 'Club USE' | 'Asso indé';
-
-export type KindsReturn = {
-    kinds: Array<Kinds>;
-};
-
 /**
  * Base schema for a list.
  */
@@ -1056,7 +1073,7 @@ export type MembershipComplete = {
     association_id: string;
     mandate_year: number;
     role_name: string;
-    role_tags?: string | null;
+    role_tags?: string;
     member_order: number;
     id: string;
 };
@@ -1090,6 +1107,30 @@ export type ModuleVisibilityCreate = {
     allowed_group_id?: string | null;
     allowed_account_type?: AccountType | null;
 };
+
+export type News = {
+    id: string;
+    title: string;
+    start: string;
+    end: string | null;
+    /**
+     * Name of the entity that created the news
+     */
+    entity: string;
+    /**
+     * The news may be related to a specific location
+     */
+    location: string | null;
+    /**
+     * The news may be related to a specific action. If so, the action button should be displayed at this datetime
+     */
+    action_start: string | null;
+    module: string;
+    module_object_id: string;
+    status: NewsStatus;
+};
+
+export type NewsStatus = 'waiting_approval' | 'rejected' | 'published';
 
 export type OrderBase = {
     user_id: string;
@@ -2061,7 +2102,7 @@ export type app__modules__phonebook__schemas_phonebook__MembershipBase = {
     association_id: string;
     mandate_year: number;
     role_name: string;
-    role_tags?: string | null;
+    role_tags?: string;
     member_order: number;
 };
 
@@ -2694,9 +2735,38 @@ export type GetPhonebookRoletagsResponse = RoleTagsReturn;
 
 export type GetPhonebookRoletagsError = unknown;
 
-export type GetPhonebookAssociationsKindsResponse = KindsReturn;
+export type GetPhonebookGroupementsResponse = Array<AssociationGroupement>;
 
-export type GetPhonebookAssociationsKindsError = unknown;
+export type GetPhonebookGroupementsError = unknown;
+
+export type PostPhonebookGroupementsData = {
+    body: AssociationGroupementBase;
+};
+
+export type PostPhonebookGroupementsResponse = AssociationGroupement;
+
+export type PostPhonebookGroupementsError = unknown;
+
+export type PatchPhonebookGroupementsGroupementIdData = {
+    body: AssociationGroupementBase;
+    path: {
+        groupement_id: string;
+    };
+};
+
+export type PatchPhonebookGroupementsGroupementIdResponse = void;
+
+export type PatchPhonebookGroupementsGroupementIdError = unknown;
+
+export type DeletePhonebookGroupementsGroupementIdData = {
+    path: {
+        groupement_id: string;
+    };
+};
+
+export type DeletePhonebookGroupementsGroupementIdResponse = void;
+
+export type DeletePhonebookGroupementsGroupementIdError = unknown;
 
 export type PatchPhonebookAssociationsAssociationIdData = {
     body: AssociationEdit;
@@ -5157,6 +5227,68 @@ export type DeleteGroupsBatchMembershipResponse = void;
 
 export type DeleteGroupsBatchMembershipError = unknown;
 
+export type PostGroupsGroupIdLogoData = {
+    path: {
+        group_id: string;
+    };
+};
+
+export type PostGroupsGroupIdLogoResponse = void;
+
+export type PostGroupsGroupIdLogoError = unknown;
+
+export type GetGroupsGroupIdLogoData = {
+    path: {
+        group_id: string;
+    };
+};
+
+export type GetGroupsGroupIdLogoResponse = unknown;
+
+export type GetGroupsGroupIdLogoError = unknown;
+
+export type GetFeedNewsResponse = Array<News>;
+
+export type GetFeedNewsError = unknown;
+
+export type GetFeedNewsNewsIdImageData = {
+    path: {
+        news_id: string;
+    };
+};
+
+export type GetFeedNewsNewsIdImageResponse = unknown;
+
+export type GetFeedNewsNewsIdImageError = unknown;
+
+export type GetFeedAdminNewsData = {
+    body: Array<NewsStatus>;
+};
+
+export type GetFeedAdminNewsResponse = Array<News>;
+
+export type GetFeedAdminNewsError = unknown;
+
+export type PostFeedAdminNewsNewsIdApproveData = {
+    path: {
+        news_id: string;
+    };
+};
+
+export type PostFeedAdminNewsNewsIdApproveResponse = void;
+
+export type PostFeedAdminNewsNewsIdApproveError = unknown;
+
+export type PostFeedAdminNewsNewsIdRejectData = {
+    path: {
+        news_id: string;
+    };
+};
+
+export type PostFeedAdminNewsNewsIdRejectResponse = void;
+
+export type PostFeedAdminNewsNewsIdRejectError = unknown;
+
 export type GetMembershipsResponse = Array<MembershipSimple>;
 
 export type GetMembershipsError = unknown;
@@ -6477,13 +6609,54 @@ export type $OpenApiTs = {
             };
         };
     };
-    '/phonebook/associations/kinds': {
+    '/phonebook/groupements/': {
         get: {
             res: {
                 /**
                  * Successful Response
                  */
-                '200': KindsReturn;
+                '200': Array<AssociationGroupement>;
+            };
+        };
+        post: {
+            req: PostPhonebookGroupementsData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '201': AssociationGroupement;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+    };
+    '/phonebook/groupements/{groupement_id}': {
+        patch: {
+            req: PatchPhonebookGroupementsGroupementIdData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '204': void;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+        delete: {
+            req: DeletePhonebookGroupementsGroupementIdData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '204': void;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
             };
         };
     };
@@ -10244,6 +10417,104 @@ export type $OpenApiTs = {
         };
         delete: {
             req: DeleteGroupsBatchMembershipData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '204': void;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+    };
+    '/groups/{group_id}/logo': {
+        post: {
+            req: PostGroupsGroupIdLogoData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '204': void;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+        get: {
+            req: GetGroupsGroupIdLogoData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '200': unknown;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+    };
+    '/feed/news': {
+        get: {
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '200': Array<News>;
+            };
+        };
+    };
+    '/feed/news/{news_id}/image': {
+        get: {
+            req: GetFeedNewsNewsIdImageData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '200': unknown;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+    };
+    '/feed/admin/news': {
+        get: {
+            req: GetFeedAdminNewsData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '200': Array<News>;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+    };
+    '/feed/admin/news/{news_id}/approve': {
+        post: {
+            req: PostFeedAdminNewsNewsIdApproveData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '204': void;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
+    };
+    '/feed/admin/news/{news_id}/reject': {
+        post: {
+            req: PostFeedAdminNewsNewsIdRejectData;
             res: {
                 /**
                  * Successful Response
