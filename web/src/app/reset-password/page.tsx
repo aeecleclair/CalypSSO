@@ -6,17 +6,20 @@ import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PasswordInputWithStrength } from "@/components/custom/PasswordInputWithStrength";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
+import { VariablesContext } from "@/components/custom/Variables";
 import { Form } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { zPassword } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const ResetPasswordPage = () => {
+  const { projectName } = useContext(VariablesContext);
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({
@@ -62,7 +65,7 @@ const ResetPasswordPage = () => {
 
   return (
     <CenteredCard
-      title="Réinitialiser le mot de passe"
+      title={`Réinitialiser le mot de passe ${projectName}`}
       description="Entrez votre nouveau mot de passe"
     >
       <Form {...form}>

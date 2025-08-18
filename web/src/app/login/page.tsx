@@ -5,15 +5,20 @@ import { LoadingButton } from "@/components/custom/LoadingButton";
 import { LoginCustomFormField } from "@/components/custom/LoginCustomField";
 import { PasswordInput } from "@/components/custom/PasswordInput";
 import { SuspenseHiddenField } from "@/components/custom/SuspenseHiddenField";
+import { VariablesContext } from "@/components/custom/Variables";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import * as React from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const Login = () => {
+  const { projectName, entityName, emailPlaceholder } =
+    useContext(VariablesContext);
+
   const formSchema = z.object({
     password: z.string({
       required_error: "Veuillez renseigner un mot de passe",
@@ -37,8 +42,8 @@ const Login = () => {
 
   return (
     <CenteredCard
-      title="MyECL"
-      description="Portail de connexion pour les services proposé par Eclair"
+      title={projectName}
+      description={`Portail de connexion pour les services proposé par ${entityName}`}
     >
       <Form {...form}>
         {/* We can't use redirection since it will trigger CORS error, thus we are using the form */}
@@ -58,7 +63,7 @@ const Login = () => {
                 <Input
                   type="email"
                   autoFocus
-                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  placeholder={emailPlaceholder}
                   required
                   {...field}
                 />

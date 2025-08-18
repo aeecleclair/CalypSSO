@@ -38,16 +38,11 @@ export const $AdvertBase = {
             type: 'string',
             title: 'Advertiser Id'
         },
-        tags: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Tags'
+        post_to_feed: {
+            type: 'boolean',
+            title: 'Post To Feed',
+            description: 'If the advert should be posted in the feed. It will be pending validation be admin',
+            default: false
         }
     },
     type: 'object',
@@ -69,16 +64,11 @@ export const $AdvertReturnComplete = {
             type: 'string',
             title: 'Advertiser Id'
         },
-        tags: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Tags'
+        post_to_feed: {
+            type: 'boolean',
+            title: 'Post To Feed',
+            description: 'If the advert should be posted in the feed. It will be pending validation be admin',
+            default: false
         },
         id: {
             type: 'string',
@@ -289,8 +279,10 @@ export const $AssociationBase = {
             type: 'string',
             title: 'Name'
         },
-        kind: {
-            '$ref': '#/components/schemas/Kinds'
+        groupement_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Groupement Id'
         },
         mandate_year: {
             type: 'integer',
@@ -322,7 +314,7 @@ export const $AssociationBase = {
         }
     },
     type: 'object',
-    required: ['name', 'kind', 'mandate_year'],
+    required: ['name', 'groupement_id', 'mandate_year'],
     title: 'AssociationBase'
 } as const;
 
@@ -332,8 +324,10 @@ export const $AssociationComplete = {
             type: 'string',
             title: 'Name'
         },
-        kind: {
-            '$ref': '#/components/schemas/Kinds'
+        groupement_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Groupement Id'
         },
         mandate_year: {
             type: 'integer',
@@ -369,7 +363,7 @@ export const $AssociationComplete = {
         }
     },
     type: 'object',
-    required: ['name', 'kind', 'mandate_year', 'id'],
+    required: ['name', 'groupement_id', 'mandate_year', 'id'],
     title: 'AssociationComplete'
 } as const;
 
@@ -386,15 +380,17 @@ export const $AssociationEdit = {
             ],
             title: 'Name'
         },
-        kind: {
+        groupement_id: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/Kinds'
+                    type: 'string',
+                    format: 'uuid'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Groupement Id'
         },
         description: {
             anyOf: [
@@ -421,6 +417,35 @@ export const $AssociationEdit = {
     },
     type: 'object',
     title: 'AssociationEdit'
+} as const;
+
+export const $AssociationGroupement = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'id'],
+    title: 'AssociationGroupement'
+} as const;
+
+export const $AssociationGroupementBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        }
+    },
+    type: 'object',
+    required: ['name'],
+    title: 'AssociationGroupementBase'
 } as const;
 
 export const $AssociationGroupsEdit = {
@@ -620,6 +645,19 @@ export const $Body_create_current_user_profile_picture_users_me_profile_picture_
     type: 'object',
     required: ['image'],
     title: 'Body_create_current_user_profile_picture_users_me_profile_picture_post'
+} as const;
+
+export const $Body_create_group_logo_groups__group_id__logo_post = {
+    properties: {
+        image: {
+            type: 'string',
+            format: 'binary',
+            title: 'Image'
+        }
+    },
+    type: 'object',
+    required: ['image'],
+    title: 'Body_create_group_logo_groups__group_id__logo_post'
 } as const;
 
 export const $Body_create_paper_pdf_and_cover_ph__paper_id__pdf_post = {
@@ -1871,6 +1909,17 @@ export const $CoreBatchUserCreateRequest = {
         email: {
             type: 'string',
             title: 'Email'
+        },
+        default_group_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Default Group Id'
         }
     },
     type: 'object',
@@ -2340,6 +2389,7 @@ export const $CoreUserCreateRequest = {
     properties: {
         email: {
             type: 'string',
+            format: 'email',
             title: 'Email'
         },
         accept_external: {
@@ -2599,6 +2649,32 @@ export const $CoreUserUpdateAdmin = {
     name: 'Backend',
     nickname: 'Hyperion',
     promo: 2021
+} as const;
+
+export const $CoreVariables = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        entity_name: {
+            type: 'string',
+            title: 'Entity Name'
+        },
+        email_placeholder: {
+            type: 'string',
+            title: 'Email Placeholder'
+        },
+        primary_color: {
+            type: 'string',
+            title: 'Primary Color',
+            description: 'Returned as an HSL triplet (ex: `24.6 95% 53.1%`)'
+        }
+    },
+    type: 'object',
+    required: ['name', 'entity_name', 'email_placeholder', 'primary_color'],
+    title: 'CoreVariables',
+    description: 'Variables used by Hyperion'
 } as const;
 
 export const $CurriculumBase = {
@@ -3424,6 +3500,26 @@ export const $GenerateTicketComplete = {
     title: 'GenerateTicketComplete'
 } as const;
 
+export const $GroupNotificationRequest = {
+    properties: {
+        group_id: {
+            type: 'string',
+            title: 'Group Id'
+        },
+        title: {
+            type: 'string',
+            title: 'Title'
+        },
+        content: {
+            type: 'string',
+            title: 'Content'
+        }
+    },
+    type: 'object',
+    required: ['group_id', 'title', 'content'],
+    title: 'GroupNotificationRequest'
+} as const;
+
 export const $HTTPValidationError = {
     properties: {
         detail: {
@@ -3799,27 +3895,6 @@ export const $ItemUpdate = {
     },
     type: 'object',
     title: 'ItemUpdate'
-} as const;
-
-export const $Kinds = {
-    type: 'string',
-    enum: ['Comité', 'Section AE', 'Club AE', 'Section USE', 'Club USE', 'Asso indé'],
-    title: 'Kinds'
-} as const;
-
-export const $KindsReturn = {
-    properties: {
-        kinds: {
-            items: {
-                '$ref': '#/components/schemas/Kinds'
-            },
-            type: 'array',
-            title: 'Kinds'
-        }
-    },
-    type: 'object',
-    required: ['kinds'],
-    title: 'KindsReturn'
 } as const;
 
 export const $ListBase = {
@@ -4515,15 +4590,9 @@ export const $MembershipComplete = {
             title: 'Role Name'
         },
         role_tags: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Role Tags'
+            type: 'string',
+            title: 'Role Tags',
+            default: ''
         },
         member_order: {
             type: 'integer',
@@ -4679,6 +4748,88 @@ export const $ModuleVisibilityCreate = {
     type: 'object',
     required: ['root'],
     title: 'ModuleVisibilityCreate'
+} as const;
+
+export const $News = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        title: {
+            type: 'string',
+            title: 'Title'
+        },
+        start: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start'
+        },
+        end: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'End'
+        },
+        entity: {
+            type: 'string',
+            title: 'Entity',
+            description: 'Name of the entity that created the news'
+        },
+        location: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Location',
+            description: 'The news may be related to a specific location'
+        },
+        action_start: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Action Start',
+            description: 'The news may be related to a specific action. If so, the action button should be displayed at this datetime'
+        },
+        module: {
+            type: 'string',
+            title: 'Module'
+        },
+        module_object_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Module Object Id'
+        },
+        status: {
+            '$ref': '#/components/schemas/NewsStatus'
+        }
+    },
+    type: 'object',
+    required: ['id', 'title', 'start', 'end', 'entity', 'location', 'action_start', 'module', 'module_object_id', 'status'],
+    title: 'News'
+} as const;
+
+export const $NewsStatus = {
+    type: 'string',
+    enum: ['waiting_approval', 'rejected', 'published'],
+    title: 'NewsStatus'
 } as const;
 
 export const $OrderBase = {
@@ -6806,6 +6957,17 @@ export const $RaidPrice = {
             ],
             title: 'Partner Price'
         },
+        external_price: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'External Price'
+        },
         t_shirt_price: {
             anyOf: [
                 {
@@ -8725,11 +8887,40 @@ export const $TokenResponse = {
     title: 'TokenResponse'
 } as const;
 
-export const $Topic = {
-    type: 'string',
-    enum: ['cinema', 'advert', 'amap', 'booking', 'event', 'loan', 'raffle', 'vote', 'ph', 'test'],
-    title: 'Topic',
-    description: 'A list of topics. An user can suscribe to a topic to receive notifications about it.'
+export const $TopicUser = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        module_root: {
+            type: 'string',
+            title: 'Module Root'
+        },
+        topic_identifier: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Topic Identifier'
+        },
+        is_user_subscribed: {
+            type: 'boolean',
+            title: 'Is User Subscribed'
+        }
+    },
+    type: 'object',
+    required: ['id', 'name', 'module_root', 'topic_identifier', 'is_user_subscribed'],
+    title: 'TopicUser'
 } as const;
 
 export const $TransactionBase = {
@@ -9619,15 +9810,9 @@ export const $app__modules__phonebook__schemas_phonebook__MembershipBase = {
             title: 'Role Name'
         },
         role_tags: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Role Tags'
+            type: 'string',
+            title: 'Role Tags',
+            default: ''
         },
         member_order: {
             type: 'integer',
