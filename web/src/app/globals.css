@@ -23,6 +23,12 @@
     --border: 20 5.9% 90%;
     --input: 20 5.9% 90%;
     --radius: 0.5rem;
+    --primary-dark: hsl(
+      from hsl(var(--primary)) h s 33%
+    );
+    --primary-light: hsl(
+      from hsl(var(--primary)) h 85% 70%
+    );
   }
 
   .dark {
@@ -121,7 +127,7 @@
     width: 400px;
     height: 400px;
     border-radius: 50%;
-    background-color: #cc5803;
+    background-color: var(--primary-dark);
     overflow: hidden;
   }
 
@@ -132,18 +138,18 @@
     height: 50px;
     border-radius: 40px;
     top: 200px;
-    background-color: #f29559;
+    background-color: var(--primary-light);
     left: 60px;
     box-shadow:
-      120px 0 #f29559,
-      -150px 50px #cc5803,
-      90px 50px #cc5803,
-      -40px 50px #f29559,
-      0 100px #f29559,
-      120px 100px #f29559,
-      -80px 150px #cc5803,
-      160px 150px #cc5803,
-      60px 150px #f29559;
+      120px 0 var(--primary-light),
+      -150px 50px var(--primary-dark),
+      90px 50px var(--primary-dark),
+      -40px 50px var(--primary-light),
+      0 100px var(--primary-light),
+      120px 100px var(--primary-light),
+      -80px 150px var(--primary-dark),
+      160px 150px var(--primary-dark),
+      60px 150px var(--primary-light);
   }
 
   .planet:after {
@@ -171,7 +177,7 @@
     width: 400px;
     height: 200px;
     border-radius: 200px 200px 0 0;
-    background-color: #cc5803;
+    background-color: var(--orange);
     top: 0;
     overflow: hidden;
   }
@@ -183,16 +189,16 @@
     height: 50px;
     border-radius: 40px;
     left: 140px;
-    background-color: #f29559;
+    background-color: var(--primary-light);
     box-shadow:
-      -150px 50px #cc5803,
-      90px 50px #cc5803,
-      -40px 50px #f29559,
-      0 100px #f29559,
-      -160px 100px #f29559,
-      -220px 150px #cc5803,
-      60px 150px #cc5803,
-      -100px 150px #f29559;
+      -150px 50px var(--primary-dark),
+      90px 50px var(--primary-dark),
+      -40px 50px var(--primary-light),
+      0 100px var(--primary-light),
+      -160px 100px var(--primary-light),
+      -220px 150px var(--primary-dark),
+      60px 150px var(--primary-dark),
+      -100px 150px var(--primary-light);
   }
 
   .up:after {
