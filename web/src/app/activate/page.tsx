@@ -1,6 +1,6 @@
 "use client";
 
-import { FloorsType, postUsersActivate } from "@/api";
+import { postUsersActivate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { DatePicker } from "@/components/custom/DatePicker";
@@ -104,7 +104,7 @@ const RegisterPage = () => {
             ? format(values.birthday, "yyyy-MM-dd")
             : undefined,
           phone: values.phone ? "+" + values.phone : undefined,
-          floor: values.floor as FloorsType | undefined | null,
+          floor: values.floor as string | undefined | null,
           promo: values.promo ? parseInt(values.promo) : undefined,
         },
       });
