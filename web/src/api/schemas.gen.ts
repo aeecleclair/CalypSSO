@@ -24,6 +24,12 @@ export const $AccountType = {
 These values should match GroupType's. They are the lower level groups in Hyperion`
 } as const;
 
+export const $ActivationFormField = {
+    type: 'string',
+    enum: ['nickname', 'birthdate', 'phone', 'promotion', 'floor'],
+    title: 'ActivationFormField'
+} as const;
+
 export const $AdvertBase = {
     properties: {
         title: {
@@ -36,6 +42,7 @@ export const $AdvertBase = {
         },
         advertiser_id: {
             type: 'string',
+            format: 'uuid',
             title: 'Advertiser Id'
         },
         post_to_feed: {
@@ -50,7 +57,7 @@ export const $AdvertBase = {
     title: 'AdvertBase'
 } as const;
 
-export const $AdvertReturnComplete = {
+export const $AdvertComplete = {
     properties: {
         title: {
             type: 'string',
@@ -62,6 +69,7 @@ export const $AdvertReturnComplete = {
         },
         advertiser_id: {
             type: 'string',
+            format: 'uuid',
             title: 'Advertiser Id'
         },
         post_to_feed: {
@@ -72,10 +80,8 @@ export const $AdvertReturnComplete = {
         },
         id: {
             type: 'string',
+            format: 'uuid',
             title: 'Id'
-        },
-        advertiser: {
-            '$ref': '#/components/schemas/AdvertiserComplete'
         },
         date: {
             anyOf: [
@@ -91,8 +97,8 @@ export const $AdvertReturnComplete = {
         }
     },
     type: 'object',
-    required: ['title', 'content', 'advertiser_id', 'id', 'advertiser'],
-    title: 'AdvertReturnComplete'
+    required: ['title', 'content', 'advertiser_id', 'id'],
+    title: 'AdvertComplete'
 } as const;
 
 export const $AdvertUpdate = {
@@ -118,88 +124,10 @@ export const $AdvertUpdate = {
                 }
             ],
             title: 'Content'
-        },
-        tags: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Tags'
         }
     },
     type: 'object',
     title: 'AdvertUpdate'
-} as const;
-
-export const $AdvertiserBase = {
-    properties: {
-        name: {
-            type: 'string',
-            title: 'Name'
-        },
-        group_manager_id: {
-            type: 'string',
-            title: 'Group Manager Id',
-            description: 'The group manager id should be a group identifier'
-        }
-    },
-    type: 'object',
-    required: ['name', 'group_manager_id'],
-    title: 'AdvertiserBase'
-} as const;
-
-export const $AdvertiserComplete = {
-    properties: {
-        name: {
-            type: 'string',
-            title: 'Name'
-        },
-        group_manager_id: {
-            type: 'string',
-            title: 'Group Manager Id',
-            description: 'The group manager id should be a group identifier'
-        },
-        id: {
-            type: 'string',
-            title: 'Id'
-        }
-    },
-    type: 'object',
-    required: ['name', 'group_manager_id', 'id'],
-    title: 'AdvertiserComplete'
-} as const;
-
-export const $AdvertiserUpdate = {
-    properties: {
-        name: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Name'
-        },
-        group_manager_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Group Manager Id'
-        }
-    },
-    type: 'object',
-    title: 'AdvertiserUpdate'
 } as const;
 
 export const $AmapSlotType = {
@@ -273,49 +201,25 @@ export const $Applicant = {
     title: 'Applicant'
 } as const;
 
-export const $AssociationBase = {
+export const $Association = {
     properties: {
         name: {
             type: 'string',
             title: 'Name'
         },
-        groupement_id: {
+        group_id: {
+            type: 'string',
+            title: 'Group Id'
+        },
+        id: {
             type: 'string',
             format: 'uuid',
-            title: 'Groupement Id'
-        },
-        mandate_year: {
-            type: 'integer',
-            title: 'Mandate Year'
-        },
-        description: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description'
-        },
-        associated_groups: {
-            items: {
-                type: 'string'
-            },
-            type: 'array',
-            title: 'Associated Groups',
-            default: []
-        },
-        deactivated: {
-            type: 'boolean',
-            title: 'Deactivated',
-            default: false
+            title: 'Id'
         }
     },
     type: 'object',
-    required: ['name', 'groupement_id', 'mandate_year'],
-    title: 'AssociationBase'
+    required: ['name', 'group_id', 'id'],
+    title: 'Association'
 } as const;
 
 export const $AssociationComplete = {
@@ -463,6 +367,35 @@ export const $AssociationGroupsEdit = {
     title: 'AssociationGroupsEdit'
 } as const;
 
+export const $AssociationUpdate = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        group_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Group Id'
+        }
+    },
+    type: 'object',
+    title: 'AssociationUpdate'
+} as const;
+
 export const $BatchResult = {
     properties: {
         failed: {
@@ -582,6 +515,19 @@ export const $Body_create_advert_image_advert_adverts__advert_id__picture_post =
     title: 'Body_create_advert_image_advert_adverts__advert_id__picture_post'
 } as const;
 
+export const $Body_create_association_logo_associations__association_id__logo_post = {
+    properties: {
+        image: {
+            type: 'string',
+            format: 'binary',
+            title: 'Image'
+        }
+    },
+    type: 'object',
+    required: ['image'],
+    title: 'Body_create_association_logo_associations__association_id__logo_post'
+} as const;
+
 export const $Body_create_association_logo_phonebook_associations__association_id__picture_post = {
     properties: {
         image: {
@@ -645,6 +591,19 @@ export const $Body_create_current_user_profile_picture_users_me_profile_picture_
     type: 'object',
     required: ['image'],
     title: 'Body_create_current_user_profile_picture_users_me_profile_picture_post'
+} as const;
+
+export const $Body_create_event_image_calendar_events__event_id__image_post = {
+    properties: {
+        image: {
+            type: 'string',
+            format: 'binary',
+            title: 'Image'
+        }
+    },
+    type: 'object',
+    required: ['image'],
+    title: 'Body_create_event_image_calendar_events__event_id__image_post'
 } as const;
 
 export const $Body_create_group_logo_groups__group_id__logo_post = {
@@ -1404,12 +1363,6 @@ export const $BookingReturnSimpleApplicant = {
     type: 'object',
     required: ['reason', 'start', 'end', 'creation', 'room_id', 'key', 'id', 'decision', 'applicant_id', 'room', 'applicant'],
     title: 'BookingReturnSimpleApplicant'
-} as const;
-
-export const $CalendarEventType = {
-    type: 'string',
-    enum: ['Event AE', 'Event USE', 'Asso indé', 'HH', 'Strass', 'Rewass', 'Autre'],
-    title: 'CalendarEventType'
 } as const;
 
 export const $CashComplete = {
@@ -2291,6 +2244,11 @@ export const $CoreUser = {
                     type: 'null'
                 }
             ]
+        },
+        is_super_admin: {
+            type: 'boolean',
+            title: 'Is Super Admin',
+            default: false
         }
     },
     type: 'object',
@@ -2665,6 +2623,9 @@ export const $CoreVariables = {
             type: 'string',
             title: 'Email Placeholder'
         },
+        main_activation_form: {
+            '$ref': '#/components/schemas/MainActivationForm'
+        },
         primary_color: {
             type: 'string',
             title: 'Primary Color',
@@ -2672,7 +2633,7 @@ export const $CoreVariables = {
         }
     },
     type: 'object',
-    required: ['name', 'entity_name', 'email_placeholder', 'primary_color'],
+    required: ['name', 'entity_name', 'email_placeholder', 'main_activation_form', 'primary_color'],
     title: 'CoreVariables',
     description: 'Variables used by Hyperion'
 } as const;
@@ -3010,80 +2971,11 @@ export const $EmergencyContact = {
     title: 'EmergencyContact'
 } as const;
 
-export const $EventApplicant = {
+export const $EventBaseCreation = {
     properties: {
         name: {
             type: 'string',
             title: 'Name'
-        },
-        firstname: {
-            type: 'string',
-            title: 'Firstname'
-        },
-        nickname: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Nickname'
-        },
-        id: {
-            type: 'string',
-            title: 'Id'
-        },
-        account_type: {
-            '$ref': '#/components/schemas/AccountType'
-        },
-        school_id: {
-            type: 'string',
-            format: 'uuid',
-            title: 'School Id'
-        },
-        email: {
-            type: 'string',
-            title: 'Email'
-        },
-        promo: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Promo'
-        },
-        phone: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Phone'
-        }
-    },
-    type: 'object',
-    required: ['name', 'firstname', 'id', 'account_type', 'school_id', 'email'],
-    title: 'EventApplicant'
-} as const;
-
-export const $EventBase = {
-    properties: {
-        name: {
-            type: 'string',
-            title: 'Name'
-        },
-        organizer: {
-            type: 'string',
-            title: 'Organizer'
         },
         start: {
             type: 'string',
@@ -3103,11 +2995,15 @@ export const $EventBase = {
             type: 'string',
             title: 'Location'
         },
-        type: {
-            '$ref': '#/components/schemas/CalendarEventType'
-        },
         description: {
-            type: 'string',
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
             title: 'Description'
         },
         recurrence_rule: {
@@ -3120,11 +3016,39 @@ export const $EventBase = {
                 }
             ],
             title: 'Recurrence Rule'
+        },
+        ticket_url_opening: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url Opening'
+        },
+        association_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Association Id'
+        },
+        ticket_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url'
         }
     },
     type: 'object',
-    required: ['name', 'organizer', 'start', 'end', 'all_day', 'location', 'type', 'description'],
-    title: 'EventBase'
+    required: ['name', 'start', 'end', 'all_day', 'location', 'association_id'],
+    title: 'EventBaseCreation'
 } as const;
 
 export const $EventComplete = {
@@ -3133,9 +3057,85 @@ export const $EventComplete = {
             type: 'string',
             title: 'Name'
         },
-        organizer: {
+        start: {
             type: 'string',
-            title: 'Organizer'
+            format: 'date-time',
+            title: 'Start'
+        },
+        end: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End'
+        },
+        all_day: {
+            type: 'boolean',
+            title: 'All Day'
+        },
+        location: {
+            type: 'string',
+            title: 'Location'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        recurrence_rule: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Recurrence Rule'
+        },
+        ticket_url_opening: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url Opening'
+        },
+        association_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Association Id'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        association: {
+            '$ref': '#/components/schemas/Association'
+        },
+        decision: {
+            '$ref': '#/components/schemas/Decision'
+        }
+    },
+    type: 'object',
+    required: ['name', 'start', 'end', 'all_day', 'location', 'association_id', 'id', 'association', 'decision'],
+    title: 'EventComplete'
+} as const;
+
+export const $EventCompleteTicketUrl = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
         },
         start: {
             type: 'string',
@@ -3155,11 +3155,15 @@ export const $EventComplete = {
             type: 'string',
             title: 'Location'
         },
-        type: {
-            '$ref': '#/components/schemas/CalendarEventType'
-        },
         description: {
-            type: 'string',
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
             title: 'Description'
         },
         recurrence_rule: {
@@ -3173,21 +3177,49 @@ export const $EventComplete = {
             ],
             title: 'Recurrence Rule'
         },
+        ticket_url_opening: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url Opening'
+        },
+        association_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Association Id'
+        },
         id: {
             type: 'string',
+            format: 'uuid',
             title: 'Id'
+        },
+        association: {
+            '$ref': '#/components/schemas/Association'
         },
         decision: {
             '$ref': '#/components/schemas/Decision'
         },
-        applicant_id: {
-            type: 'string',
-            title: 'Applicant Id'
+        ticket_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url'
         }
     },
     type: 'object',
-    required: ['name', 'organizer', 'start', 'end', 'all_day', 'location', 'type', 'description', 'id', 'decision', 'applicant_id'],
-    title: 'EventComplete'
+    required: ['name', 'start', 'end', 'all_day', 'location', 'association_id', 'id', 'association', 'decision'],
+    title: 'EventCompleteTicketUrl'
 } as const;
 
 export const $EventEdit = {
@@ -3202,17 +3234,6 @@ export const $EventEdit = {
                 }
             ],
             title: 'Name'
-        },
-        organizer: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Organizer'
         },
         start: {
             anyOf: [
@@ -3260,16 +3281,6 @@ export const $EventEdit = {
             ],
             title: 'Location'
         },
-        type: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/CalendarEventType'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
         description: {
             anyOf: [
                 {
@@ -3291,76 +3302,45 @@ export const $EventEdit = {
                 }
             ],
             title: 'Recurrence Rule'
+        },
+        ticket_url_opening: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url Opening'
+        },
+        ticket_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ticket Url'
         }
     },
     type: 'object',
     title: 'EventEdit'
 } as const;
 
-export const $EventReturn = {
+export const $EventTicketUrl = {
     properties: {
-        name: {
+        ticket_url: {
             type: 'string',
-            title: 'Name'
-        },
-        organizer: {
-            type: 'string',
-            title: 'Organizer'
-        },
-        start: {
-            type: 'string',
-            format: 'date-time',
-            title: 'Start'
-        },
-        end: {
-            type: 'string',
-            format: 'date-time',
-            title: 'End'
-        },
-        all_day: {
-            type: 'boolean',
-            title: 'All Day'
-        },
-        location: {
-            type: 'string',
-            title: 'Location'
-        },
-        type: {
-            '$ref': '#/components/schemas/CalendarEventType'
-        },
-        description: {
-            type: 'string',
-            title: 'Description'
-        },
-        recurrence_rule: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Recurrence Rule'
-        },
-        id: {
-            type: 'string',
-            title: 'Id'
-        },
-        decision: {
-            '$ref': '#/components/schemas/Decision'
-        },
-        applicant_id: {
-            type: 'string',
-            title: 'Applicant Id'
-        },
-        applicant: {
-            '$ref': '#/components/schemas/EventApplicant'
+            title: 'Ticket Url'
         }
     },
     type: 'object',
-    required: ['name', 'organizer', 'start', 'end', 'all_day', 'location', 'type', 'description', 'id', 'decision', 'applicant_id', 'applicant'],
-    title: 'EventReturn'
+    required: ['ticket_url'],
+    title: 'EventTicketUrl'
 } as const;
 
 export const $FirebaseDevice = {
@@ -3599,6 +3579,18 @@ export const $HistoryType = {
     title: 'HistoryType'
 } as const;
 
+export const $IcalSecret = {
+    properties: {
+        secret: {
+            type: 'string',
+            title: 'Secret'
+        }
+    },
+    type: 'object',
+    required: ['secret'],
+    title: 'IcalSecret'
+} as const;
+
 export const $Information = {
     properties: {
         manager: {
@@ -3727,6 +3719,92 @@ export const $InviteToken = {
     type: 'object',
     required: ['team_id', 'token'],
     title: 'InviteToken'
+} as const;
+
+export const $Invoice = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        reference: {
+            type: 'string',
+            title: 'Reference'
+        },
+        structure_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Structure Id'
+        },
+        creation: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Creation'
+        },
+        start_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Date'
+        },
+        end_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End Date'
+        },
+        total: {
+            type: 'integer',
+            title: 'Total'
+        },
+        paid: {
+            type: 'boolean',
+            title: 'Paid',
+            default: false
+        },
+        received: {
+            type: 'boolean',
+            title: 'Received',
+            default: false
+        },
+        structure: {
+            '$ref': '#/components/schemas/Structure'
+        },
+        details: {
+            items: {
+                '$ref': '#/components/schemas/InvoiceDetail'
+            },
+            type: 'array',
+            title: 'Details'
+        }
+    },
+    type: 'object',
+    required: ['id', 'reference', 'structure_id', 'creation', 'start_date', 'end_date', 'total', 'structure', 'details'],
+    title: 'Invoice'
+} as const;
+
+export const $InvoiceDetail = {
+    properties: {
+        invoice_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Invoice Id'
+        },
+        store_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Store Id'
+        },
+        total: {
+            type: 'integer',
+            title: 'Total'
+        },
+        store: {
+            '$ref': '#/components/schemas/StoreSimple'
+        }
+    },
+    type: 'object',
+    required: ['invoice_id', 'store_id', 'total', 'store'],
+    title: 'InvoiceDetail'
 } as const;
 
 export const $Item = {
@@ -4428,6 +4506,30 @@ export const $MailMigrationRequest = {
     title: 'MailMigrationRequest'
 } as const;
 
+export const $MainActivationForm = {
+    properties: {
+        fields: {
+            items: {
+                '$ref': '#/components/schemas/ActivationFormField'
+            },
+            type: 'array',
+            title: 'Fields',
+            description: 'List of fields that are to be asked in the main activation form'
+        },
+        floor_choices: {
+            items: {
+                type: 'string'
+            },
+            type: 'array',
+            title: 'Floor Choices',
+            description: 'List of choices for the floor field if it is asked'
+        }
+    },
+    type: 'object',
+    required: ['fields'],
+    title: 'MainActivationForm'
+} as const;
+
 export const $Manager = {
     properties: {
         name: {
@@ -4748,6 +4850,36 @@ export const $ModuleVisibilityCreate = {
     type: 'object',
     required: ['root'],
     title: 'ModuleVisibilityCreate'
+} as const;
+
+export const $MyPaymentBankAccountHolder = {
+    properties: {
+        holder_structure_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Holder Structure Id'
+        }
+    },
+    type: 'object',
+    required: ['holder_structure_id'],
+    title: 'MyPaymentBankAccountHolder',
+    description: 'Bank account holder information for MyPayment.'
+} as const;
+
+export const $MyPaymentBankAccountInformationComplete = {
+    properties: {
+        holder_structure_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Holder Structure Id'
+        },
+        holder_structure: {
+            '$ref': '#/components/schemas/Structure'
+        }
+    },
+    type: 'object',
+    required: ['holder_structure_id', 'holder_structure'],
+    title: 'MyPaymentBankAccountInformationComplete'
 } as const;
 
 export const $News = {
@@ -8261,12 +8393,17 @@ export const $Store = {
             format: 'uuid',
             title: 'Wallet Id'
         },
+        creation: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Creation'
+        },
         structure: {
             '$ref': '#/components/schemas/Structure'
         }
     },
     type: 'object',
-    required: ['name', 'id', 'structure_id', 'wallet_id', 'structure'],
+    required: ['name', 'id', 'structure_id', 'wallet_id', 'creation', 'structure'],
     title: 'Store'
 } as const;
 
@@ -8280,6 +8417,38 @@ export const $StoreBase = {
     type: 'object',
     required: ['name'],
     title: 'StoreBase'
+} as const;
+
+export const $StoreSimple = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        structure_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Structure Id'
+        },
+        wallet_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Wallet Id'
+        },
+        creation: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Creation'
+        }
+    },
+    type: 'object',
+    required: ['name', 'id', 'structure_id', 'wallet_id', 'creation'],
+    title: 'StoreSimple'
 } as const;
 
 export const $StoreUpdate = {
@@ -8302,6 +8471,13 @@ export const $StoreUpdate = {
 
 export const $Structure = {
     properties: {
+        short_id: {
+            type: 'string',
+            maxLength: 3,
+            minLength: 3,
+            title: 'Short Id',
+            description: 'Short ID of the structure, used for invoices'
+        },
         name: {
             type: 'string',
             title: 'Name'
@@ -8322,10 +8498,50 @@ export const $Structure = {
             type: 'string',
             title: 'Manager User Id'
         },
+        siege_address_street: {
+            type: 'string',
+            title: 'Siege Address Street'
+        },
+        siege_address_city: {
+            type: 'string',
+            title: 'Siege Address City'
+        },
+        siege_address_zipcode: {
+            type: 'string',
+            title: 'Siege Address Zipcode'
+        },
+        siege_address_country: {
+            type: 'string',
+            title: 'Siege Address Country'
+        },
+        siret: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siret'
+        },
+        iban: {
+            type: 'string',
+            title: 'Iban'
+        },
+        bic: {
+            type: 'string',
+            title: 'Bic'
+        },
         id: {
             type: 'string',
             format: 'uuid',
             title: 'Id'
+        },
+        creation: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Creation'
         },
         manager_user: {
             '$ref': '#/components/schemas/CoreUserSimple'
@@ -8342,12 +8558,19 @@ export const $Structure = {
         }
     },
     type: 'object',
-    required: ['name', 'manager_user_id', 'id', 'manager_user', 'association_membership'],
+    required: ['short_id', 'name', 'manager_user_id', 'siege_address_street', 'siege_address_city', 'siege_address_zipcode', 'siege_address_country', 'iban', 'bic', 'id', 'creation', 'manager_user', 'association_membership'],
     title: 'Structure'
 } as const;
 
 export const $StructureBase = {
     properties: {
+        short_id: {
+            type: 'string',
+            maxLength: 3,
+            minLength: 3,
+            title: 'Short Id',
+            description: 'Short ID of the structure, used for invoices'
+        },
         name: {
             type: 'string',
             title: 'Name'
@@ -8367,10 +8590,45 @@ export const $StructureBase = {
         manager_user_id: {
             type: 'string',
             title: 'Manager User Id'
+        },
+        siege_address_street: {
+            type: 'string',
+            title: 'Siege Address Street'
+        },
+        siege_address_city: {
+            type: 'string',
+            title: 'Siege Address City'
+        },
+        siege_address_zipcode: {
+            type: 'string',
+            title: 'Siege Address Zipcode'
+        },
+        siege_address_country: {
+            type: 'string',
+            title: 'Siege Address Country'
+        },
+        siret: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siret'
+        },
+        iban: {
+            type: 'string',
+            title: 'Iban'
+        },
+        bic: {
+            type: 'string',
+            title: 'Bic'
         }
     },
     type: 'object',
-    required: ['name', 'manager_user_id'],
+    required: ['short_id', 'name', 'manager_user_id', 'siege_address_street', 'siege_address_city', 'siege_address_zipcode', 'siege_address_country', 'iban', 'bic'],
     title: 'StructureBase'
 } as const;
 
@@ -8410,6 +8668,83 @@ export const $StructureUpdate = {
                 }
             ],
             title: 'Association Membership Id'
+        },
+        siret: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siret'
+        },
+        siege_address_street: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siege Address Street'
+        },
+        siege_address_city: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siege Address City'
+        },
+        siege_address_zipcode: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siege Address Zipcode'
+        },
+        siege_address_country: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Siege Address Country'
+        },
+        iban: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Iban'
+        },
+        bic: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Bic'
         }
     },
     type: 'object',
@@ -9182,6 +9517,11 @@ export const $UserStore = {
             format: 'uuid',
             title: 'Wallet Id'
         },
+        creation: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Creation'
+        },
         structure: {
             '$ref': '#/components/schemas/Structure'
         },
@@ -9203,7 +9543,7 @@ export const $UserStore = {
         }
     },
     type: 'object',
-    required: ['name', 'id', 'structure_id', 'wallet_id', 'structure', 'can_bank', 'can_see_history', 'can_cancel', 'can_manage_sellers'],
+    required: ['name', 'id', 'structure_id', 'wallet_id', 'creation', 'structure', 'can_bank', 'can_see_history', 'can_cancel', 'can_manage_sellers'],
     title: 'UserStore'
 } as const;
 
@@ -9479,6 +9819,22 @@ export const $WalletType = {
     type: 'string',
     enum: ['user', 'store'],
     title: 'WalletType'
+} as const;
+
+export const $app__core__associations__schemas_associations__AssociationBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        group_id: {
+            type: 'string',
+            title: 'Group Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'group_id'],
+    title: 'AssociationBase'
 } as const;
 
 export const $app__core__memberships__schemas_memberships__MembershipBase = {
@@ -9789,6 +10145,51 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
     },
     type: 'object',
     title: 'ProductEdit'
+} as const;
+
+export const $app__modules__phonebook__schemas_phonebook__AssociationBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        groupement_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Groupement Id'
+        },
+        mandate_year: {
+            type: 'integer',
+            title: 'Mandate Year'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        associated_groups: {
+            items: {
+                type: 'string'
+            },
+            type: 'array',
+            title: 'Associated Groups',
+            default: []
+        },
+        deactivated: {
+            type: 'boolean',
+            title: 'Deactivated',
+            default: false
+        }
+    },
+    type: 'object',
+    required: ['name', 'groupement_id', 'mandate_year'],
+    title: 'AssociationBase'
 } as const;
 
 export const $app__modules__phonebook__schemas_phonebook__MembershipBase = {

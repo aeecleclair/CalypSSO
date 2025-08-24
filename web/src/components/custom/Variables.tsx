@@ -7,6 +7,7 @@ export const VariablesContext = createContext({
   projectName: "",
   entityName: "",
   emailPlaceholder: "",
+  mainActivationForm: { fields: [] as string[], floorChoices: [] as string[] },
 });
 
 export default function Variables({ children }: { children: React.ReactNode }) {
@@ -16,6 +17,10 @@ export default function Variables({ children }: { children: React.ReactNode }) {
   const [emailPlaceholder, setEmailPlaceholder] = useState(
     "prenom.nom@etu.ec-lyon.fr",
   );
+  const [mainActivationForm, setMainActivationForm] = useState({
+    fields: [] as string[],
+    floorChoices: [] as string[],
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -27,6 +32,10 @@ export default function Variables({ children }: { children: React.ReactNode }) {
         setEmailPlaceholder(
           variables?.email_placeholder || "prenom.nom@etu.ec-lyon.fr",
         );
+        setMainActivationForm({
+          fields: variables?.main_activation_form.fields || [],
+          floorChoices: variables?.main_activation_form.floor_choices || [],
+        });
 
         if (variables?.primary_color) {
           document.documentElement.style.setProperty(
@@ -50,7 +59,7 @@ export default function Variables({ children }: { children: React.ReactNode }) {
 
   return (
     <VariablesContext.Provider
-      value={{ projectName, entityName, emailPlaceholder }}
+      value={{ projectName, entityName, emailPlaceholder, mainActivationForm }}
     >
       {isLoading ? (
         <></>
