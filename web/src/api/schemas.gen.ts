@@ -1486,12 +1486,13 @@ export const $CdrUser = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         }
     },
     type: 'object',
@@ -1609,12 +1610,13 @@ export const $CdrUserUpdate = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         }
     },
     type: 'object',
@@ -2197,12 +2199,13 @@ export const $CoreUser = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         },
         phone: {
             anyOf: [
@@ -2312,12 +2315,13 @@ export const $CoreUserActivateRequest = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         },
         promo: {
             anyOf: [
@@ -2467,12 +2471,13 @@ export const $CoreUserUpdate = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         }
     },
     type: 'object',
@@ -2591,12 +2596,13 @@ export const $CoreUserUpdateAdmin = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         }
     },
     type: 'object',
@@ -3425,12 +3431,6 @@ export const $FlappyBirdScoreInDB = {
     type: 'object',
     required: ['value', 'user', 'creation_time', 'id', 'user_id'],
     title: 'FlappyBirdScoreInDB'
-} as const;
-
-export const $FloorsType = {
-    type: 'string',
-    enum: ['Autre', 'Adoma', 'Exte', 'T1', 'T2', 'T3', 'T4', 'T56', 'U1', 'U2', 'U3', 'U4', 'U56', 'V1', 'V2', 'V3', 'V45', 'V6', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6'],
-    title: 'FloorsType'
 } as const;
 
 export const $GenerateTicketBase = {
@@ -9594,12 +9594,13 @@ export const $UserTicket = {
         floor: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/FloorsType'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Floor'
         },
         created_on: {
             anyOf: [

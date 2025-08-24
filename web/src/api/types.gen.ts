@@ -311,7 +311,7 @@ export type CdrUser = {
     email: string;
     birthday?: string | null;
     phone?: string | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
 };
 
 export type CdrUserPreview = {
@@ -330,7 +330,7 @@ export type CdrUserUpdate = {
     email?: string | null;
     birthday?: string | null;
     phone?: string | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
 };
 
 export type ChangePasswordRequest = {
@@ -484,7 +484,7 @@ export type CoreUser = {
     email: string;
     birthday?: string | null;
     promo?: number | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
     phone?: string | null;
     created_on?: string | null;
     groups?: Array<CoreGroupSimple>;
@@ -500,7 +500,7 @@ export type CoreUserActivateRequest = {
     password: string;
     birthday?: string | null;
     phone?: string | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
     /**
      * Promotion of the student, an integer like 2021
      */
@@ -546,7 +546,7 @@ export type CoreUserUpdate = {
     nickname?: string | null;
     birthday?: string | null;
     phone?: string | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
 };
 
 export type CoreUserUpdateAdmin = {
@@ -559,7 +559,7 @@ export type CoreUserUpdateAdmin = {
     nickname?: string | null;
     birthday?: string | null;
     phone?: string | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
 };
 
 /**
@@ -758,8 +758,6 @@ export type FlappyBirdScoreInDB = {
     id: string;
     user_id: string;
 };
-
-export type FloorsType = 'Autre' | 'Adoma' | 'Exte' | 'T1' | 'T2' | 'T3' | 'T4' | 'T56' | 'U1' | 'U2' | 'U3' | 'U4' | 'U56' | 'V1' | 'V2' | 'V3' | 'V45' | 'V6' | 'X1' | 'X2' | 'X3' | 'X4' | 'X5' | 'X6';
 
 export type GenerateTicketBase = {
     name: string;
@@ -2052,7 +2050,7 @@ export type UserTicket = {
     account_type: AccountType;
     school_id: string;
     promo?: number | null;
-    floor?: FloorsType | null;
+    floor?: string | null;
     created_on?: string | null;
 };
 
@@ -5149,7 +5147,7 @@ export type DeleteMembershipsUsersMembershipIdResponse = void;
 
 export type DeleteMembershipsUsersMembershipIdError = unknown;
 
-export type GetMypaymentBankAccountHolderResponse = Structure;
+export type GetMypaymentBankAccountHolderResponse = MyPaymentBankAccountInformationComplete;
 
 export type GetMypaymentBankAccountHolderError = unknown;
 
@@ -10394,7 +10392,7 @@ export type $OpenApiTs = {
                 /**
                  * Successful Response
                  */
-                '200': Structure;
+                '200': MyPaymentBankAccountInformationComplete;
             };
         };
         post: {

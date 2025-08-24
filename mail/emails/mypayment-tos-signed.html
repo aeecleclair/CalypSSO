@@ -1,0 +1,28 @@
+---
+preheader: @{{ _payment_product_name }} Terms of Service signed
+---
+
+<x-default>
+  <x-card
+    title="You signed the Terms of Service for @{{ _payment_product_name }}"
+  >
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      You signed the Terms of Service version @{{tos_version}} for @{{
+      _payment_product_name }}. You can consult their
+      <a href="@{{ tos_url }}">latest version</a> at any time.
+    </p>
+  </x-card>
+
+  <x-spacer height="24px" />
+
+  <x-card
+    lang="fr"
+    title="Vous avez signé les Conditions Générales d'Utilisation de @{{ _payment_product_name }}"
+  >
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      Vous avez signé la version @{{tos_version}} des Conditions Générales
+      d'Utilisation de @{{ _payment_product_name }}. Vous pouvez consulter leur
+      <a href="@{{ tos_url }}">dernière version</a> à tout moment.
+    </p>
+  </x-card>
+</x-default>
