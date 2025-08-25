@@ -13,12 +13,12 @@ class TypeMessage(str, Enum):
     mismatching_redirect_uri = "mismatching_redirect_uri"
     user_not_member_of_allowed_group = "user_not_member_of_allowed_group"
     user_account_type_not_allowed = "user_account_type_not_allowed"
-    myeclpay_structure_transfer_success = "myeclpay_structure_transfer_success"
-    myeclpay_wallet_device_activation_success = (
-        "myeclpay_wallet_device_activation_success"
+    mypayment_structure_transfer_success = "mypayment_structure_transfer_success"
+    mypayment_wallet_device_activation_success = (
+        "mypayment_wallet_device_activation_success"
     )
-    myeclpay_wallet_device_already_activated_or_revoked = (
-        "myeclpay_wallet_device_already_activated_or_revoked"
+    mypayment_wallet_device_already_activated_or_revoked = (
+        "mypayment_wallet_device_already_activated_or_revoked"
     )
     token_expired = "token_expired"  # noqa: S105
 
@@ -26,7 +26,7 @@ class TypeMessage(str, Enum):
 class Asset(str, Enum):
     privacy = "privacy"
     terms_and_conditions = "terms_and_conditions"
-    myeclpay_terms_of_service = "myeclpay_terms_of_service"
+    mypayment_terms_of_service = "mypayment_terms_of_service"
     support = "support"
 
 

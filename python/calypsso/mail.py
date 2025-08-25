@@ -103,29 +103,29 @@ class MailTemplates:
             confirmation_url=confirmation_url,
         )
 
-    def get_mail_myeclpay_device_activation(self, activation_url: str) -> str:
+    def get_mail_mypayment_device_activation(self, activation_url: str) -> str:
         """
-        Return the mail template for MyECLPay device activation.
+        Return the mail template for MyPayment device activation.
         """
-        return self.jinja_env.get_template("myeclpay-device-activation.html").render(
+        return self.jinja_env.get_template("mypayment-device-activation.html").render(
             self.environment_variables,
             activation_url=activation_url,
         )
 
-    def get_mail_myeclpay_structure_transfer(self, confirmation_url: str) -> str:
+    def get_mail_mypayment_structure_transfer(self, confirmation_url: str) -> str:
         """
-        Return the mail template for MyECLPay structure transfer validation.
+        Return the mail template for MyPayment structure transfer validation.
         """
-        return self.jinja_env.get_template("myeclpay-structure-transfer.html").render(
+        return self.jinja_env.get_template("mypayment-structure-transfer.html").render(
             self.environment_variables,
             confirmation_url=confirmation_url,
         )
 
-    def get_mail_myeclpay_tos_signed(self, tos_version: int, tos_url: str) -> str:
+    def get_mail_mypayment_tos_signed(self, tos_version: int, tos_url: str) -> str:
         """
         Return the mail template to inform about TOS signature.
         """
-        return self.jinja_env.get_template("myeclpay-tos-signed.html").render(
+        return self.jinja_env.get_template("mypayment-tos-signed.html").render(
             self.environment_variables,
             tos_version=tos_version,
             tos_url=tos_url,

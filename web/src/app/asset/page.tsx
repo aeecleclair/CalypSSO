@@ -4,7 +4,7 @@ import {
   getPrivacy,
   getTermsAndConditions,
   getSupport,
-  getMyeclpayTermsOfService,
+  getMypaymentTermsOfService,
 } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { MotionField } from "@/components/custom/MotionField";
@@ -18,7 +18,7 @@ import Markdown from "react-markdown";
 const assets: Record<string, () => RequestResult> = {
   privacy: getPrivacy,
   terms_and_conditions: getTermsAndConditions,
-  myeclpay_terms_of_service: getMyeclpayTermsOfService,
+  mypayment_terms_of_service: getMypaymentTermsOfService,
   support: getSupport,
 };
 

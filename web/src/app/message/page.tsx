@@ -32,15 +32,15 @@ const TypeMap: Record<string, Type> = {
     message: "User account type is not allowed",
     icon: HiExclamation,
   },
-  myeclpay_structure_transfer_success: {
+  mypayment_structure_transfer_success: {
     message: "Structure transfer successful",
     icon: HiCheck,
   },
-  myeclpay_wallet_device_activation_success: {
+  mypayment_wallet_device_activation_success: {
     message: "Wallet device was successfully activated",
     icon: HiCheck,
   },
-  myeclpay_wallet_device_already_activated_or_revoked: {
+  mypayment_wallet_device_already_activated_or_revoked: {
     message: "Wallet device is already activated or revoked",
     icon: HiExclamation,
   },
