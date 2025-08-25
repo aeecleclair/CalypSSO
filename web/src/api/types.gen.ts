@@ -570,6 +570,9 @@ export type CoreVariables = {
     entity_name: string;
     email_placeholder: string;
     main_activation_form: MainActivationForm;
+    student_email_regex: string;
+    staff_email_regex?: string | null;
+    former_student_email_regex?: string | null;
     /**
      * Returned as an HSL triplet (ex: `24.6 95% 53.1%`)
      */

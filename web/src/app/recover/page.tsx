@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RecoverPage = () => {
-  const { projectName } = useContext(VariablesContext);
+  const { projectName, emailPlaceholder } = useContext(VariablesContext);
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -78,7 +78,7 @@ const RecoverPage = () => {
                 <Input
                   type="email"
                   autoFocus
-                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  placeholder={emailPlaceholder}
                   {...field}
                 />
               )}

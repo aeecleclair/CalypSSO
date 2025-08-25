@@ -2632,6 +2632,32 @@ export const $CoreVariables = {
         main_activation_form: {
             '$ref': '#/components/schemas/MainActivationForm'
         },
+        student_email_regex: {
+            type: 'string',
+            title: 'Student Email Regex'
+        },
+        staff_email_regex: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Staff Email Regex'
+        },
+        former_student_email_regex: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Former Student Email Regex'
+        },
         primary_color: {
             type: 'string',
             title: 'Primary Color',
@@ -2639,7 +2665,7 @@ export const $CoreVariables = {
         }
     },
     type: 'object',
-    required: ['name', 'entity_name', 'email_placeholder', 'main_activation_form', 'primary_color'],
+    required: ['name', 'entity_name', 'email_placeholder', 'main_activation_form', 'student_email_regex', 'primary_color'],
     title: 'CoreVariables',
     description: 'Variables used by Hyperion'
 } as const;
