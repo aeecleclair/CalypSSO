@@ -40,10 +40,15 @@ export default function Variables({ children }: { children: React.ReactNode }) {
         setEmailPlaceholder(
           variables?.email_placeholder || "prenom.nom@etu.ec-lyon.fr",
         );
-        setStudentEmailRegex(variables?.student_email_regex || "");
-        setStaffEmailRegex(variables?.staff_email_regex || null);
+        setStudentEmailRegex(
+          variables?.student_email_regex?.replaceAll(`\\\\`, `\\`) || "",
+        );
+        setStaffEmailRegex(
+          variables?.staff_email_regex?.replaceAll(`\\\\`, `\\`) || null,
+        );
         setFormerStudentEmailRegex(
-          variables?.former_student_email_regex || null,
+          variables?.former_student_email_regex?.replaceAll(`\\\\`, `\\`) ||
+            null,
         );
         setMainActivationForm({
           fields: variables?.main_activation_form.fields || [],
