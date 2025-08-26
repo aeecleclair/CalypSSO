@@ -41,7 +41,8 @@ export default function Variables({ children }: { children: React.ReactNode }) {
           variables?.email_placeholder || "prenom.nom@etu.ec-lyon.fr",
         );
         setStudentEmailRegex(
-          variables?.student_email_regex?.replaceAll(`\\\\`, `\\`) || "",
+          variables?.student_email_regex?.replaceAll(`\\\\`, `\\`) ||
+            "^[\\w\\-.]*@(((etu(-enise)?|enise)\\.)?ec-lyon\\.fr|centraliens-lyon\\.net)$",
         );
         setStaffEmailRegex(
           variables?.staff_email_regex?.replaceAll(`\\\\`, `\\`) || null,
