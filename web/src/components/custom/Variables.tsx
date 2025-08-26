@@ -7,6 +7,10 @@ export const VariablesContext = createContext({
   projectName: "",
   entityName: "",
   emailPlaceholder: "",
+  studentEmailRegex: "",
+  staffEmailRegex: null as null | string,
+  formerStudentEmailRegex: null as null | string,
+  mainActivationForm: { fields: [] as string[], floorChoices: [] as string[] },
 });
 
 export default function Variables({ children }: { children: React.ReactNode }) {
@@ -16,6 +20,15 @@ export default function Variables({ children }: { children: React.ReactNode }) {
   const [emailPlaceholder, setEmailPlaceholder] = useState(
     "prenom.nom@etu.ec-lyon.fr",
   );
+  const [studentEmailRegex, setStudentEmailRegex] = useState("");
+  const [staffEmailRegex, setStaffEmailRegex] = useState<null | string>(null);
+  const [formerStudentEmailRegex, setFormerStudentEmailRegex] = useState<
+    null | string
+  >(null);
+  const [mainActivationForm, setMainActivationForm] = useState({
+    fields: [] as string[],
+    floorChoices: [] as string[],
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -27,6 +40,21 @@ export default function Variables({ children }: { children: React.ReactNode }) {
         setEmailPlaceholder(
           variables?.email_placeholder || "prenom.nom@etu.ec-lyon.fr",
         );
+        setStudentEmailRegex(
+          variables?.student_email_regex?.replaceAll(`\\\\`, `\\`) ||
+            "^[\\w\\-.]*@(((etu(-enise)?|enise)\\.)?ec-lyon\\.fr|centraliens-lyon\\.net)$",
+        );
+        setStaffEmailRegex(
+          variables?.staff_email_regex?.replaceAll(`\\\\`, `\\`) || null,
+        );
+        setFormerStudentEmailRegex(
+          variables?.former_student_email_regex?.replaceAll(`\\\\`, `\\`) ||
+            null,
+        );
+        setMainActivationForm({
+          fields: variables?.main_activation_form.fields || [],
+          floorChoices: variables?.main_activation_form.floor_choices || [],
+        });
 
         if (variables?.primary_color) {
           document.documentElement.style.setProperty(
@@ -50,7 +78,15 @@ export default function Variables({ children }: { children: React.ReactNode }) {
 
   return (
     <VariablesContext.Provider
-      value={{ projectName, entityName, emailPlaceholder }}
+      value={{
+        projectName,
+        entityName,
+        emailPlaceholder,
+        studentEmailRegex,
+        staffEmailRegex,
+        formerStudentEmailRegex,
+        mainActivationForm,
+      }}
     >
       {isLoading ? (
         <></>

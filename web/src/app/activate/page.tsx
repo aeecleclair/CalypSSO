@@ -1,6 +1,6 @@
 "use client";
 
-import { FloorsType, postUsersActivate } from "@/api";
+import { postUsersActivate } from "@/api";
 import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { DatePicker } from "@/components/custom/DatePicker";
@@ -31,35 +31,13 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const FloorTypes: Readonly<[string, ...string[]]> = [
-  "Autre",
-  "Adoma",
-  "Exte",
-  "T1",
-  "T2",
-  "T3",
-  "T4",
-  "T56",
-  "U1",
-  "U2",
-  "U3",
-  "U4",
-  "U56",
-  "V1",
-  "V2",
-  "V3",
-  "V45",
-  "V6",
-  "X1",
-  "X2",
-  "X3",
-  "X4",
-  "X5",
-  "X6",
-];
-
 const RegisterPage = () => {
-  const { projectName } = useContext(VariablesContext);
+  const { projectName, mainActivationForm } = useContext(VariablesContext);
+
+  const FloorTypes: Readonly<[string, ...string[]]> =
+    mainActivationForm.floorChoices.length > 0
+      ? (mainActivationForm.floorChoices as [string, ...string[]])
+      : ([""] as [string, ...string[]]);
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -126,7 +104,7 @@ const RegisterPage = () => {
             ? format(values.birthday, "yyyy-MM-dd")
             : undefined,
           phone: values.phone ? "+" + values.phone : undefined,
-          floor: values.floor as FloorsType | undefined | null,
+          floor: values.floor as string | undefined | null,
           promo: values.promo ? parseInt(values.promo) : undefined,
         },
       });
@@ -178,89 +156,107 @@ const RegisterPage = () => {
                 neighborName="firstname"
                 render={(field) => <Input {...field} />}
               />
-              <CustomFormField
-                form={form}
-                name="birthday"
-                label="Date de naissance"
-                neighborName="phone"
-                render={(field) => (
-                  <DatePicker
-                    date={field.value}
-                    setDate={field.onChange}
-                    defaultDate={field.value || addYears(new Date(), -21)}
-                    {...field}
-                  />
-                )}
-              />
-              <CustomFormField
-                form={form}
-                name="phone"
-                label="Numéro de téléphone"
-                neighborName="birthday"
-                render={(field) => <PhoneCustomInput {...field} />}
-              />
+              {mainActivationForm.fields.includes("birthdate") && (
+                <CustomFormField
+                  form={form}
+                  name="birthday"
+                  label="Date de naissance"
+                  neighborName="phone"
+                  render={(field) => (
+                    <DatePicker
+                      date={field.value}
+                      setDate={field.onChange}
+                      defaultDate={field.value || addYears(new Date(), -21)}
+                      {...field}
+                    />
+                  )}
+                />
+              )}
+              {mainActivationForm.fields.includes("phone") && (
+                <CustomFormField
+                  form={form}
+                  name="phone"
+                  label="Numéro de téléphone"
+                  neighborName="birthday"
+                  render={(field) => <PhoneCustomInput {...field} />}
+                />
+              )}
             </div>
 
             <SuspenseConditional maskComponentParam="external">
-              <CustomFormField
-                form={form}
-                name="nickname"
-                label="Surnom"
-                render={(field) => <Input {...field} />}
-              />
+              {mainActivationForm.fields.includes("nickname") && (
+                <CustomFormField
+                  form={form}
+                  name="nickname"
+                  label="Surnom"
+                  render={(field) => <Input {...field} />}
+                />
+              )}
 
-              <TextSeparator text="Informations sur votre scolarité" />
-              <div className="mt-2 grid grid-cols-1 gap-4  md:grid-cols-2">
-                <CustomFormField
-                  form={form}
-                  name="promo"
-                  label="Promotion"
-                  neighborName="floor"
-                  render={(field) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <CustomSelectTrigger>
-                        {field.value
-                          ? `Promo ${field.value}`
-                          : "Séléctionner votre promo"}
-                      </CustomSelectTrigger>
-                      <SelectContent>
-                        {[...Array(10)].map((_, index) => {
-                          const year = (
-                            new Date().getFullYear() - index
-                          ).toString();
-                          return (
-                            <SelectItem key={index} value={year}>
-                              Promo {year}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-                <CustomFormField
-                  form={form}
-                  name="floor"
-                  label="Étage de votre résidence"
-                  neighborName="promo"
-                  render={(field) => (
-                    <Select onValueChange={field.onChange}>
-                      <CustomSelectTrigger>
-                        <SelectValue placeholder="Choisissez votre étage" />
-                      </CustomSelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          {FloorTypes.map((floor) => (
-                            <SelectItem key={floor} value={floor}>
-                              {floor}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-              </div>
+              {(mainActivationForm.fields.includes("promotion") ||
+                mainActivationForm.fields.includes("floor")) && (
+                <>
+                  <TextSeparator text="Informations sur votre scolarité" />
+                  <div className="mt-2 grid grid-cols-1 gap-4  md:grid-cols-2">
+                    {mainActivationForm.fields.includes("promotion") && (
+                      <CustomFormField
+                        form={form}
+                        name="promo"
+                        label="Promotion"
+                        neighborName="floor"
+                        render={(field) => (
+                          <Select
+                            value={field.value}
+                            onValueChange={field.onChange}
+                          >
+                            <CustomSelectTrigger>
+                              {field.value
+                                ? `Promo ${field.value}`
+                                : "Séléctionner votre promo"}
+                            </CustomSelectTrigger>
+                            <SelectContent>
+                              {[...Array(10)].map((_, index) => {
+                                const year = (
+                                  new Date().getFullYear() - index
+                                ).toString();
+                                return (
+                                  <SelectItem key={index} value={year}>
+                                    Promo {year}
+                                  </SelectItem>
+                                );
+                              })}
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                    )}
+                    {mainActivationForm.fields.includes("floor") && (
+                      <CustomFormField
+                        form={form}
+                        name="floor"
+                        label="Étage de votre résidence"
+                        neighborName="promo"
+                        render={(field) => (
+                          <Select onValueChange={field.onChange}>
+                            <CustomSelectTrigger>
+                              <SelectValue placeholder="Choisissez votre étage" />
+                            </CustomSelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                {FloorTypes.map((floor) => (
+                                  <SelectItem key={floor} value={floor}>
+                                    {floor}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                    )}
+                  </div>
+                </>
+              )}
               <TextSeparator text="Mot de passe" />
             </SuspenseConditional>
             <CustomFormField

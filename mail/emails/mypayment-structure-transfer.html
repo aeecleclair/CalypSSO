@@ -1,10 +1,10 @@
 ---
-preheader: Activate your MyECLPay device
+preheader: Confirm structure transfer
 ---
 
 <x-default>
   <x-button-card
-    title="Confirm MyECLPay structure @{{ structure_name }} transfer"
+    title="Confirm @{{ _payment_product_name }} structure @{{ structure_name }} transfer"
     url="@{{ confirmation_url }}"
     button="Confirm the transfer"
   >
@@ -22,7 +22,7 @@ preheader: Activate your MyECLPay device
 
   <x-button-card
     lang="fr"
-    title="Confirmer le transfert de la structure MyECLPay @{{ structure_name }}"
+    title="Confirmer le transfert de la structure @{{ _payment_product_name }} @{{ structure_name }}"
     url="@{{ confirmation_url }}"
     button="Confirmer le transfert"
   >

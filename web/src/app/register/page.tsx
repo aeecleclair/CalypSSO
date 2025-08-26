@@ -16,7 +16,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const RegisterContent = () => {
-  const { projectName } = useContext(VariablesContext);
+  const {
+    projectName,
+    emailPlaceholder,
+    studentEmailRegex,
+    staffEmailRegex,
+    formerStudentEmailRegex,
+  } = useContext(VariablesContext);
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -37,10 +43,12 @@ const RegisterContent = () => {
   if (!acceptExternalUser) {
     emailField = emailField.regex(
       new RegExp(
-        /^[\w\-.]*@(((etu(-enise)?|enise)\.)?ec-lyon\.fr|centraliens-lyon\.net)$/,
+        `(${[studentEmailRegex, staffEmailRegex, formerStudentEmailRegex]
+          .filter((regex): regex is string => regex !== null && regex !== "")
+          .join("|")})`,
       ),
       {
-        message: "Veuillez utiliser une adresse email centralienne",
+        message: "Veuillez utiliser une adresse email liée à l'établissement",
       },
     );
   }
@@ -100,7 +108,7 @@ const RegisterContent = () => {
                 <Input
                   type="email"
                   autoFocus
-                  placeholder="prenom.nom@etu.ec-lyon.fr"
+                  placeholder={emailPlaceholder}
                   {...field}
                 />
               )}
