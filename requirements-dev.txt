@@ -1,4 +1,4 @@
 jinja2>=3.1 # NOTE: Jinja2 version must be the same as pyproject.toml's dependencies configuration
 mypy==1.17.1
-ruff==0.12.7
+ruff==0.12.11
 starlette>=0.37 # NOTE: Starlette version must be the same as pyproject.toml's dependencies configuration 
