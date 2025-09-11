@@ -6,7 +6,7 @@ const SuccessPage = () => {
     <SuccessCard
       title="Mail envoyé"
       description="Un mail a été envoyé à l'adresse indiquée"
-      icon={HiOutlineMail}
+      icon={HiOutlineMail({ className: "w-32 h-32 m-auto" })}
     />
   );
 };

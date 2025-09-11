@@ -6,7 +6,8 @@ const SuccessPage = () => {
     <SuccessCard
       title="Inscription réussie"
       description="Votre compte a été créé avec succès"
-      icon={HiCheck}
+      icon={HiCheck({ className: "w-32 h-32 m-auto" })}
+      showDownloadButtons={true}
     />
   );
 };

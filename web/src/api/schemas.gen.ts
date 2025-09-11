@@ -50,10 +50,14 @@ export const $AdvertBase = {
             title: 'Post To Feed',
             description: 'If the advert should be posted in the feed. It will be pending validation be admin',
             default: false
+        },
+        notification: {
+            type: 'boolean',
+            title: 'Notification'
         }
     },
     type: 'object',
-    required: ['title', 'content', 'advertiser_id'],
+    required: ['title', 'content', 'advertiser_id', 'notification'],
     title: 'AdvertBase'
 } as const;
 
@@ -78,6 +82,10 @@ export const $AdvertComplete = {
             description: 'If the advert should be posted in the feed. It will be pending validation be admin',
             default: false
         },
+        notification: {
+            type: 'boolean',
+            title: 'Notification'
+        },
         id: {
             type: 'string',
             format: 'uuid',
@@ -97,7 +105,7 @@ export const $AdvertComplete = {
         }
     },
     type: 'object',
-    required: ['title', 'content', 'advertiser_id', 'id'],
+    required: ['title', 'content', 'advertiser_id', 'notification', 'id'],
     title: 'AdvertComplete'
 } as const;
 
@@ -2662,6 +2670,28 @@ export const $CoreVariables = {
             type: 'string',
             title: 'Primary Color',
             description: 'Returned as an HSL triplet (ex: `24.6 95% 53.1%`)'
+        },
+        play_store_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Play Store Url'
+        },
+        app_store_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'App Store Url'
         }
     },
     type: 'object',
@@ -3061,6 +3091,10 @@ export const $EventBaseCreation = {
             ],
             title: 'Ticket Url Opening'
         },
+        notification: {
+            type: 'boolean',
+            title: 'Notification'
+        },
         association_id: {
             type: 'string',
             format: 'uuid',
@@ -3079,7 +3113,7 @@ export const $EventBaseCreation = {
         }
     },
     type: 'object',
-    required: ['name', 'start', 'end', 'all_day', 'location', 'association_id'],
+    required: ['name', 'start', 'end', 'all_day', 'location', 'notification', 'association_id'],
     title: 'EventBaseCreation'
 } as const;
 
@@ -3141,6 +3175,10 @@ export const $EventComplete = {
             ],
             title: 'Ticket Url Opening'
         },
+        notification: {
+            type: 'boolean',
+            title: 'Notification'
+        },
         association_id: {
             type: 'string',
             format: 'uuid',
@@ -3159,7 +3197,7 @@ export const $EventComplete = {
         }
     },
     type: 'object',
-    required: ['name', 'start', 'end', 'all_day', 'location', 'association_id', 'id', 'association', 'decision'],
+    required: ['name', 'start', 'end', 'all_day', 'location', 'notification', 'association_id', 'id', 'association', 'decision'],
     title: 'EventComplete'
 } as const;
 
@@ -3221,6 +3259,10 @@ export const $EventCompleteTicketUrl = {
             ],
             title: 'Ticket Url Opening'
         },
+        notification: {
+            type: 'boolean',
+            title: 'Notification'
+        },
         association_id: {
             type: 'string',
             format: 'uuid',
@@ -3250,7 +3292,7 @@ export const $EventCompleteTicketUrl = {
         }
     },
     type: 'object',
-    required: ['name', 'start', 'end', 'all_day', 'location', 'association_id', 'id', 'association', 'decision'],
+    required: ['name', 'start', 'end', 'all_day', 'location', 'notification', 'association_id', 'id', 'association', 'decision'],
     title: 'EventCompleteTicketUrl'
 } as const;
 
@@ -3357,6 +3399,17 @@ export const $EventEdit = {
                 }
             ],
             title: 'Ticket Url'
+        },
+        notification: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Notification'
         }
     },
     type: 'object',
@@ -4890,22 +4943,6 @@ export const $MyPaymentBankAccountHolder = {
     required: ['holder_structure_id'],
     title: 'MyPaymentBankAccountHolder',
     description: 'Bank account holder information for MyPayment.'
-} as const;
-
-export const $MyPaymentBankAccountInformationComplete = {
-    properties: {
-        holder_structure_id: {
-            type: 'string',
-            format: 'uuid',
-            title: 'Holder Structure Id'
-        },
-        holder_structure: {
-            '$ref': '#/components/schemas/Structure'
-        }
-    },
-    type: 'object',
-    required: ['holder_structure_id', 'holder_structure'],
-    title: 'MyPaymentBankAccountInformationComplete'
 } as const;
 
 export const $News = {

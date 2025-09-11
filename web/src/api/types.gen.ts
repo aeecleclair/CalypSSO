@@ -21,6 +21,7 @@ export type AdvertBase = {
      * If the advert should be posted in the feed. It will be pending validation be admin
      */
     post_to_feed?: boolean;
+    notification: boolean;
 };
 
 export type AdvertComplete = {
@@ -31,6 +32,7 @@ export type AdvertComplete = {
      * If the advert should be posted in the feed. It will be pending validation be admin
      */
     post_to_feed?: boolean;
+    notification: boolean;
     id: string;
     date?: string | null;
 };
@@ -577,6 +579,8 @@ export type CoreVariables = {
      * Returned as an HSL triplet (ex: `24.6 95% 53.1%`)
      */
     primary_color: string;
+    play_store_url?: string | null;
+    app_store_url?: string | null;
 };
 
 export type CurriculumBase = {
@@ -681,6 +685,7 @@ export type EventBaseCreation = {
     description?: string | null;
     recurrence_rule?: string | null;
     ticket_url_opening?: string | null;
+    notification: boolean;
     association_id: string;
     ticket_url?: string | null;
 };
@@ -694,6 +699,7 @@ export type EventComplete = {
     description?: string | null;
     recurrence_rule?: string | null;
     ticket_url_opening?: string | null;
+    notification: boolean;
     association_id: string;
     id: string;
     association: Association;
@@ -709,6 +715,7 @@ export type EventCompleteTicketUrl = {
     description?: string | null;
     recurrence_rule?: string | null;
     ticket_url_opening?: string | null;
+    notification: boolean;
     association_id: string;
     id: string;
     association: Association;
@@ -726,6 +733,7 @@ export type EventEdit = {
     recurrence_rule?: string | null;
     ticket_url_opening?: string | null;
     ticket_url?: string | null;
+    notification?: boolean | null;
 };
 
 export type EventTicketUrl = {
@@ -1131,11 +1139,6 @@ export type ModuleVisibilityCreate = {
  */
 export type MyPaymentBankAccountHolder = {
     holder_structure_id: string;
-};
-
-export type MyPaymentBankAccountInformationComplete = {
-    holder_structure_id: string;
-    holder_structure: Structure;
 };
 
 export type News = {
@@ -2656,7 +2659,7 @@ export type GetCalendarEventsAssociationsAssociationIdData = {
     };
 };
 
-export type GetCalendarEventsAssociationsAssociationIdResponse = Array<EventComplete>;
+export type GetCalendarEventsAssociationsAssociationIdResponse = Array<EventCompleteTicketUrl>;
 
 export type GetCalendarEventsAssociationsAssociationIdError = unknown;
 
@@ -2700,6 +2703,16 @@ export type GetCalendarEventsEventIdTicketUrlData = {
 export type GetCalendarEventsEventIdTicketUrlResponse = EventTicketUrl;
 
 export type GetCalendarEventsEventIdTicketUrlError = unknown;
+
+export type GetCalendarEventsEventIdImageData = {
+    path: {
+        event_id: string;
+    };
+};
+
+export type GetCalendarEventsEventIdImageResponse = unknown;
+
+export type GetCalendarEventsEventIdImageError = unknown;
 
 export type PostCalendarEventsEventIdImageData = {
     path: {
@@ -5150,7 +5163,7 @@ export type DeleteMembershipsUsersMembershipIdResponse = void;
 
 export type DeleteMembershipsUsersMembershipIdError = unknown;
 
-export type GetMypaymentBankAccountHolderResponse = MyPaymentBankAccountInformationComplete;
+export type GetMypaymentBankAccountHolderResponse = Structure;
 
 export type GetMypaymentBankAccountHolderError = unknown;
 
@@ -5158,7 +5171,7 @@ export type PostMypaymentBankAccountHolderData = {
     body: MyPaymentBankAccountHolder;
 };
 
-export type PostMypaymentBankAccountHolderResponse = MyPaymentBankAccountInformationComplete;
+export type PostMypaymentBankAccountHolderResponse = Structure;
 
 export type PostMypaymentBankAccountHolderError = unknown;
 
@@ -5737,10 +5750,6 @@ export type PostUsersActivateError = unknown;
 export type PostUsersS3InitResponse = unknown;
 
 export type PostUsersS3InitError = unknown;
-
-export type PostUsersMakeAdminResponse = app__types__standard_responses__Result;
-
-export type PostUsersMakeAdminError = unknown;
 
 export type PostUsersRecoverData = {
     body: Body_recover_user_users_recover_post;
@@ -6558,7 +6567,7 @@ export type $OpenApiTs = {
                 /**
                  * Successful Response
                  */
-                '200': Array<EventComplete>;
+                '200': Array<EventCompleteTicketUrl>;
                 /**
                  * Validation Error
                  */
@@ -6623,6 +6632,19 @@ export type $OpenApiTs = {
         };
     };
     '/calendar/events/{event_id}/image': {
+        get: {
+            req: GetCalendarEventsEventIdImageData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '200': unknown;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
+            };
+        };
         post: {
             req: PostCalendarEventsEventIdImageData;
             res: {
@@ -10395,7 +10417,7 @@ export type $OpenApiTs = {
                 /**
                  * Successful Response
                  */
-                '200': MyPaymentBankAccountInformationComplete;
+                '200': Structure;
             };
         };
         post: {
@@ -10404,7 +10426,7 @@ export type $OpenApiTs = {
                 /**
                  * Successful Response
                  */
-                '201': MyPaymentBankAccountInformationComplete;
+                '201': Structure;
                 /**
                  * Validation Error
                  */
@@ -11286,16 +11308,6 @@ export type $OpenApiTs = {
                  * Successful Response
                  */
                 '201': unknown;
-            };
-        };
-    };
-    '/users/make-admin': {
-        post: {
-            res: {
-                /**
-                 * Successful Response
-                 */
-                '200': app__types__standard_responses__Result;
             };
         };
     };
