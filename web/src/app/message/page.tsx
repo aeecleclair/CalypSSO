@@ -65,7 +65,7 @@ const SuccessPageContent = () => {
     <SuccessCard
       title={typeContent.message}
       description={typeContent.message}
-      icon={typeContent.icon}
+      icon={typeContent.icon({ className: "w-32 h-32 m-auto" })}
     />
   );
 };

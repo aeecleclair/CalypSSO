@@ -11,6 +11,8 @@ export const VariablesContext = createContext({
   staffEmailRegex: null as null | string,
   formerStudentEmailRegex: null as null | string,
   mainActivationForm: { fields: [] as string[], floorChoices: [] as string[] },
+  appStoreUrl: null as null | string,
+  playStoreUrl: null as null | string,
 });
 
 export default function Variables({ children }: { children: React.ReactNode }) {
@@ -29,6 +31,8 @@ export default function Variables({ children }: { children: React.ReactNode }) {
     fields: [] as string[],
     floorChoices: [] as string[],
   });
+  const [appStoreUrl, setAppStoreUrl] = useState<null | string>(null);
+  const [playStoreUrl, setPlayStoreUrl] = useState<null | string>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -55,6 +59,8 @@ export default function Variables({ children }: { children: React.ReactNode }) {
           fields: variables?.main_activation_form.fields || [],
           floorChoices: variables?.main_activation_form.floor_choices || [],
         });
+        setAppStoreUrl(variables?.app_store_url || null);
+        setPlayStoreUrl(variables?.play_store_url || null);
 
         if (variables?.primary_color) {
           document.documentElement.style.setProperty(
@@ -86,6 +92,8 @@ export default function Variables({ children }: { children: React.ReactNode }) {
         staffEmailRegex,
         formerStudentEmailRegex,
         mainActivationForm,
+        appStoreUrl,
+        playStoreUrl,
       }}
     >
       {isLoading ? (
