@@ -4602,6 +4602,17 @@ export const $MainActivationForm = {
             type: 'array',
             title: 'Floor Choices',
             description: 'List of choices for the floor field if it is asked'
+        },
+        promotion_offset: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Promotion Offset'
         }
     },
     type: 'object',

@@ -10,7 +10,11 @@ export const VariablesContext = createContext({
   studentEmailRegex: "",
   staffEmailRegex: null as null | string,
   formerStudentEmailRegex: null as null | string,
-  mainActivationForm: { fields: [] as string[], floorChoices: [] as string[] },
+  mainActivationForm: {
+    fields: [] as string[],
+    floorChoices: [] as string[],
+    promotionOffset: 0,
+  },
   appStoreUrl: null as null | string,
   playStoreUrl: null as null | string,
 });
@@ -30,6 +34,7 @@ export default function Variables({ children }: { children: React.ReactNode }) {
   const [mainActivationForm, setMainActivationForm] = useState({
     fields: [] as string[],
     floorChoices: [] as string[],
+    promotionOffset: 0,
   });
   const [appStoreUrl, setAppStoreUrl] = useState<null | string>(null);
   const [playStoreUrl, setPlayStoreUrl] = useState<null | string>(null);
@@ -58,6 +63,8 @@ export default function Variables({ children }: { children: React.ReactNode }) {
         setMainActivationForm({
           fields: variables?.main_activation_form.fields || [],
           floorChoices: variables?.main_activation_form.floor_choices || [],
+          promotionOffset:
+            variables?.main_activation_form.promotion_offset || 0,
         });
         setAppStoreUrl(variables?.app_store_url || null);
         setPlayStoreUrl(variables?.play_store_url || null);
