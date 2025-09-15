@@ -217,7 +217,9 @@ const RegisterPage = () => {
                             <SelectContent>
                               {[...Array(10)].map((_, index) => {
                                 const year = (
-                                  new Date().getFullYear() - index
+                                  new Date().getFullYear() -
+                                  index +
+                                  mainActivationForm.promotionOffset
                                 ).toString();
                                 return (
                                   <SelectItem key={index} value={year}>

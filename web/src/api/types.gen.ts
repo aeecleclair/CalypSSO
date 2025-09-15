@@ -1061,6 +1061,7 @@ export type MainActivationForm = {
      * List of choices for the floor field if it is asked
      */
     floor_choices?: Array<(string)>;
+    promotion_offset?: number | null;
 };
 
 export type Manager = {
