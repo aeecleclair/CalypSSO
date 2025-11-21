@@ -23,7 +23,6 @@ const RegisterContent = () => {
     staffEmailRegex,
     formerStudentEmailRegex,
   } = useContext(VariablesContext);
-
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -108,7 +107,7 @@ const RegisterContent = () => {
                 <Input
                   type="email"
                   autoFocus
-                  placeholder={emailPlaceholder}
+                  placeholder={acceptExternalUser ? "mail@example.com" : emailPlaceholder}
                   {...field}
                 />
               )}
