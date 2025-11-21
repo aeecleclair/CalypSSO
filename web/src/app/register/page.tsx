@@ -107,7 +107,9 @@ const RegisterContent = () => {
                 <Input
                   type="email"
                   autoFocus
-                  placeholder={acceptExternalUser ? "mail@example.com" : emailPlaceholder}
+                  placeholder={
+                    acceptExternalUser ? "mail@example.com" : emailPlaceholder
+                  }
                   {...field}
                 />
               )}
