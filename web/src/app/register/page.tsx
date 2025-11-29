@@ -5,6 +5,7 @@ import { CenteredCard } from "@/components/custom/CenteredCard";
 import { CustomFormField } from "@/components/custom/CustomFormField";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { VariablesContext } from "@/components/custom/Variables";
+import { Button } from "@/components/custom/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -96,6 +97,24 @@ const RegisterContent = () => {
       title={`Créer un compte ${projectName}`}
       description={"Vous n'avez besoin que de votre email pour commencer"}
     >
+      <div className="flex flex-row mb-4 text-center">
+        <Button
+          variant="outline"
+          className={`mr-2 flex-1 ${!acceptExternalUser ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground" : ""}`}
+          onClick={() => router.push("?external=false")}
+        >
+          J&apos;ai un email
+          <br /> en {emailPlaceholder.split("@")[1]}
+        </Button>
+        <Button
+          variant="outline"
+          className={`mr-2 flex-1 ${acceptExternalUser ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground" : ""}`}
+          onClick={() => router.push("?external=true")}
+        >
+          J&apos;utilise un
+          <br /> email perso
+        </Button>
+      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
