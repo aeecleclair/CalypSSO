@@ -43,7 +43,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.46.3",
+    "@hey-api/openapi-ts": "^0.84.4",
     "@tailwindcss/typography": "^0.5.16",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "^20",
