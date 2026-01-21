@@ -123,3 +123,14 @@ def get_login_relative_url(
     }
 
     return f"calypsso/login/?{urllib.parse.urlencode(exclude_none(params))}"
+
+def get_recover_relative_url(email: str | None = None,should_change_password: bool | None = None) -> str:
+    """
+    Return CalypSSO recover page relative url: `calypsso/recover?...`
+    """
+    params = {
+        "email": email,
+        "should_change_password": should_change_password,
+    }
+
+    return f"calypsso/recover/?{urllib.parse.urlencode(exclude_none(params))}"
