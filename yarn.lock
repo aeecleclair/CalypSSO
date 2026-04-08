@@ -346,7 +346,7 @@
     pathe "^1.1.2"
     picocolors "^1.0.1"
 
-"@maizzle/framework@latest":
+"@maizzle/framework@5.0.8":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@maizzle/framework/-/framework-5.0.8.tgz#6a5327c7e7d80b84ca60d8548bc534cea1e99ae3"
   integrity sha512-5rbFmaudlE/BjyEjybwmVWmfJE0haFq9lv8FURepuwYZsHvnxw9eQPor19gE2LsSPuh2jPEX2iTka3so25EWQw==
@@ -1617,9 +1617,9 @@ camelcase@8.0.0:
   integrity sha512-8WB3Jcas3swSvjIeA2yvCJ+Miyz5l1ZmB6HFb9R1317dt9LCQoswg/BGrmAmkWVEszSrrg4RwmO46qIm2OEnSA==
 
 caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001716:
-  version "1.0.30001718"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001718.tgz#dae13a9c80d517c30c6197515a96131c194d8f82"
-  integrity sha512-AflseV1ahcSunK53NfEs9gFWgOEmzr0f+kaMFA4xiLZlr9Hzt7HxcSpIFcnNCUkz6R6dWKa54rUz3HUmI3nVcw==
+  version "1.0.30001787"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001787.tgz"
+  integrity sha512-mNcrMN9KeI68u7muanUpEejSLghOKlVhRqS/Za2IeyGllJ9I9otGpR9g3nsw7n4W378TE/LyIteA0+/FOZm4Kg==
 
 ccount@^2.0.0:
   version "2.0.1"
@@ -5938,7 +5938,7 @@ tailwindcss-mso@^2.0.1:
   resolved "https://registry.yarnpkg.com/tailwindcss-mso/-/tailwindcss-mso-2.0.2.tgz#3daddaf81169da75bf00ebbbd9ab3f0073907841"
   integrity sha512-GaR8RW/Kan+YWEQ9Y9Ah6AYy7R2wEQ3X++YK4ffJVWycCTd6ryMLezqmyhi7KWHqsgQOb4nhjJYayI+JF44BXw==
 
-tailwindcss-preset-email@latest:
+tailwindcss-preset-email@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/tailwindcss-preset-email/-/tailwindcss-preset-email-1.4.0.tgz#bcfa4b5d97697bc8dd40b8af6bf9e34c32f0b21f"
   integrity sha512-UgvLHT5UsPEEXjto1WlR1wYXmYKeMaS2OPTJQqyufsU12os/EjBpeygEjTdrId7U2/mwDF4grlgo81qlzYSByg==
