@@ -46,7 +46,7 @@
     "@hey-api/openapi-ts": "^0.46.3",
     "@tailwindcss/typography": "^0.5.16",
     "@types/google-libphonenumber": "^7.4.30",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
