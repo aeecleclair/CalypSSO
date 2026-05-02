@@ -21,6 +21,8 @@ class TypeMessage(str, Enum):
         "mypayment_wallet_device_already_activated_or_revoked"
     )
     token_expired = "token_expired"  # noqa: S105
+    ticket_change_over_success = "ticket_change_over_success"
+    ticket_change_over_invalid = "ticket_change_over_invalid"
 
 
 class Asset(str, Enum):

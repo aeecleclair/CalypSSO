@@ -1,0 +1,38 @@
+---
+preheader: Confirm ticket transfer
+---
+
+<x-default>
+  <x-button-card
+    title="Confirm @{{ event_name }} ticket transfer from @{{ giver_name }}"
+    url="@{{ confirmation_url }}"
+    button="Accept the transfer"
+  >
+    @{{ giver_name }} wants to transfer you their ticket for the event @{{
+    event_name }}. To accept this transfer, click on the button below:
+
+    <fill:complementary_info>
+      The ticket will only be transferred if you accept the transfer. Click on
+      the button to check if the invitation is still valid. If you do not wish
+      to accept the transfer, you can ignore this message.
+    </fill:complementary_info>
+  </x-button-card>
+
+  <x-spacer height="24px" />
+
+  <x-button-card
+    lang="fr"
+    title="Confirmer le transfert du billet @{{ event_name }} de @{{ giver_name }}"
+    url="@{{ confirmation_url }}"
+    button="Accepter le transfert"
+  >
+    @{{ giver_name }} souhaite te transférer son billet pour l'evénement @{{
+    event_name }}. Pour accepter ce transfert, clique sur le bouton ci-dessous :
+
+    <fill:complementary_info>
+      Le billet ne sera transféré que si tu acceptes le transfert. Clique sur le
+      bouton pour vérifier si l'invitation est toujours valide. Si tu ne
+      souhaites pas accepter le transfert, tu peux ignorer ce message.
+    </fill:complementary_info>
+  </x-button-card>
+</x-default>

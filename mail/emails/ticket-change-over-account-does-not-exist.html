@@ -1,0 +1,30 @@
+---
+preheader: Confirm ticket change-over
+---
+
+<x-default>
+  <x-card
+    title="Transfer of the ticket @{{ event_name }} from @{{ giver_name }}"
+  >
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      @{{ giver_name }} wants to transfer you their ticket for the event @{{
+      event_name }} but your email address is not associated with a @{{
+      _product_name }} account. Please create an account, then ask @{{
+      giver_name }} to transfer the ticket to you again.
+    </p>
+  </x-card>
+
+  <x-spacer height="24px" />
+
+  <x-card
+    lang="fr"
+    title="Transfert du billet @{{ event_name }} de @{{ giver_name }}"
+  >
+    <p class="m-0 mb-6 text-base/6 text-slate-600">
+      @{{ giver_name }} souhaite te transférer son billet pour l'evénement @{{
+      event_name }} mais ton adresse mail n'est pas associée à un compte @{{
+      _product_name }}. Crée un compte, puis demande à @{{ giver_name }} de te
+      transférer à nouveau le billet.
+    </p>
+  </x-card>
+</x-default>

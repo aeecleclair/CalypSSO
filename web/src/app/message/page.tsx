@@ -52,6 +52,14 @@ const TypeMap: Record<string, Type> = {
     message: "Missing required query parameter in url",
     icon: HiExclamation,
   },
+  ticket_change_over_success: {
+    message: "Ticket transfer successful",
+    icon: HiCheck,
+  },
+  ticket_change_over_invalid: {
+    message: "Invalid ticket transfer token",
+    icon: HiExclamation,
+  },
 };
 
 const SuccessPageContent = () => {
