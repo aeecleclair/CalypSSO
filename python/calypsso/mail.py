@@ -60,12 +60,13 @@ class MailTemplates:
             activation_url=activation_url,
         )
 
-    def get_mail_account_exist(self) -> str:
+    def get_mail_account_exist(self, reset_password_url: str) -> str:
         """
         Return the mail template for account already existing.
         """
         return self.jinja_env.get_template("account-exist.html").render(
             self.environment_variables,
+            reset_password_url=reset_password_url,
         )
 
     def get_mail_account_invitation_required(self) -> str:
