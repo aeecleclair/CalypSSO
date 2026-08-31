@@ -21,6 +21,7 @@ class TypeMessage(str, Enum):
         "mypayment_wallet_device_already_activated_or_revoked"
     )
     token_expired = "token_expired"  # noqa: S105
+    payment_success = "payment_success"
 
 
 class Asset(str, Enum):
