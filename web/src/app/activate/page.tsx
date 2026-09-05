@@ -147,14 +147,16 @@ const RegisterPage = () => {
                 name="firstname"
                 label="Prénom"
                 neighborName="name"
-                render={(field) => <Input autoFocus {...field} />}
+                render={(field) => (
+                  <Input autoCapitalize="words" autoFocus {...field} />
+                )}
               />
               <CustomFormField
                 form={form}
                 name="name"
                 label="Nom"
                 neighborName="firstname"
-                render={(field) => <Input {...field} />}
+                render={(field) => <Input autoCapitalize="words" {...field} />}
               />
               {mainActivationForm.fields.includes("birthdate") && (
                 <CustomFormField
@@ -189,7 +191,9 @@ const RegisterPage = () => {
                   form={form}
                   name="nickname"
                   label="Surnom"
-                  render={(field) => <Input {...field} />}
+                  render={(field) => (
+                    <Input autoCapitalize="words" {...field} />
+                  )}
                 />
               )}
 
