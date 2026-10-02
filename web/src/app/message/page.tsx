@@ -52,6 +52,10 @@ const TypeMap: Record<string, Type> = {
     message: "Missing required query parameter in url",
     icon: HiExclamation,
   },
+  payment_success: {
+    message: "Payment successful",
+    icon: HiCheck,
+  },
 };
 
 const SuccessPageContent = () => {
