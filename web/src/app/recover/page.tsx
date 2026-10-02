@@ -9,7 +9,7 @@ import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,8 @@ const RecoverPage = () => {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const shouldChangePassword = !!searchParams.get("should_change_password");
   const formSchema = z.object({
     email: z
       .string({
@@ -65,7 +67,11 @@ const RecoverPage = () => {
   return (
     <CenteredCard
       title={`Réinitialiser le mot de passe ${projectName}`}
-      description={"Entrez votre email pour commencer"}
+      description={
+        !shouldChangePassword
+          ? "Entrez votre email pour commencer"
+          : `Votre compte ${projectName} nécessite une réinitialisation de mot de passe par email.`
+      }
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
